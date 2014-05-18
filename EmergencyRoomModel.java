@@ -1,3 +1,5 @@
+import java.security.acl.LastOwnerException;
+
 import desmoj.core.dist.RealDistExponential;
 import desmoj.core.dist.RealDistUniform;
 import desmoj.core.simulator.Experiment;
@@ -29,11 +31,11 @@ public class EmergencyRoomModel extends Model {
 		return treatmentTime[cprio - 1].sample();
 	}
 
-	protected Queue<PatientEntity> highPriorityPatientQueue;
-	protected Queue<PatientEntity> lowPriorityPatientQueue;
-	protected Queue<PatientEntity> lastCheckPatientQueue;
-	protected Queue<DoctorEntity> freeDoctorQueue;
-	protected Queue<DoctorEntity> busyDoctorQueue;
+	protected static Queue<PatientEntity> highPriorityPatientQueue;
+	protected static Queue<PatientEntity> lowPriorityPatientQueue;
+	protected static Queue<PatientEntity> lastCheckPatientQueue;
+	protected static Queue<DoctorEntity> freeDoctorQueue;
+	protected static Queue<DoctorEntity> busyDoctorQueue;
 
 	public String description() {
 		return "TODO: Emergency Department Description";
@@ -103,7 +105,10 @@ public class EmergencyRoomModel extends Model {
 
 		emergencyExperiment.finish();
 	
-		System.out.println(underFive);
-		
+		// TODO rm output
+		System.out.println("under five minutes: " + underFive);
+		System.out.println("avg waiting patients, rest: " + (lastCheckPatientQueue.averageLength()+lowPriorityPatientQueue.averageLength()));		
+		System.out.println("max wating patients, rest: " + (lastCheckPatientQueue.maxLength()+lowPriorityPatientQueue.maxLength()));		
+		System.out.println("Zeros: " + (highPriorityPatientQueue.zeroWaits()+lastCheckPatientQueue.zeroWaits()+lowPriorityPatientQueue.zeroWaits()));
 	}
 }

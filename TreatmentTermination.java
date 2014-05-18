@@ -39,7 +39,6 @@ public class TreatmentTermination extends Event<PatientEntity> {
 				nextPatient.waitingTime=SimTime.add(SimTime.diff(nextPatient.end, nextPatient.start),SimTime.diff(nextPatient.end2,nextPatient.start2));
 				if(SimTime.isSmallerOrEqual(nextPatient.waitingTime, new SimTime(5.0))){
 					model.underFive++;
-					System.out.println("Waiting Time:"+nextPatient.waitingTime);
 				}
 			}else{
 				nextPatient.end=model.currentTime();

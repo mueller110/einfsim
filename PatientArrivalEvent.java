@@ -45,7 +45,6 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 				patient.waitingTime=SimTime.add(SimTime.diff(patient.end, patient.start),SimTime.diff(patient.end2,patient.start2));
 				if(SimTime.isSmallerOrEqual(patient.waitingTime, new SimTime(5.0))){
 					model.underFive++;
-					System.out.println("Waiting Time:"+patient.waitingTime);
 				}
 			}else{
 				patient.end=model.currentTime();
