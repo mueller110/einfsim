@@ -9,6 +9,8 @@ import desmoj.core.simulator.SimTime;
 public class EmergencyRoomModel extends Model {
 	private int numberOfDoctors = 2;
 	private static int simulationTime = 28800;
+	static int counter = 0;
+	static int counterZero = 0;
 
 	public EmergencyRoomModel(Model owner, String name, boolean showInReport,
 			boolean showInTrace) {
@@ -102,6 +104,8 @@ public class EmergencyRoomModel extends Model {
 		emergencyExperiment.report();
 
 		emergencyExperiment.finish();
+//		System.out.println("2te Prio: " + counter);
+		System.out.println("Zeros:" + counterZero);
 
 	}
 }

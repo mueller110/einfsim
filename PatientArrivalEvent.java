@@ -21,6 +21,7 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 			queue = model.lowPriorityPatientQueue;
 		} else if (cPriority == 2) {
 			queue = model.lastCheckPatientQueue;
+			model.counter++;
 		} else {
 			queue = model.highPriorityPatientQueue;
 		}
@@ -32,9 +33,8 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 			model.freeDoctorQueue.remove(doctor);
 			model.busyDoctorQueue.insert(doctor);
 			queue.remove(patient);
-			
-			System.out.println(patient.getPriority());
-			
+			model.counterZero++;
+						
 			TreatmentTermination treatmentTerm = new TreatmentTermination(
 					model, "End of Treatment", true);
 			treatmentTerm.schedule(patient,

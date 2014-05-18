@@ -25,15 +25,18 @@ public class TreatmentTermination extends Event<PatientEntity> {
 			queue = model.lowPriorityPatientQueue;
 		}
 
+		if(patient.getPriority()==1 || patient.getPriority()==3){
+//			System.out.println(patient.getIdentNumber() + " into last check (" + patient.getPriority() + ")");
+			patient.setPriority(2);
+			PatientArrivalEvent arrival = new PatientArrivalEvent(model, "Last check of Patient", true);
+			arrival.schedule(patient, new SimTime(0.0)); // instant arrival
+		} else {
+//			System.out.println(patient.getIdentNumber() + " leaves. (" + patient.getPriority() + ")");
+		}
+		
 		if (queue != null) {
 			PatientEntity nextPatient = queue.first();
 			queue.remove(nextPatient);
-			
-			if(patient.getPriority()==1 || patient.getPriority()==3){
-				patient.setPriority(2);
-				PatientArrivalEvent arrival = new PatientArrivalEvent(model, "Last check of Patient", true);
-				arrival.schedule(patient, new SimTime(0.0)); // instant arrival
-			}
 			
 			TreatmentTermination treatmentTerm = new TreatmentTermination(
 					model, "End of Treatment", true);
