@@ -7,8 +7,9 @@ import desmoj.core.simulator.SimTime;
 
 @SuppressWarnings("deprecation")
 public class EmergencyRoomModel extends Model {
-	private int numberOfDoctors =2;
-	private static int simulationTime=50000;
+	private int numberOfDoctors = 2;
+	private static int simulationTime = 50000;
+
 	public EmergencyRoomModel(Model owner, String name, boolean showInReport,
 			boolean showInTrace) {
 		super(owner, name, showInReport, showInTrace);
@@ -46,7 +47,7 @@ public class EmergencyRoomModel extends Model {
 	public void init() {
 		// new patient every 40 mins (average)
 		patientArrivalTime = new RealDistExponential(this,
-				"arrival time interval",20, true, true);
+				"arrival time interval", 20, true, true);
 
 		// avoid negativ arrival time
 		patientArrivalTime.setNonNegative(true);
@@ -55,14 +56,18 @@ public class EmergencyRoomModel extends Model {
 
 		// es muss gelten: bedienZeitPrio1<bedienZeitPrio3 und
 		// bedienZeitPrio2_1< bedienZeitPrio2_3
-		treatmentTime[0] = new RealDistUniform(this, "treatment time interval (Priority 1)", 10,
-				30, true, true); // bedienZeitPrio 1
-		treatmentTime[1] = new RealDistUniform(this, "treatment time interval (Priority 2_1)", 20,
-				10, true, true); // bedienZeitPrio 2_1
-		treatmentTime[3] = new RealDistUniform(this, "treatment time interval (Priority 2_3)", 40,
-				20, true, true); // bedienZeitPrio 2_3
-		treatmentTime[2] = new RealDistUniform(this, "treatment time inverval (Priority 3)", 50,
-				120, true, true); // bedienZeitPrio 3
+		treatmentTime[0] = new RealDistUniform(this,
+				"treatment time interval (Priority 1)", 10, 30, true, true); // bedienZeitPrio
+																				// 1
+		treatmentTime[1] = new RealDistUniform(this,
+				"treatment time interval (Priority 2_1)", 20, 10, true, true); // bedienZeitPrio
+																				// 2_1
+		treatmentTime[3] = new RealDistUniform(this,
+				"treatment time interval (Priority 2_3)", 40, 20, true, true); // bedienZeitPrio
+																				// 2_3
+		treatmentTime[2] = new RealDistUniform(this,
+				"treatment time inverval (Priority 3)", 50, 120, true, true); // bedienZeitPrio
+																				// 3
 
 		highPriorityPatientQueue = new Queue<PatientEntity>(this,
 				"High-Priority Queue", true, true);
@@ -96,8 +101,10 @@ public class EmergencyRoomModel extends Model {
 		model.connectToExperiment(schalterExperiment);
 
 		// Intervall fuer trace/debug
-		schalterExperiment.tracePeriod(new SimTime(0.0), new SimTime(simulationTime));
-		schalterExperiment.debugPeriod(new SimTime(0.0), new SimTime(simulationTime));
+		schalterExperiment.tracePeriod(new SimTime(0.0), new SimTime(
+				simulationTime));
+		schalterExperiment.debugPeriod(new SimTime(0.0), new SimTime(
+				simulationTime));
 
 		// Ende der Simulation setzen
 		// -> hier 4 Stunden (= 240 min)
@@ -111,10 +118,9 @@ public class EmergencyRoomModel extends Model {
 
 		// Report generieren
 		schalterExperiment.report();
-		
+
 		// Ausgabekanaele schliessen, allfaellige threads beenden
 		schalterExperiment.finish();
-		
 
 	}
 }

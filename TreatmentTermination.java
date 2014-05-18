@@ -14,25 +14,34 @@ public class TreatmentTermination extends Event<PatientEntity> {
 	@Override
 	public void eventRoutine(PatientEntity patient) {
 		Queue<PatientEntity> queue = null;
-		int cPriority=patient.getPriority();
+		int cPriority = patient.getPriority();
 
-			
 		if (!model.highPriorityPatientQueue.isEmpty()) {
 			queue = model.highPriorityPatientQueue;
 		} else if (!model.lowPriorityPatientQueue.isEmpty()) {
 			queue = model.lowPriorityPatientQueue;
-		} else if(!model.lastCheckPatientQueue.isEmpty()){
-			queue=model.lastCheckPatientQueue;
+		} else if (!model.lastCheckPatientQueue.isEmpty()) {
+			queue = model.lastCheckPatientQueue;
 		}
-		
+
 		if (queue != null) {
 			PatientEntity nextPatient = queue.first();
 			queue.remove(nextPatient);
+			
+			//rm
+			if(patient.getPriority()==2){
+//				PatientArrivalEvent arrival = new PatientArrivalEvent(model, "Arrival of Patient", true);
+//				arrival.schedule(patient, new SimTime(0.0)); // instant arrival
+			}
+			//rm:end
+			
 			TreatmentTermination treatmentTerm = new TreatmentTermination(
 					model, "End of Treatment", true);
-			treatmentTerm.schedule(nextPatient,
-					new SimTime(model.getTreatmentTime(nextPatient.getPriority())));
-			
+			treatmentTerm.schedule(
+					nextPatient,
+					new SimTime(model.getTreatmentTime(nextPatient
+							.getPriority())));
+
 		} else {
 			DoctorEntity doctor = (DoctorEntity) model.busyDoctorQueue.first();
 			// make doc available
