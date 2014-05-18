@@ -3,6 +3,7 @@ import desmoj.core.simulator.Model;
 import desmoj.core.simulator.Queue;
 import desmoj.core.simulator.SimTime;
 
+@SuppressWarnings("deprecation")
 public class TreatmentTermination extends Event<PatientEntity> {
 	private EmergencyRoomModel model;
 
@@ -18,22 +19,21 @@ public class TreatmentTermination extends Event<PatientEntity> {
 
 		if (!model.highPriorityPatientQueue.isEmpty()) {
 			queue = model.highPriorityPatientQueue;
-		} else if (!model.lowPriorityPatientQueue.isEmpty()) {
-			queue = model.lowPriorityPatientQueue;
 		} else if (!model.lastCheckPatientQueue.isEmpty()) {
 			queue = model.lastCheckPatientQueue;
+		} else if (!model.lowPriorityPatientQueue.isEmpty()) {
+			queue = model.lowPriorityPatientQueue;
 		}
 
 		if (queue != null) {
 			PatientEntity nextPatient = queue.first();
 			queue.remove(nextPatient);
 			
-			//rm
-			if(patient.getPriority()==2){
+			if(patient.getPriority()==1 || patient.getPriority()==3){
+				patient.setPriority(2);
 				PatientArrivalEvent arrival = new PatientArrivalEvent(model, "Last check of Patient", true);
 				arrival.schedule(patient, new SimTime(0.0)); // instant arrival
 			}
-			//rm:end
 			
 			TreatmentTermination treatmentTerm = new TreatmentTermination(
 					model, "End of Treatment", true);

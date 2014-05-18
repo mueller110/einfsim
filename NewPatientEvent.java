@@ -5,8 +5,7 @@ import desmoj.core.simulator.*;
 public class NewPatientEvent extends ExternalEvent {
 
 	private EmergencyRoomModel model;
-	static Random rand = new Random();
-	static int count;
+	private static Random rand = new Random();
 
 	public NewPatientEvent(Model owner, String name, boolean showInTrace) {
 		super(owner, name, showInTrace);
@@ -16,7 +15,6 @@ public class NewPatientEvent extends ExternalEvent {
 	@Override
 	public void eventRoutine() {
 		int prio;
-		count++;
 		if (rand.nextDouble() <= 0.2) {
 			prio = 3;
 		} else {

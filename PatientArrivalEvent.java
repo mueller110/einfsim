@@ -3,6 +3,7 @@ import desmoj.core.simulator.Model;
 import desmoj.core.simulator.Queue;
 import desmoj.core.simulator.SimTime;
 
+@SuppressWarnings("deprecation")
 public class PatientArrivalEvent extends Event<PatientEntity> {
 	private EmergencyRoomModel model;
 
@@ -15,11 +16,11 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 	public void eventRoutine(PatientEntity patient) {
 		Queue<PatientEntity> queue;
 		int cPriority = patient.getPriority();
+		
 		if (cPriority == 1) {
 			queue = model.lowPriorityPatientQueue;
 		} else if (cPriority == 2) {
 			queue = model.lastCheckPatientQueue;
-			patient.setPriority(4);
 		} else {
 			queue = model.highPriorityPatientQueue;
 		}
@@ -32,10 +33,6 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 			model.busyDoctorQueue.insert(doctor);
 			queue.remove(patient);
 			
-			// set priority to 2, for the last check queue
-			if(patient.getPriority()==1 || patient.getPriority()==3){
-				patient.setPriority(2);
-			}
 			System.out.println(patient.getPriority());
 			
 			TreatmentTermination treatmentTerm = new TreatmentTermination(

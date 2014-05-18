@@ -9,7 +9,6 @@ public class PatientEntity extends Entity {
 			int priority) {
 		super(owner, name, showInTrace);
 		this.priority = priority;
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getPriority() {

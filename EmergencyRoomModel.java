@@ -8,12 +8,11 @@ import desmoj.core.simulator.SimTime;
 @SuppressWarnings("deprecation")
 public class EmergencyRoomModel extends Model {
 	private int numberOfDoctors = 2;
-	private static int simulationTime = 50000;
+	private static int simulationTime = 28800;
 
 	public EmergencyRoomModel(Model owner, String name, boolean showInReport,
 			boolean showInTrace) {
 		super(owner, name, showInReport, showInTrace);
-		// TODO Auto-generated constructor stub
 	}
 
 	private RealDistExponential patientArrivalTime;
@@ -22,7 +21,7 @@ public class EmergencyRoomModel extends Model {
 		return patientArrivalTime.sample();
 	}
 
-	private RealDistUniform treatmentTime[] = new RealDistUniform[4];
+	private RealDistUniform treatmentTime[] = new RealDistUniform[3];
 
 	public double getTreatmentTime(int cprio) {
 		return treatmentTime[cprio - 1].sample();
@@ -51,8 +50,6 @@ public class EmergencyRoomModel extends Model {
 
 		patientArrivalTime.setNonNegative(true);
 
-		// kundenAnkunftsZeit.setSeed(1234567890);
-
 		// es muss gelten: bedienZeitPrio1<bedienZeitPrio3 und
 		// bedienZeitPrio2_1< bedienZeitPrio2_3
 		treatmentTime[0] = new RealDistUniform(this,
@@ -61,9 +58,6 @@ public class EmergencyRoomModel extends Model {
 		treatmentTime[1] = new RealDistUniform(this,
 				"treatment time interval (Priority 2_1)", 20, 10, true, true); // bedienZeitPrio
 																				// 2_1
-		treatmentTime[3] = new RealDistUniform(this,
-				"treatment time interval (Priority 2_3)", 20, 10, true, true); // bedienZeitPrio
-																				// 2_3
 		treatmentTime[2] = new RealDistUniform(this,
 				"treatment time inverval (Priority 3)", 50, 120, true, true); // bedienZeitPrio
 																				// 3
@@ -96,7 +90,6 @@ public class EmergencyRoomModel extends Model {
 
 		model.connectToExperiment(emergencyExperiment);
 
-		// Intervall fuer trace/debug
 		emergencyExperiment.tracePeriod(new SimTime(0.0), new SimTime(
 				simulationTime));
 		emergencyExperiment.debugPeriod(new SimTime(0.0), new SimTime(
