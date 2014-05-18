@@ -49,7 +49,6 @@ public class EmergencyRoomModel extends Model {
 		patientArrivalTime = new RealDistExponential(this,
 				"arrival time interval", 20, true, true);
 
-		// avoid negativ arrival time
 		patientArrivalTime.setNonNegative(true);
 
 		// kundenAnkunftsZeit.setSeed(1234567890);
@@ -90,37 +89,26 @@ public class EmergencyRoomModel extends Model {
 	}
 
 	public static void main(java.lang.String[] args) {
-		Experiment schalterExperiment = new Experiment("Emergency-Room");
+		Experiment emergencyExperiment = new Experiment("Emergency-Room");
 
-		// neues Modell erzeugen
-		// Par 1: null markiert main model, sonst Mastermodell angeben
 		EmergencyRoomModel model = new EmergencyRoomModel(null,
 				"Emergency-Room Model", true, true);
 
-		// Modell mit Experiment verbinden
-		model.connectToExperiment(schalterExperiment);
+		model.connectToExperiment(emergencyExperiment);
 
 		// Intervall fuer trace/debug
-		schalterExperiment.tracePeriod(new SimTime(0.0), new SimTime(
+		emergencyExperiment.tracePeriod(new SimTime(0.0), new SimTime(
 				simulationTime));
-		schalterExperiment.debugPeriod(new SimTime(0.0), new SimTime(
+		emergencyExperiment.debugPeriod(new SimTime(0.0), new SimTime(
 				simulationTime));
 
-		// Ende der Simulation setzen
-		// -> hier 4 Stunden (= 240 min)
-		schalterExperiment.stop(new SimTime(simulationTime));
+		emergencyExperiment.stop(new SimTime(simulationTime));
 
-		// Experiment zur Zeit 0.0 starten
-		schalterExperiment.start();
+		emergencyExperiment.start();
 
-		// -> Simulation laeuft bis Abbruchkriterium erreicht ist
-		// -> danach geht es hier weiter
+		emergencyExperiment.report();
 
-		// Report generieren
-		schalterExperiment.report();
-
-		// Ausgabekanaele schliessen, allfaellige threads beenden
-		schalterExperiment.finish();
+		emergencyExperiment.finish();
 
 	}
 }

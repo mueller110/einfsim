@@ -17,7 +17,7 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 		int cPriority = patient.getPriority();
 		if (cPriority == 1) {
 			queue = model.lowPriorityPatientQueue;
-		} else if (cPriority == 2 || cPriority == 4) {
+		} else if (cPriority == 2) {
 			queue = model.lastCheckPatientQueue;
 			patient.setPriority(4);
 		} else {

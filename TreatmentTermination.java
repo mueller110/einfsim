@@ -30,7 +30,7 @@ public class TreatmentTermination extends Event<PatientEntity> {
 			
 			//rm
 			if(patient.getPriority()==2){
-				PatientArrivalEvent arrival = new PatientArrivalEvent(model, "Arrival of Patient", true);
+				PatientArrivalEvent arrival = new PatientArrivalEvent(model, "Last check of Patient", true);
 				arrival.schedule(patient, new SimTime(0.0)); // instant arrival
 			}
 			//rm:end
