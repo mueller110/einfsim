@@ -63,7 +63,7 @@ public class EmergencyRoomModel extends Model {
 				"treatment time interval (Priority 2_1)", 20, 10, true, true); // bedienZeitPrio
 																				// 2_1
 		treatmentTime[3] = new RealDistUniform(this,
-				"treatment time interval (Priority 2_3)", 40, 20, true, true); // bedienZeitPrio
+				"treatment time interval (Priority 2_3)", 20, 10, true, true); // bedienZeitPrio
 																				// 2_3
 		treatmentTime[2] = new RealDistUniform(this,
 				"treatment time inverval (Priority 3)", 50, 120, true, true); // bedienZeitPrio
