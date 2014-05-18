@@ -9,8 +9,8 @@ import desmoj.core.simulator.SimTime;
 public class EmergencyRoomModel extends Model {
 	private int numberOfDoctors = 2;
 	private static int simulationTime = 28800;
-	static int counter = 0;
-	static int counterZero = 0;
+	private static int arrivalTime = 40;
+	public static int underFive = 0;
 
 	public EmergencyRoomModel(Model owner, String name, boolean showInReport,
 			boolean showInTrace) {
@@ -48,7 +48,7 @@ public class EmergencyRoomModel extends Model {
 	public void init() {
 		// new patient every 40 mins (average)
 		patientArrivalTime = new RealDistExponential(this,
-				"arrival time interval", 20, true, true);
+				"arrival time interval", arrivalTime, true, true);
 
 		patientArrivalTime.setNonNegative(true);
 
@@ -89,9 +89,7 @@ public class EmergencyRoomModel extends Model {
 
 		EmergencyRoomModel model = new EmergencyRoomModel(null,
 				"Emergency-Room Model", true, true);
-
 		model.connectToExperiment(emergencyExperiment);
-
 		emergencyExperiment.tracePeriod(new SimTime(0.0), new SimTime(
 				simulationTime));
 		emergencyExperiment.debugPeriod(new SimTime(0.0), new SimTime(
@@ -104,8 +102,8 @@ public class EmergencyRoomModel extends Model {
 		emergencyExperiment.report();
 
 		emergencyExperiment.finish();
-//		System.out.println("2te Prio: " + counter);
-		System.out.println("Zeros:" + counterZero);
-
+	
+		System.out.println(underFive);
+		
 	}
 }
