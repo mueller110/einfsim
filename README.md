@@ -1,5 +1,11 @@
 
 ------------------------------------------------------------------------------
+TODO:
+Initialisierungsphase
+90%-Quantile
+neues Erfinden (Tod der Notfälle?, Unterbrechung: High priority vor Low priority?)
+
+
 Notaufnahme
 
 In der Notaufnahme eines Krankenhauses erscheint durchschnittlich alle 40min ein Patient. 2 Ärzte versehen Dienst um die Erstbehandlungen durchzuführen. Etwa 20% der Patienten müssen möglichst rasch behandelt werden (= akute Notfälle), der Rest kann warten. Ersteren wird die höchste Priorität 3 zugeordnet (Behandlung durch einen Arzt so rasch als möglich), dann Reduktion der Priorität auf 2 (warten bis wieder ein Arzt verfügbar ist und nochmals Behandlung vor Verlassen der Notaufnahme). Jenen Patienten, die warten können wird Priorität 1 zugeordnet (werden behandelt, wenn sie an der Reihe sind, eher kürzer als akute Notfälle) und erhalten dann ebenfalls Priorität 2 (jedoch auch hier kürzere Behandlungszeit). Danach verlassen auch diese die Notaufnahme.
