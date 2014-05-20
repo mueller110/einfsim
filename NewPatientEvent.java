@@ -23,9 +23,7 @@ public class NewPatientEvent extends ExternalEvent {
 		} else {
 			prio = 1;
 		}
-
 		PatientEntity patient = new PatientEntity(model, "Patient", true, prio);
-
 		PatientArrivalEvent arrival = new PatientArrivalEvent(model,
 				"Arrival of Patient", true);
 		arrival.schedule(patient, new SimTime(0.0)); // instant arrival

@@ -11,7 +11,8 @@ public class EmergencyRoomModel extends Model {
 	private static int simulationTime = 28800;
 	private static int arrivalTime = 40;
 	public static int underFive = 0;
-
+	
+	public static SimTime warmUp=new SimTime(50.0);
 	public EmergencyRoomModel(Model owner, String name, boolean showInReport,
 			boolean showInTrace) {
 		super(owner, name, showInReport, showInTrace);
@@ -28,15 +29,14 @@ public class EmergencyRoomModel extends Model {
 	public double getTreatmentTime(int cprio) {
 		return treatmentTime[cprio - 1].sample();
 	}
-
-	protected static Queue<PatientEntity> highPriorityPatientQueue;
-	protected static Queue<PatientEntity> lowPriorityPatientQueue;
-	protected static Queue<PatientEntity> lastCheckPatientQueue;
-	protected static Queue<PatientEntity> allPatientsQueue;
-
-	protected static Queue<DoctorEntity> freeDoctorQueue;
-	protected static Queue<DoctorEntity> busyDoctorQueue;
-
+	
+	public static Queue<PatientEntity> highPriorityPatientQueue;
+	public static Queue<PatientEntity> lowPriorityPatientQueue;
+	public static Queue<PatientEntity> lastCheckPatientQueue;
+	public static Queue<PatientEntity> allPatientsQueue;
+	public static Queue<DoctorEntity> freeDoctorQueue;
+	public static Queue<DoctorEntity> busyDoctorQueue;
+	
 	public String description() {
 		return "TODO: Emergency Department Description";
 	}
@@ -99,15 +99,26 @@ public class EmergencyRoomModel extends Model {
 				simulationTime));
 		emergencyExperiment.debugPeriod(new SimTime(0.0), new SimTime(
 				simulationTime));
-
+		
+		ResetEvent reset=new ResetEvent(model,"Queue Reset",true);		
+		reset.schedule(new QueueEntity(model,"Queue",true,highPriorityPatientQueue),warmUp);
+		reset=new ResetEvent(model,"Queue Reset",true);
+		reset.schedule(new QueueEntity(model,"Queue",true,lowPriorityPatientQueue),warmUp);
+		reset=new ResetEvent(model,"Queue Reset",true);
+		reset.schedule(new QueueEntity(model,"Queue",true,lastCheckPatientQueue),warmUp);
+		reset=new ResetEvent(model,"Queue Reset",true);
+		reset.schedule(new QueueEntity(model,"Queue",true,allPatientsQueue),warmUp);
+		reset=new ResetEvent(model,"Queue Reset",true);
+		reset.schedule(new QueueEntity(model,"Queue",true,busyDoctorQueue),warmUp);
+		reset=new ResetEvent(model,"Queue Reset",true);
+		reset.schedule(new QueueEntity(model,"Queue",true,freeDoctorQueue),warmUp);
+		
 		emergencyExperiment.stop(new SimTime(simulationTime));
-
 		emergencyExperiment.start();
-
 		emergencyExperiment.report();
-
 		emergencyExperiment.finish();
 
+		
 		// TODO rm output
 		System.out.println("\nunder five minutes: " + underFive);
 		System.out
@@ -124,26 +135,33 @@ public class EmergencyRoomModel extends Model {
 									.zeroWaits()));
 
 		SimTime[] simTimeArr = new SimTime[allPatientsQueue.size()];
-
+		int count=0;
 		for (int i = 0; i < simTimeArr.length; i++) {
-			simTimeArr[i] = allPatientsQueue.first().getStay();
+			PatientEntity patient=allPatientsQueue.first();	
+			if (SimTime.isLarger(patient.start, warmUp)){
+				simTimeArr[count] = patient.getStay();
+				count++;
+			}
 			allPatientsQueue.removeFirst();
 		}
-
-		SimTime temp;
-		for (int i = 0; i < simTimeArr.length; i++) {
-			for (int j = 0; j < simTimeArr.length; j++) {
-				if(SimTime.isLarger(simTimeArr[j], simTimeArr[i])){
+		
+		SimTime temp;	
+		for (int i = 0; i < count; i++) {
+			for (int j = 0; j < count - i - 1; j++) {
+				if (SimTime.isLarger(simTimeArr[j], simTimeArr[j + 1])) {
 					temp = simTimeArr[j];
-					simTimeArr[j] = simTimeArr[i];
-					simTimeArr[i] = temp;
+					simTimeArr[j] = simTimeArr[j + 1];
+					simTimeArr[j + 1] = temp;
 				}
 			}
 		}
 		
-		int n = (int) (simTimeArr.length * 0.9);
-		double quantile =  0.5 * SimTime.add(simTimeArr[n], simTimeArr[n+1]).getTimeValue();
 		
+		
+
+		
+		int n = (int) (simTimeArr.length * 0.9);
+		double quantile =  0.5 * SimTime.add(simTimeArr[n], simTimeArr[n+1]).getTimeValue();	
 		System.out.println("Quantile: " + quantile);
 		
 	}
