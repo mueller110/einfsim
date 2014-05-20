@@ -1,5 +1,3 @@
-import java.security.acl.LastOwnerException;
-
 import desmoj.core.dist.RealDistExponential;
 import desmoj.core.dist.RealDistUniform;
 import desmoj.core.simulator.Experiment;
@@ -34,6 +32,8 @@ public class EmergencyRoomModel extends Model {
 	protected static Queue<PatientEntity> highPriorityPatientQueue;
 	protected static Queue<PatientEntity> lowPriorityPatientQueue;
 	protected static Queue<PatientEntity> lastCheckPatientQueue;
+	protected static Queue<PatientEntity> allPatientsQueue;
+
 	protected static Queue<DoctorEntity> freeDoctorQueue;
 	protected static Queue<DoctorEntity> busyDoctorQueue;
 
@@ -71,6 +71,8 @@ public class EmergencyRoomModel extends Model {
 		lowPriorityPatientQueue = new Queue<PatientEntity>(this,
 				"Low-Priority Queue", true, true);
 
+		allPatientsQueue = new Queue<PatientEntity>(this, "Statistic", false, false);
+
 		// for prio 2 patients
 		lastCheckPatientQueue = new Queue<PatientEntity>(this,
 				"Last-Check queue", true, true);
@@ -87,6 +89,7 @@ public class EmergencyRoomModel extends Model {
 	}
 
 	public static void main(java.lang.String[] args) {
+
 		Experiment emergencyExperiment = new Experiment("Emergency-Room");
 
 		EmergencyRoomModel model = new EmergencyRoomModel(null,
@@ -104,11 +107,44 @@ public class EmergencyRoomModel extends Model {
 		emergencyExperiment.report();
 
 		emergencyExperiment.finish();
-	
+
 		// TODO rm output
-		System.out.println("under five minutes: " + underFive);
-		System.out.println("avg waiting patients, rest: " + (lastCheckPatientQueue.averageLength()+lowPriorityPatientQueue.averageLength()));		
-		System.out.println("max wating patients, rest: " + (lastCheckPatientQueue.maxLength()+lowPriorityPatientQueue.maxLength()));		
-		System.out.println("Zeros: " + (highPriorityPatientQueue.zeroWaits()+lastCheckPatientQueue.zeroWaits()+lowPriorityPatientQueue.zeroWaits()));
+		System.out.println("\nunder five minutes: " + underFive);
+		System.out
+				.println("avg waiting patients, rest: "
+						+ (lastCheckPatientQueue.averageLength() + lowPriorityPatientQueue
+								.averageLength()));
+		System.out.println("max wating patients, rest: "
+				+ (lastCheckPatientQueue.maxLength() + lowPriorityPatientQueue
+						.maxLength()));
+		System.out
+				.println("Zeros: "
+						+ (highPriorityPatientQueue.zeroWaits()
+								+ lastCheckPatientQueue.zeroWaits() + lowPriorityPatientQueue
+									.zeroWaits()));
+
+		SimTime[] simTimeArr = new SimTime[allPatientsQueue.size()];
+
+		for (int i = 0; i < simTimeArr.length; i++) {
+			simTimeArr[i] = allPatientsQueue.first().getStay();
+			allPatientsQueue.removeFirst();
+		}
+
+		SimTime temp;
+		for (int i = 0; i < simTimeArr.length; i++) {
+			for (int j = 0; j < simTimeArr.length; j++) {
+				if(SimTime.isLarger(simTimeArr[j], simTimeArr[i])){
+					temp = simTimeArr[j];
+					simTimeArr[j] = simTimeArr[i];
+					simTimeArr[i] = temp;
+				}
+			}
+		}
+		
+		int n = (int) (simTimeArr.length * 0.9);
+		double quantile =  0.5 * SimTime.add(simTimeArr[n], simTimeArr[n+1]).getTimeValue();
+		
+		System.out.println("Quantile: " + quantile);
+		
 	}
 }

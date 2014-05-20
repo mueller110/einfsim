@@ -1,8 +1,8 @@
 import desmoj.core.simulator.Entity;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.SimTime;
-import desmoj.extensions.visualization2d.animation.core.simulator.EntityAnimation;
 
+@SuppressWarnings("deprecation")
 public class PatientEntity extends Entity {
 	private int priority;
 	public SimTime start;
@@ -10,6 +10,7 @@ public class PatientEntity extends Entity {
 	public SimTime end;
 	public SimTime end2;
 	public SimTime waitingTime;
+
 	public PatientEntity(Model owner, String name, boolean showInTrace,
 			int priority) {
 		super(owner, name, showInTrace);
@@ -22,6 +23,10 @@ public class PatientEntity extends Entity {
 
 	public void setPriority(int priority) {
 		this.priority = priority;
+	}
+	
+	public SimTime getStay(){
+		return SimTime.diff(end2, start);
 	}
 
 }
