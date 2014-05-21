@@ -9,6 +9,7 @@ public class PatientEntity extends Entity {
 	public SimTime start;
 	public SimTime departureTime;
 	public SimTime waitingTime;
+	public SimTime end;
 	public boolean treatementInterrupted;
 	public SimTime rest;
 	boolean isZero=false;

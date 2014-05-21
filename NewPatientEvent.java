@@ -18,7 +18,7 @@ public class NewPatientEvent extends ExternalEvent {
 	@Override
 	public void eventRoutine() {
 		int prio;
-		if (rand.nextDouble() <= 0.5) {
+		if (rand.nextDouble() <= 0.2) {
 			prio = 3;
 		} else {
 			prio = 1;

@@ -8,7 +8,7 @@ import desmoj.core.simulator.SimTime;
 @SuppressWarnings("deprecation")
 public class EmergencyRoomModel extends Model {
 	private int numberOfDoctors = 2;
-	private static int simulationTime = 288000;
+	private static int simulationTime = 28800;
 	private static int arrivalTime = 40;
 	public static int underFive = 0;
 	
@@ -115,6 +115,8 @@ public class EmergencyRoomModel extends Model {
 		reset.schedule(new QueueEntity(model,"Queue",true,busyDoctorQueue),warmUp);
 		reset=new ResetEvent(model,"Queue Reset",true);
 		reset.schedule(new QueueEntity(model,"Queue",true,freeDoctorQueue),warmUp);
+		reset=new ResetEvent(model,"Queue Reset",true);
+		reset.schedule(new QueueEntity(model,"Queue",true,inTreatmentQueue),warmUp);
 		
 		emergencyExperiment.stop(new SimTime(simulationTime));
 		emergencyExperiment.start();

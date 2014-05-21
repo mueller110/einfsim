@@ -49,7 +49,7 @@ menuitemReset.setToolTipText("Restore default settings");
 
 menuitemReset.addActionListener(new ActionListener() {
 
-@Override
+//@Override
 public void actionPerformed(ActionEvent e) {
 System.out.println("Restoring default settings.");
 spinP1min.setValue(new Integer(10));
@@ -194,7 +194,7 @@ btnStart.setToolTipText("Start the simulation");
 
 btnStart.addActionListener(new ActionListener() {
 
-@Override
+//@Override
 public void actionPerformed(ActionEvent e) {
 System.out.println("Starting Simulation.");
 
@@ -215,7 +215,7 @@ setDefaultCloseOperation(EXIT_ON_CLOSE);
 public static void main(String[] args) {
 SwingUtilities.invokeLater(new Runnable() {
 
-@Override
+//@Override
 public void run() {
 GUI gui = new GUI();
 gui.setVisible(true);

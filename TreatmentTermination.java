@@ -17,7 +17,7 @@ public class TreatmentTermination extends Event<PatientEntity> {
 	public void eventRoutine(PatientEntity patient) {
 		Queue<PatientEntity> queue = null;
 		int cPriority = patient.getPriority();
-		patient.treatementInterrupted=false;
+		patient.treatementInterrupted = false;
 		if (!model.highPriorityPatientQueue.isEmpty()) {
 			queue = model.highPriorityPatientQueue;
 		} else if (!model.lastCheckPatientQueue.isEmpty()) {
@@ -34,31 +34,40 @@ public class TreatmentTermination extends Event<PatientEntity> {
 		} else {
 			model.allPatientsQueue.insert(patient);
 		}
-		
+
 		EmergencyRoomModel.inTreatmentQueue.remove(patient);
-		
+
 		if (queue != null) {
 			PatientEntity nextPatient = queue.first();
 			queue.remove(nextPatient);
 			EmergencyRoomModel.inTreatmentQueue.insert(nextPatient);
-			
+
 			if (nextPatient.getPriority() == 2) {
-				//this was the last waiting time for nextPatient => we can set its departure time 
+				// this was the last waiting time for nextPatient => we can set
+				// its departure time
 				nextPatient.departureTime = new SimTime(model.currentTime());
 				if (SimTime.isSmallerOrEqual(nextPatient.waitingTime,
 						new SimTime(5.0))) {
 					model.underFive++;
 				}
-			} 
-			if (nextPatient.waitingTime==null)
-				nextPatient.waitingTime=new SimTime(0.0);
-			nextPatient.waitingTime=SimTime.add(nextPatient.waitingTime, SimTime.diff(model.currentTime(), nextPatient.start));
+			}
+			if (nextPatient.waitingTime == null)
+				nextPatient.waitingTime = new SimTime(0.0);
+			nextPatient.end = model.currentTime();
+			nextPatient.waitingTime = SimTime.add(nextPatient.waitingTime,
+					SimTime.diff(nextPatient.end, nextPatient.start));
 			TreatmentTermination treatmentTerm = new TreatmentTermination(
 					model, "End of Treatment", true);
-			treatmentTerm.schedule(
-					nextPatient,
-					new SimTime(model.getTreatmentTime(nextPatient
-							.getPriority())));
+			
+			//if (nextPatient.treatementInterrupted == true) {
+			//	treatmentTerm.schedule(nextPatient, nextPatient.rest);
+			//} 
+			//else {
+				treatmentTerm.schedule(
+						nextPatient,
+						new SimTime(model.getTreatmentTime(nextPatient
+								.getPriority())));
+			//}
 			nextPatient.treatmentTermination = treatmentTerm;
 
 		} else {
