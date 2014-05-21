@@ -8,12 +8,15 @@ import desmoj.core.simulator.SimTime;
 @SuppressWarnings("deprecation")
 public class EmergencyRoomModel extends Model {
 	public static int numberOfDoctors = 2;
-	public static int simulationTime =700;
+	public static int simulationTime = 700;
 	public static int arrivalTime = 40;
 	public static int underFive = 0;
-	public static int dist1Min,dist1Max,dist2Min,dist2Max,dist3Min,dist3Max;
-	
-	public static SimTime warmUp=new SimTime(50.0);
+	public static int dist1Min, dist1Max, dist2Min, dist2Max, dist3Min,
+			dist3Max;
+	public static boolean initialPhaseFlag = false;
+
+	public static SimTime warmUp = new SimTime(2880.0);
+
 	public EmergencyRoomModel(Model owner, String name, boolean showInReport,
 			boolean showInTrace) {
 		super(owner, name, showInReport, showInTrace);
@@ -30,7 +33,7 @@ public class EmergencyRoomModel extends Model {
 	public double getTreatmentTime(int cprio) {
 		return treatmentTime[cprio - 1].sample();
 	}
-	
+
 	public static Queue<PatientEntity> highPriorityPatientQueue;
 	public static Queue<PatientEntity> lowPriorityPatientQueue;
 	public static Queue<PatientEntity> lastCheckPatientQueue;
@@ -38,7 +41,7 @@ public class EmergencyRoomModel extends Model {
 	public static Queue<DoctorEntity> freeDoctorQueue;
 	public static Queue<DoctorEntity> busyDoctorQueue;
 	public static Queue<PatientEntity> inTreatmentQueue;
-	
+
 	public String description() {
 		return "TODO: Emergency Department Description";
 	}
@@ -59,24 +62,29 @@ public class EmergencyRoomModel extends Model {
 		// es muss gelten: bedienZeitPrio1<bedienZeitPrio3 und
 		// bedienZeitPrio2_1< bedienZeitPrio2_3
 		treatmentTime[0] = new RealDistUniform(this,
-				"treatment time interval (Priority 1)", dist1Min, dist1Max, true, true); // bedienZeitPrio
-																				// 1
+				"treatment time interval (Priority 1)", dist1Min, dist1Max,
+				true, true); // bedienZeitPrio
+		// 1
 		treatmentTime[1] = new RealDistUniform(this,
-				"treatment time interval (Priority 2_1)",dist2Min, dist2Max, true, true); // bedienZeitPrio
-																				// 2_1
+				"treatment time interval (Priority 2_1)", dist2Min, dist2Max,
+				true, true); // bedienZeitPrio
+		// 2_1
 		treatmentTime[2] = new RealDistUniform(this,
-				"treatment time inverval (Priority 3)", dist3Min, dist3Max, true, true); // bedienZeitPrio
-																				// 3
+				"treatment time inverval (Priority 3)", dist3Min, dist3Max,
+				true, true); // bedienZeitPrio
+		// 3
 
 		highPriorityPatientQueue = new Queue<PatientEntity>(this,
 				"High-Priority Queue", true, true);
 		lowPriorityPatientQueue = new Queue<PatientEntity>(this,
 				"Low-Priority Queue", true, true);
 
-		allPatientsQueue = new Queue<PatientEntity>(this, "Statistic", false, false);
+		allPatientsQueue = new Queue<PatientEntity>(this, "Statistic", false,
+				false);
 
-		inTreatmentQueue = new Queue<PatientEntity>(this, "Patient with Dr.", true, true);
-		
+		inTreatmentQueue = new Queue<PatientEntity>(this, "Patient with Dr.",
+				true, true);
+
 		// for prio 2 patients
 		lastCheckPatientQueue = new Queue<PatientEntity>(this,
 				"Last-Check queue", true, true);
@@ -89,7 +97,7 @@ public class EmergencyRoomModel extends Model {
 				true);
 	}
 
-	public static void runSimulation () {		
+	public static void runSimulation() {
 		Experiment emergencyExperiment = new Experiment("Emergency-Room");
 		EmergencyRoomModel model = new EmergencyRoomModel(null,
 				"Emergency-Room Model", true, true);
@@ -98,26 +106,34 @@ public class EmergencyRoomModel extends Model {
 				simulationTime));
 		emergencyExperiment.debugPeriod(new SimTime(0.0), new SimTime(
 				simulationTime));
-		ResetEvent reset=new ResetEvent(model,"Queue Reset",true);		
-		reset.schedule(new QueueEntity(model,"Queue",true,highPriorityPatientQueue),warmUp);
-		reset=new ResetEvent(model,"Queue Reset",true);
-		reset.schedule(new QueueEntity(model,"Queue",true,lowPriorityPatientQueue),warmUp);
-		reset=new ResetEvent(model,"Queue Reset",true);
-		reset.schedule(new QueueEntity(model,"Queue",true,lastCheckPatientQueue),warmUp);
-		reset=new ResetEvent(model,"Queue Reset",true);
-		reset.schedule(new QueueEntity(model,"Queue",true,allPatientsQueue),warmUp);
-		reset=new ResetEvent(model,"Queue Reset",true);
-		reset.schedule(new QueueEntity(model,"Queue",true,busyDoctorQueue),warmUp);
-		reset=new ResetEvent(model,"Queue Reset",true);
-		reset.schedule(new QueueEntity(model,"Queue",true,freeDoctorQueue),warmUp);	
-		reset=new ResetEvent(model,"Queue Reset",true);
-		reset.schedule(new QueueEntity(model,"Queue",true,inTreatmentQueue),warmUp);	
+		if (initialPhaseFlag) {
+			ResetEvent reset = new ResetEvent(model, "Queue Reset", true);
+			reset.schedule(new QueueEntity(model, "Queue", true,
+					highPriorityPatientQueue), warmUp);
+			reset = new ResetEvent(model, "Queue Reset", true);
+			reset.schedule(new QueueEntity(model, "Queue", true,
+					lowPriorityPatientQueue), warmUp);
+			reset = new ResetEvent(model, "Queue Reset", true);
+			reset.schedule(new QueueEntity(model, "Queue", true,
+					lastCheckPatientQueue), warmUp);
+			reset = new ResetEvent(model, "Queue Reset", true);
+			reset.schedule(new QueueEntity(model, "Queue", true,
+					allPatientsQueue), warmUp);
+			reset = new ResetEvent(model, "Queue Reset", true);
+			reset.schedule(new QueueEntity(model, "Queue", true,
+					busyDoctorQueue), warmUp);
+			reset = new ResetEvent(model, "Queue Reset", true);
+			reset.schedule(new QueueEntity(model, "Queue", true,
+					freeDoctorQueue), warmUp);
+			reset = new ResetEvent(model, "Queue Reset", true);
+			reset.schedule(new QueueEntity(model, "Queue", true,
+					inTreatmentQueue), warmUp);
+		}
 		emergencyExperiment.stop(new SimTime(simulationTime));
 		emergencyExperiment.start();
 		emergencyExperiment.report();
 		emergencyExperiment.finish();
 
-		
 		// TODO rm output
 		System.out.println("\nunder five minutes: " + underFive);
 		System.out
@@ -132,25 +148,30 @@ public class EmergencyRoomModel extends Model {
 						+ (highPriorityPatientQueue.zeroWaits()
 								+ lastCheckPatientQueue.zeroWaits() + lowPriorityPatientQueue
 									.zeroWaits()));
-		System.out.println(allPatientsQueue.size());
+		System.out.println("allPatientsQueuesize " + allPatientsQueue.size());
 		SimTime[] simTimeArr = new SimTime[allPatientsQueue.size()];
-		int count=0;
+		int count = 0;
 		for (int i = 0; i < simTimeArr.length; i++) {
-			PatientEntity patient=allPatientsQueue.first();	
-			if (SimTime.isLarger(patient.arrivalTime, warmUp)){
-				//problem: there are patients with no departure time at end of simulation
-				// approach: just set the simulation end time as departure time but: problem we have to talk about^^
-				SimTime tmp=patient.getStay();
-				if (tmp==null){
-					tmp=SimTime.diff(new SimTime(simulationTime),patient.arrivalTime);
-				}			
+			PatientEntity patient = allPatientsQueue.first();
+			if (SimTime.isLarger(patient.arrivalTime, warmUp)) {
+				// problem: there are patients with no departure time at end of
+				// simulation
+				// approach: just set the simulation end time as departure time
+				// but: problem we have to talk about^^
+				SimTime tmp = patient.getStay();
+				if (tmp == null) {
+					tmp = SimTime.diff(new SimTime(simulationTime),
+							patient.arrivalTime);
+				}
 				simTimeArr[count] = tmp;
 				count++;
 			}
 			allPatientsQueue.removeFirst();
 		}
-	
-		SimTime temp;	
+
+		System.out.println("count: " + count);
+
+		SimTime temp;
 		for (int i = 0; i < count; i++) {
 			for (int j = 0; j < count - i - 1; j++) {
 				if (SimTime.isLarger(simTimeArr[j], simTimeArr[j + 1])) {
@@ -160,16 +181,19 @@ public class EmergencyRoomModel extends Model {
 				}
 			}
 		}
-		
+
 		int n = (int) (count * 0.9);
 		double quantile;
-		if (n==count-1){
-			quantile=  0.5 * SimTime.add(simTimeArr[n], simTimeArr[n-1]).getTimeValue();
-		}else{
-			quantile=  0.5 * SimTime.add(simTimeArr[n], simTimeArr[n+1]).getTimeValue();	
+		if (count > 5) {
+			if (n == count - 1) {
+				quantile = 0.5 * SimTime.add(simTimeArr[n], simTimeArr[n - 1])
+						.getTimeValue();
+			} else {
+				quantile = 0.5 * SimTime.add(simTimeArr[n], simTimeArr[n + 1])
+						.getTimeValue();
+			}
+			System.out.println("Quantile: " + quantile);
 		}
-		 
-		System.out.println("Quantile: " + quantile);
 		System.out.println("SimTime: " + simulationTime);
 	}
 }

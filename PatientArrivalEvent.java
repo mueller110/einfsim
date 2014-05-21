@@ -81,7 +81,7 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 					tmpPatient.treatementInterrupted=true;
 					patient.isZero=true;
 					PatientArrivalEvent arrival = new PatientArrivalEvent(model,
-							"Tobi sucht das", true);
+							"Reschedule", true);
 					arrival.schedule(tmpPatient, new SimTime(0.0)); // instant arrival
 				}else{
 					patient.start = model.currentTime();

@@ -3,6 +3,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -29,6 +30,8 @@ public class GUI extends JFrame {
 			lblP2max, lblP3min, lblP3max;
 	JSpinner spinP1min, spinP2min, spinP3min, spinP1max, spinP2max, spinP3max,
 			spinNrDr, spinAvgPatArr, spinSimuTime;
+	JCheckBox chkInitialphase;
+	
 
 	public GUI() {
 		int width = 400;
@@ -205,13 +208,25 @@ public class GUI extends JFrame {
 				EmergencyRoomModel.dist3Max=(int)spinP3max.getValue();
 				EmergencyRoomModel.numberOfDoctors=(int)spinNrDr.getValue();
 				EmergencyRoomModel.arrivalTime=(int)spinAvgPatArr.getValue();
-				EmergencyRoomModel.simulationTime=(int)spinSimuTime.getValue();			
+				EmergencyRoomModel.simulationTime=(int)spinSimuTime.getValue();
+				EmergencyRoomModel.initialPhaseFlag=chkInitialphase.isSelected();
+				EmergencyRoomModel.underFive = 0;
 				EmergencyRoomModel.runSimulation();
 
 			}
 		});
 
 		panel.add(btnStart);
+		
+		/*
+		 * Checkboxes
+		 */
+		chkInitialphase = new JCheckBox("Initialphase");
+		chkInitialphase.setSelected(false);
+		chkInitialphase.setBounds(127, (height-150), 120, 20);
+		panel.add(chkInitialphase);
+		
+		
 		setTitle("Emergency Room Model");
 		setSize(width, height);
 		setLocationRelativeTo(null);
