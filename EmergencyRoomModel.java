@@ -170,6 +170,6 @@ public class EmergencyRoomModel extends Model {
 		}
 		 
 		System.out.println("Quantile: " + quantile);
-		
+		System.out.println("SimTime: " + simulationTime);
 	}
 }

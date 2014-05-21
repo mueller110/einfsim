@@ -72,7 +72,8 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 					SimTime drtime = SimTime.diff(model.currentTime(), tmpPatient.end);
 					SimTime absolut = SimTime.add(tmpPatient.end, tmpPatient.treatmentDuration);					
 					tmpPatient.rest = SimTime.diff(absolut,SimTime.add(tmpPatient.end, drtime));
-					System.out.println(tmpPatient.rest);
+					
+					System.out.println(tmpPatient.getName() + ": " + tmpPatient.getPriority() + " " + tmpPatient.rest);
 					tmpPatient.treatmentTermination.cancel();
 					queue.remove(patient);
 					model.inTreatmentQueue.remove(tmpPatient);

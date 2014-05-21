@@ -67,7 +67,7 @@ public class TreatmentTermination extends Event<PatientEntity> {
 				nextPatient.treatmentDuration = new SimTime(
 						model.getTreatmentTime(nextPatient.getPriority()));
 				treatmentTerm.schedule(nextPatient, new SimTime(
-						patient.treatmentDuration));
+						nextPatient.treatmentDuration));
 			}
 			nextPatient.treatmentTermination = treatmentTerm;
 
