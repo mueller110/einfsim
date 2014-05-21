@@ -36,6 +36,7 @@ public class EmergencyRoomModel extends Model {
 	public static Queue<PatientEntity> allPatientsQueue;
 	public static Queue<DoctorEntity> freeDoctorQueue;
 	public static Queue<DoctorEntity> busyDoctorQueue;
+	public static Queue<PatientEntity> treatedPantientQueue;
 	
 	public String description() {
 		return "TODO: Emergency Department Description";
@@ -73,6 +74,8 @@ public class EmergencyRoomModel extends Model {
 
 		allPatientsQueue = new Queue<PatientEntity>(this, "Statistic", false, false);
 
+		treatedPantientQueue = new Queue<PatientEntity>(this, "Patient with Dr.", true, true);
+		
 		// for prio 2 patients
 		lastCheckPatientQueue = new Queue<PatientEntity>(this,
 				"Last-Check queue", true, true);
@@ -138,7 +141,7 @@ public class EmergencyRoomModel extends Model {
 		int count=0;
 		for (int i = 0; i < simTimeArr.length; i++) {
 			PatientEntity patient=allPatientsQueue.first();	
-			if (SimTime.isLarger(patient.start, warmUp)){
+			if (SimTime.isLarger(patient.arrivalTime, warmUp)){
 				simTimeArr[count] = patient.getStay();
 				count++;
 			}

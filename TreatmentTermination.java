@@ -34,15 +34,18 @@ public class TreatmentTermination extends Event<PatientEntity> {
 		} else {
 			model.allPatientsQueue.insert(patient);
 		}
-
+		
+		EmergencyRoomModel.treatedPantientQueue.remove(patient);
+		
 		if (queue != null) {
 			PatientEntity nextPatient = queue.first();
 			queue.remove(nextPatient);
+			EmergencyRoomModel.treatedPantientQueue.insert(nextPatient);
 			if (nextPatient.getPriority() == 2) {
-				nextPatient.end2 = model.currentTime();
+				nextPatient.departureTime = model.currentTime();
 				nextPatient.waitingTime = SimTime.add(
-						SimTime.diff(nextPatient.end, nextPatient.start),
-						SimTime.diff(nextPatient.end2, nextPatient.start2));
+						SimTime.diff(nextPatient.end, nextPatient.arrivalTime),
+						SimTime.diff(nextPatient.departureTime, nextPatient.start2));
 				if (SimTime.isSmallerOrEqual(nextPatient.waitingTime,
 						new SimTime(5.0))) {
 					model.underFive++;
@@ -57,6 +60,7 @@ public class TreatmentTermination extends Event<PatientEntity> {
 					nextPatient,
 					new SimTime(model.getTreatmentTime(nextPatient
 							.getPriority())));
+			nextPatient.treatmentTermination = treatmentTerm;
 
 		} else {
 			DoctorEntity doctor = (DoctorEntity) model.busyDoctorQueue.first();

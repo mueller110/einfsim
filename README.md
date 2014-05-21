@@ -1,8 +1,6 @@
 
 ------------------------------------------------------------------------------
 TODO:
-Initialisierungsphase
-90%-Quantile
 neues Erfinden (Tod der Notfälle?, Unterbrechung: High priority vor Low priority?)
 
 

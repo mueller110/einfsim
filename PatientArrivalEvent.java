@@ -22,13 +22,15 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 		int cPriority = patient.getPriority();
 		total++;
 		if (cPriority == 1) {
-			patient.start = model.currentTime();
+			if (!patient.treatementInterrupted){
+				patient.arrivalTime = model.currentTime();
+			}else{}
 			queue = model.lowPriorityPatientQueue;
 		} else if (cPriority == 2) {
 			patient.start2 = model.currentTime();
 			queue = model.lastCheckPatientQueue;
 		} else {
-			patient.start = model.currentTime();
+			patient.arrivalTime = model.currentTime();
 			queue = model.highPriorityPatientQueue;
 		}
 		queue.insert(patient);
@@ -40,10 +42,10 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 			model.busyDoctorQueue.insert(doctor);
 			queue.remove(patient);
 			if (cPriority == 2) {
-				patient.end2 = model.currentTime();
+				patient.departureTime = model.currentTime();
 				patient.waitingTime = SimTime.add(
-						SimTime.diff(patient.end, patient.start),
-						SimTime.diff(patient.end2, patient.start2));
+						SimTime.diff(patient.end, patient.arrivalTime),
+						SimTime.diff(patient.departureTime, patient.start2));
 				if (SimTime.isSmallerOrEqual(patient.waitingTime, new SimTime(
 						5.0))) {
 					model.underFive++;
@@ -56,8 +58,38 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 					model, "End of Treatment", true);
 			treatmentTerm.schedule(patient,
 					new SimTime(model.getTreatmentTime(patient.getPriority())));
+			
+			patient.treatmentTermination = treatmentTerm;
+			
+			EmergencyRoomModel.treatedPantientQueue.insert(patient);
+
+		} else {
+			if(patient.getPriority()==3){				
+				
+				PatientEntity tmpPatient;
+				PatientEntity firstPatient = model.treatedPantientQueue.first();
+				
+				do{
+					tmpPatient = model.treatedPantientQueue.first();
+					model.treatedPantientQueue.remove(tmpPatient);
+					
+					
+					
+					model.treatedPantientQueue.insert(tmpPatient);
+				}while(firstPatient!=model.treatedPantientQueue.first() || tmpPatient.getPriority()!=1);
+				
+				if(tmpPatient.getPriority()==1){
+					model.treatedPantientQueue.remove(tmpPatient);
+					tmpPatient.treatementInterrupted=true;
+					
+					PatientArrivalEvent arrival = new PatientArrivalEvent(model,
+							"Arrival of Patient", true);
+					arrival.schedule(tmpPatient, new SimTime(0.0)); // instant arrival
+				}
+			}
 		}
 
+		
 	}
 
 }

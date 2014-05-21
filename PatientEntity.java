@@ -5,11 +5,14 @@ import desmoj.core.simulator.SimTime;
 @SuppressWarnings("deprecation")
 public class PatientEntity extends Entity {
 	private int priority;
-	public SimTime start;
+	public SimTime arrivalTime;
 	public SimTime start2;
 	public SimTime end;
-	public SimTime end2;
+	public SimTime departureTime;
 	public SimTime waitingTime;
+	public boolean treatementInterrupted;
+	TreatmentTermination treatmentTermination;
+
 
 	public PatientEntity(Model owner, String name, boolean showInTrace,
 			int priority) {
@@ -26,7 +29,7 @@ public class PatientEntity extends Entity {
 	}
 	
 	public SimTime getStay(){
-		return SimTime.diff(end2, start);
+		return SimTime.diff(departureTime, arrivalTime);
 	}
 
 }
