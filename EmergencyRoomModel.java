@@ -8,7 +8,7 @@ import desmoj.core.simulator.SimTime;
 @SuppressWarnings("deprecation")
 public class EmergencyRoomModel extends Model {
 	private int numberOfDoctors = 2;
-	private static int simulationTime = 28800;
+	private static int simulationTime = 288000;
 	private static int arrivalTime = 40;
 	public static int underFive = 0;
 	
@@ -36,7 +36,7 @@ public class EmergencyRoomModel extends Model {
 	public static Queue<PatientEntity> allPatientsQueue;
 	public static Queue<DoctorEntity> freeDoctorQueue;
 	public static Queue<DoctorEntity> busyDoctorQueue;
-	public static Queue<PatientEntity> treatedPantientQueue;
+	public static Queue<PatientEntity> inTreatmentQueue;
 	
 	public String description() {
 		return "TODO: Emergency Department Description";
@@ -61,7 +61,7 @@ public class EmergencyRoomModel extends Model {
 				"treatment time interval (Priority 1)", 10, 30, true, true); // bedienZeitPrio
 																				// 1
 		treatmentTime[1] = new RealDistUniform(this,
-				"treatment time interval (Priority 2_1)", 20, 10, true, true); // bedienZeitPrio
+				"treatment time interval (Priority 2_1)", 10, 20, true, true); // bedienZeitPrio
 																				// 2_1
 		treatmentTime[2] = new RealDistUniform(this,
 				"treatment time inverval (Priority 3)", 50, 120, true, true); // bedienZeitPrio
@@ -74,7 +74,7 @@ public class EmergencyRoomModel extends Model {
 
 		allPatientsQueue = new Queue<PatientEntity>(this, "Statistic", false, false);
 
-		treatedPantientQueue = new Queue<PatientEntity>(this, "Patient with Dr.", true, true);
+		inTreatmentQueue = new Queue<PatientEntity>(this, "Patient with Dr.", true, true);
 		
 		// for prio 2 patients
 		lastCheckPatientQueue = new Queue<PatientEntity>(this,
@@ -136,18 +136,24 @@ public class EmergencyRoomModel extends Model {
 						+ (highPriorityPatientQueue.zeroWaits()
 								+ lastCheckPatientQueue.zeroWaits() + lowPriorityPatientQueue
 									.zeroWaits()));
-
+		System.out.println(allPatientsQueue.size());
 		SimTime[] simTimeArr = new SimTime[allPatientsQueue.size()];
 		int count=0;
 		for (int i = 0; i < simTimeArr.length; i++) {
 			PatientEntity patient=allPatientsQueue.first();	
 			if (SimTime.isLarger(patient.arrivalTime, warmUp)){
-				simTimeArr[count] = patient.getStay();
+				//problem: there are patients with no departure time at end of simulation
+				// approach: just set the simulation end time as departure time but: problem we have to talk about^^
+				SimTime tmp=patient.getStay();
+				if (tmp==null){
+					tmp=SimTime.diff(new SimTime(simulationTime),patient.arrivalTime);
+				}			
+				simTimeArr[count] = tmp;
 				count++;
 			}
 			allPatientsQueue.removeFirst();
 		}
-		
+	
 		SimTime temp;	
 		for (int i = 0; i < count; i++) {
 			for (int j = 0; j < count - i - 1; j++) {
@@ -159,12 +165,14 @@ public class EmergencyRoomModel extends Model {
 			}
 		}
 		
-		
-		
-
-		
-		int n = (int) (simTimeArr.length * 0.9);
-		double quantile =  0.5 * SimTime.add(simTimeArr[n], simTimeArr[n+1]).getTimeValue();	
+		int n = (int) (count * 0.9);
+		double quantile;
+		if (n==count-1){
+			quantile=  0.5 * SimTime.add(simTimeArr[n], simTimeArr[n-1]).getTimeValue();
+		}else{
+			quantile=  0.5 * SimTime.add(simTimeArr[n], simTimeArr[n+1]).getTimeValue();	
+		}
+		 
 		System.out.println("Quantile: " + quantile);
 		
 	}

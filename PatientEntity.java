@@ -6,11 +6,12 @@ import desmoj.core.simulator.SimTime;
 public class PatientEntity extends Entity {
 	private int priority;
 	public SimTime arrivalTime;
-	public SimTime start2;
-	public SimTime end;
+	public SimTime start;
 	public SimTime departureTime;
 	public SimTime waitingTime;
 	public boolean treatementInterrupted;
+	public SimTime rest;
+	boolean isZero=false;
 	TreatmentTermination treatmentTermination;
 
 
@@ -18,6 +19,7 @@ public class PatientEntity extends Entity {
 			int priority) {
 		super(owner, name, showInTrace);
 		this.priority = priority;
+		
 	}
 
 	public int getPriority() {
@@ -29,6 +31,8 @@ public class PatientEntity extends Entity {
 	}
 	
 	public SimTime getStay(){
+		if (departureTime==null)
+			return null;
 		return SimTime.diff(departureTime, arrivalTime);
 	}
 

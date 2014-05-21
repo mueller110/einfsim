@@ -9,7 +9,7 @@ public class NewPatientEvent extends ExternalEvent {
 
 	private EmergencyRoomModel model;
 	private static Random rand = new Random();
-
+	
 	public NewPatientEvent(Model owner, String name, boolean showInTrace) {
 		super(owner, name, showInTrace);
 		model = (EmergencyRoomModel) owner;
@@ -18,7 +18,7 @@ public class NewPatientEvent extends ExternalEvent {
 	@Override
 	public void eventRoutine() {
 		int prio;
-		if (rand.nextDouble() <= 0.2) {
+		if (rand.nextDouble() <= 0.5) {
 			prio = 3;
 		} else {
 			prio = 1;

@@ -17,7 +17,7 @@ public class TreatmentTermination extends Event<PatientEntity> {
 	public void eventRoutine(PatientEntity patient) {
 		Queue<PatientEntity> queue = null;
 		int cPriority = patient.getPriority();
-
+		patient.treatementInterrupted=false;
 		if (!model.highPriorityPatientQueue.isEmpty()) {
 			queue = model.highPriorityPatientQueue;
 		} else if (!model.lastCheckPatientQueue.isEmpty()) {
@@ -35,25 +35,24 @@ public class TreatmentTermination extends Event<PatientEntity> {
 			model.allPatientsQueue.insert(patient);
 		}
 		
-		EmergencyRoomModel.treatedPantientQueue.remove(patient);
+		EmergencyRoomModel.inTreatmentQueue.remove(patient);
 		
 		if (queue != null) {
 			PatientEntity nextPatient = queue.first();
 			queue.remove(nextPatient);
-			EmergencyRoomModel.treatedPantientQueue.insert(nextPatient);
+			EmergencyRoomModel.inTreatmentQueue.insert(nextPatient);
+			
 			if (nextPatient.getPriority() == 2) {
-				nextPatient.departureTime = model.currentTime();
-				nextPatient.waitingTime = SimTime.add(
-						SimTime.diff(nextPatient.end, nextPatient.arrivalTime),
-						SimTime.diff(nextPatient.departureTime, nextPatient.start2));
+				//this was the last waiting time for nextPatient => we can set its departure time 
+				nextPatient.departureTime = new SimTime(model.currentTime());
 				if (SimTime.isSmallerOrEqual(nextPatient.waitingTime,
 						new SimTime(5.0))) {
 					model.underFive++;
 				}
-			} else {
-				nextPatient.end = model.currentTime();
-			}
-
+			} 
+			if (nextPatient.waitingTime==null)
+				nextPatient.waitingTime=new SimTime(0.0);
+			nextPatient.waitingTime=SimTime.add(nextPatient.waitingTime, SimTime.diff(model.currentTime(), nextPatient.start));
 			TreatmentTermination treatmentTerm = new TreatmentTermination(
 					model, "End of Treatment", true);
 			treatmentTerm.schedule(
