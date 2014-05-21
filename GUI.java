@@ -17,210 +17,215 @@ import javax.swing.SwingUtilities;
 
 public class GUI extends JFrame {
 
-/**
+	/**
 *
 */
-private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-JMenuBar menubar;
-JPanel panel;
-JButton btnStart;
-JLabel lblNrDr, lblAvgPatArr, lblSimuTime, lblP1min, lblP1max, lblP2min,
-lblP2max, lblP3min, lblP3max;
-JSpinner spinP1min, spinP2min, spinP3min, spinP1max, spinP2max, spinP3max, spinNrDr, spinAvgPatArr, spinSimuTime;
+	JMenuBar menubar;
+	JPanel panel;
+	JButton btnStart;
+	JLabel lblNrDr, lblAvgPatArr, lblSimuTime, lblP1min, lblP1max, lblP2min,
+			lblP2max, lblP3min, lblP3max;
+	JSpinner spinP1min, spinP2min, spinP3min, spinP1max, spinP2max, spinP3max,
+			spinNrDr, spinAvgPatArr, spinSimuTime;
 
-public GUI() {
-int width = 400;
-int height = 400;
+	public GUI() {
+		int width = 400;
+		int height = 400;
 
-panel = new JPanel();
-getContentPane().add(panel);
-panel.setLayout(null);
-setResizable(false);
+		panel = new JPanel();
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		setResizable(false);
 
-/*
-* menubar
-*/
-menubar = new JMenuBar();
-JMenu menuSettings = new JMenu("Settings");
-menuSettings.setMnemonic(KeyEvent.VK_S);
-JMenuItem menuitemReset = new JMenuItem("Reset");
-menuitemReset.setToolTipText("Restore default settings");
+		/*
+		 * menubar
+		 */
+		menubar = new JMenuBar();
+		JMenu menuSettings = new JMenu("Settings");
+		menuSettings.setMnemonic(KeyEvent.VK_S);
+		JMenuItem menuitemReset = new JMenuItem("Reset");
+		menuitemReset.setToolTipText("Restore default settings");
 
-menuitemReset.addActionListener(new ActionListener() {
+		menuitemReset.addActionListener(new ActionListener() {
 
-//@Override
-public void actionPerformed(ActionEvent e) {
-System.out.println("Restoring default settings.");
-spinP1min.setValue(new Integer(10));
-spinP1max.setValue(new Integer(30));
-spinP2min.setValue(new Integer(10));
-spinP2max.setValue(new Integer(20));
-spinP3min.setValue(new Integer(50));
-spinP3max.setValue(new Integer(120));
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Restoring default settings.");
+				spinP1min.setValue(new Integer(10));
+				spinP1max.setValue(new Integer(30));
+				spinP2min.setValue(new Integer(10));
+				spinP2max.setValue(new Integer(20));
+				spinP3min.setValue(new Integer(50));
+				spinP3max.setValue(new Integer(120));
 
-spinNrDr.setValue(new Integer(2));
-spinAvgPatArr.setValue(new Integer(40));
-spinSimuTime.setValue(new Integer(28800));
-}
-});
+				spinNrDr.setValue(new Integer(2));
+				spinAvgPatArr.setValue(new Integer(40));
+				spinSimuTime.setValue(new Integer(28800));
+			}
+		});
 
-menuSettings.add(menuitemReset);
+		menuSettings.add(menuitemReset);
 
-menubar.add(menuSettings);
-setJMenuBar(menubar);
+		menubar.add(menuSettings);
+		setJMenuBar(menubar);
 
-/*
-* Textfields & Labels
-*/
-/*
-* SimuZeit /
-*/
+		/*
+		 * Textfields & Labels
+		 */
+		/*
+		 * SimuZeit /
+		 */
 
-lblNrDr = new JLabel("Number of doctors:");
-lblNrDr.setBounds(10, 15, 120, 10);
+		lblNrDr = new JLabel("Number of doctors:");
+		lblNrDr.setBounds(10, 15, 120, 10);
 
-SpinnerModel NrDr = new SpinnerNumberModel(2, 1, 10, 1);
-spinNrDr = new JSpinner(NrDr);
-spinNrDr.setBounds(130, 10, 70, 20);
-((DefaultEditor) spinNrDr.getEditor()).getTextField()
-.setEditable(false);
+		SpinnerModel NrDr = new SpinnerNumberModel(2, 1, 10, 1);
+		spinNrDr = new JSpinner(NrDr);
+		spinNrDr.setBounds(130, 10, 70, 20);
+		((DefaultEditor) spinNrDr.getEditor()).getTextField()
+				.setEditable(false);
 
-panel.add(lblNrDr);
-panel.add(spinNrDr);
+		panel.add(lblNrDr);
+		panel.add(spinNrDr);
 
-lblAvgPatArr = new JLabel("Average arrival time:");
-lblAvgPatArr.setBounds(10, 50, 120, 15);
+		lblAvgPatArr = new JLabel("Average arrival time:");
+		lblAvgPatArr.setBounds(10, 50, 120, 15);
 
-SpinnerModel AvgPatArr = new SpinnerNumberModel(40, 5, 600, 5);
-spinAvgPatArr = new JSpinner(AvgPatArr);
-spinAvgPatArr.setBounds(130, 50, 70, 20);
-((DefaultEditor) spinAvgPatArr.getEditor()).getTextField().setEditable(
-false);
+		SpinnerModel AvgPatArr = new SpinnerNumberModel(40, 5, 600, 5);
+		spinAvgPatArr = new JSpinner(AvgPatArr);
+		spinAvgPatArr.setBounds(130, 50, 70, 20);
+		((DefaultEditor) spinAvgPatArr.getEditor()).getTextField().setEditable(
+				false);
 
-panel.add(lblAvgPatArr);
-panel.add(spinAvgPatArr);
+		panel.add(lblAvgPatArr);
+		panel.add(spinAvgPatArr);
 
-lblSimuTime = new JLabel("Simulation time:");
-lblSimuTime.setBounds(10, 90, 120, 15);
+		lblSimuTime = new JLabel("Simulation time:");
+		lblSimuTime.setBounds(10, 90, 120, 15);
 
-SpinnerModel SimuTime = new SpinnerNumberModel(28800, 360, 144000, 360);
-spinSimuTime = new JSpinner(SimuTime);
-spinSimuTime.setBounds(130, 90, 70, 20);
-((DefaultEditor) spinSimuTime.getEditor()).getTextField().setEditable(
-false);
+		SpinnerModel SimuTime = new SpinnerNumberModel(28800, 360, 144000, 360);
+		spinSimuTime = new JSpinner(SimuTime);
+		spinSimuTime.setBounds(130, 90, 70, 20);
+		((DefaultEditor) spinSimuTime.getEditor()).getTextField().setEditable(
+				false);
 
-panel.add(lblSimuTime);
-panel.add(spinSimuTime);
+		panel.add(lblSimuTime);
+		panel.add(spinSimuTime);
 
-lblP1min = new JLabel("Priority 1 min:");
-lblP1min.setBounds(10, 130, 120, 15);
+		lblP1min = new JLabel("Priority 1 min:");
+		lblP1min.setBounds(10, 130, 120, 15);
 
-SpinnerModel P1min = new SpinnerNumberModel(10, 1, 1000, 1);
-spinP1min = new JSpinner(P1min);
-spinP1min.setBounds(130, 130, 70, 20);
-((DefaultEditor) spinP1min.getEditor()).getTextField().setEditable(
-false);
+		SpinnerModel P1min = new SpinnerNumberModel(10, 1, 1000, 1);
+		spinP1min = new JSpinner(P1min);
+		spinP1min.setBounds(130, 130, 70, 20);
+		((DefaultEditor) spinP1min.getEditor()).getTextField().setEditable(
+				false);
 
-panel.add(lblP1min);
-panel.add(spinP1min);
+		panel.add(lblP1min);
+		panel.add(spinP1min);
 
-lblP1max = new JLabel("max:");
-lblP1max.setBounds(220, 130, 40, 15);
+		lblP1max = new JLabel("max:");
+		lblP1max.setBounds(220, 130, 40, 15);
 
-SpinnerModel P1max = new SpinnerNumberModel(30, 1, 1000, 1);
-spinP1max = new JSpinner(P1max);
-spinP1max.setBounds(250, 130, 70, 20);
-((DefaultEditor) spinP1max.getEditor()).getTextField().setEditable(
-false);
+		SpinnerModel P1max = new SpinnerNumberModel(30, 1, 1000, 1);
+		spinP1max = new JSpinner(P1max);
+		spinP1max.setBounds(250, 130, 70, 20);
+		((DefaultEditor) spinP1max.getEditor()).getTextField().setEditable(
+				false);
 
-panel.add(lblP1max);
-panel.add(spinP1max);
+		panel.add(lblP1max);
+		panel.add(spinP1max);
 
-lblP2min = new JLabel("Priority 2 min:");
-lblP2min.setBounds(10, 170, 120, 15);
+		lblP2min = new JLabel("Priority 2 min:");
+		lblP2min.setBounds(10, 170, 120, 15);
 
-SpinnerModel P2min = new SpinnerNumberModel(10, 1, 1000, 1);
-spinP2min = new JSpinner(P2min);
-spinP2min.setBounds(130, 170, 70, 20);
-((DefaultEditor) spinP2min.getEditor()).getTextField().setEditable(
-false);
+		SpinnerModel P2min = new SpinnerNumberModel(10, 1, 1000, 1);
+		spinP2min = new JSpinner(P2min);
+		spinP2min.setBounds(130, 170, 70, 20);
+		((DefaultEditor) spinP2min.getEditor()).getTextField().setEditable(
+				false);
 
-panel.add(lblP2min);
-panel.add(spinP2min);
+		panel.add(lblP2min);
+		panel.add(spinP2min);
 
-lblP2max = new JLabel("max:");
-lblP2max.setBounds(220, 170, 40, 15);
+		lblP2max = new JLabel("max:");
+		lblP2max.setBounds(220, 170, 40, 15);
 
-SpinnerModel P2max = new SpinnerNumberModel(20, 1, 1000, 1);
-spinP2max = new JSpinner(P2max);
-spinP2max.setBounds(250, 170, 70, 20);
-((DefaultEditor) spinP2max.getEditor()).getTextField().setEditable(
-false);
+		SpinnerModel P2max = new SpinnerNumberModel(20, 1, 1000, 1);
+		spinP2max = new JSpinner(P2max);
+		spinP2max.setBounds(250, 170, 70, 20);
+		((DefaultEditor) spinP2max.getEditor()).getTextField().setEditable(
+				false);
 
-panel.add(lblP2max);
-panel.add(spinP2max);
+		panel.add(lblP2max);
+		panel.add(spinP2max);
 
-lblP3min = new JLabel("Priority 3 min:");
-lblP3min.setBounds(10, 210, 120, 15);
+		lblP3min = new JLabel("Priority 3 min:");
+		lblP3min.setBounds(10, 210, 120, 15);
 
-SpinnerModel P3min = new SpinnerNumberModel(50, 1, 1000, 1);
-spinP3min = new JSpinner(P3min);
-spinP3min.setBounds(130, 210, 70, 20);
-((DefaultEditor) spinP3min.getEditor()).getTextField().setEditable(
-false);
+		SpinnerModel P3min = new SpinnerNumberModel(50, 1, 1000, 1);
+		spinP3min = new JSpinner(P3min);
+		spinP3min.setBounds(130, 210, 70, 20);
+		((DefaultEditor) spinP3min.getEditor()).getTextField().setEditable(
+				false);
 
-panel.add(lblP3min);
-panel.add(spinP3min);
+		panel.add(lblP3min);
+		panel.add(spinP3min);
 
-lblP3max = new JLabel("max:");
-lblP3max.setBounds(220, 210, 40, 15);
+		lblP3max = new JLabel("max:");
+		lblP3max.setBounds(220, 210, 40, 15);
 
-SpinnerModel P3max = new SpinnerNumberModel(120, 1, 1000, 1);
-spinP3max = new JSpinner(P3max);
-spinP3max.setBounds(250, 210, 70, 20);
-((DefaultEditor) spinP3max.getEditor()).getTextField().setEditable(
-false);
+		SpinnerModel P3max = new SpinnerNumberModel(120, 1, 1000, 1);
+		spinP3max = new JSpinner(P3max);
+		spinP3max.setBounds(250, 210, 70, 20);
+		((DefaultEditor) spinP3max.getEditor()).getTextField().setEditable(
+				false);
 
-panel.add(lblP3max);
-panel.add(spinP3max);
+		panel.add(lblP3max);
+		panel.add(spinP3max);
 
-/*
-* Buttons
-*/
-btnStart = new JButton("start");
-btnStart.setBounds((width / 2 - 40), (height - 100), 80, 30);
-btnStart.setToolTipText("Start the simulation");
+		/*
+		 * Buttons
+		 */
+		btnStart = new JButton("start");
+		btnStart.setBounds((width / 2 - 40), (height - 100), 80, 30);
+		btnStart.setToolTipText("Start the simulation");
+		btnStart.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Starting Simulation.");
+				int params[]=new int[9];
+				EmergencyRoomModel.dist1Min=(int)spinP1min.getValue();
+				EmergencyRoomModel.dist1Max=(int)spinP1max.getValue();
+				EmergencyRoomModel.dist2Min=(int)spinP2min.getValue();
+				EmergencyRoomModel.dist2Max=(int)spinP2max.getValue();
+				EmergencyRoomModel.dist3Min=(int)spinP3min.getValue();
+				EmergencyRoomModel.dist3Max=(int)spinP3max.getValue();
+				EmergencyRoomModel.numberOfDoctors=(int)spinNrDr.getValue();
+				EmergencyRoomModel.arrivalTime=(int)spinAvgPatArr.getValue();
+				EmergencyRoomModel.simulationTime=(int)spinSimuTime.getValue();			
+				EmergencyRoomModel.runSimulation();
 
-btnStart.addActionListener(new ActionListener() {
+			}
+		});
 
-//@Override
-public void actionPerformed(ActionEvent e) {
-System.out.println("Starting Simulation.");
+		panel.add(btnStart);
+		setTitle("Emergency Room Model");
+		setSize(width, height);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-//TODO start
-
-}
-});
-
-panel.add(btnStart);
-
-setTitle("Emergency Room Model");
-setSize(width, height);
-setLocationRelativeTo(null);
-setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-}
-
-public static void main(String[] args) {
-SwingUtilities.invokeLater(new Runnable() {
-
-//@Override
-public void run() {
-GUI gui = new GUI();
-gui.setVisible(true);
-}
-});
-}
+	}
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				GUI gui = new GUI();
+				gui.setVisible(true);
+			}
+		});
+	}
 
 }

@@ -7,10 +7,11 @@ import desmoj.core.simulator.SimTime;
 
 @SuppressWarnings("deprecation")
 public class EmergencyRoomModel extends Model {
-	private int numberOfDoctors = 2;
-	private static int simulationTime = 28800;
-	private static int arrivalTime = 40;
+	public static int numberOfDoctors = 2;
+	public static int simulationTime = 288000;
+	public static int arrivalTime = 40;
 	public static int underFive = 0;
+	public static int dist1Min,dist1Max,dist2Min,dist2Max,dist3Min,dist3Max;
 	
 	public static SimTime warmUp=new SimTime(50.0);
 	public EmergencyRoomModel(Model owner, String name, boolean showInReport,
@@ -58,13 +59,13 @@ public class EmergencyRoomModel extends Model {
 		// es muss gelten: bedienZeitPrio1<bedienZeitPrio3 und
 		// bedienZeitPrio2_1< bedienZeitPrio2_3
 		treatmentTime[0] = new RealDistUniform(this,
-				"treatment time interval (Priority 1)", 10, 30, true, true); // bedienZeitPrio
+				"treatment time interval (Priority 1)", dist1Min, dist1Max, true, true); // bedienZeitPrio
 																				// 1
 		treatmentTime[1] = new RealDistUniform(this,
-				"treatment time interval (Priority 2_1)", 10, 20, true, true); // bedienZeitPrio
+				"treatment time interval (Priority 2_1)",dist2Min, dist2Max, true, true); // bedienZeitPrio
 																				// 2_1
 		treatmentTime[2] = new RealDistUniform(this,
-				"treatment time inverval (Priority 3)", 50, 120, true, true); // bedienZeitPrio
+				"treatment time inverval (Priority 3)", dist3Min, dist3Max, true, true); // bedienZeitPrio
 																				// 3
 
 		highPriorityPatientQueue = new Queue<PatientEntity>(this,
@@ -79,22 +80,17 @@ public class EmergencyRoomModel extends Model {
 		// for prio 2 patients
 		lastCheckPatientQueue = new Queue<PatientEntity>(this,
 				"Last-Check queue", true, true);
-
 		freeDoctorQueue = new Queue<DoctorEntity>(this, "free doctors", true,
 				true);
-
 		for (int i = 0; i < numberOfDoctors; i++) {
 			freeDoctorQueue.insert(new DoctorEntity(this, "doctor", true));
 		}
-
 		busyDoctorQueue = new Queue<DoctorEntity>(this, "busy doctors", true,
 				true);
 	}
 
-	public static void main(java.lang.String[] args) {
-
+	public static void runSimulation () {		
 		Experiment emergencyExperiment = new Experiment("Emergency-Room");
-
 		EmergencyRoomModel model = new EmergencyRoomModel(null,
 				"Emergency-Room Model", true, true);
 		model.connectToExperiment(emergencyExperiment);
@@ -102,7 +98,6 @@ public class EmergencyRoomModel extends Model {
 				simulationTime));
 		emergencyExperiment.debugPeriod(new SimTime(0.0), new SimTime(
 				simulationTime));
-		
 		ResetEvent reset=new ResetEvent(model,"Queue Reset",true);		
 		reset.schedule(new QueueEntity(model,"Queue",true,highPriorityPatientQueue),warmUp);
 		reset=new ResetEvent(model,"Queue Reset",true);
@@ -114,10 +109,9 @@ public class EmergencyRoomModel extends Model {
 		reset=new ResetEvent(model,"Queue Reset",true);
 		reset.schedule(new QueueEntity(model,"Queue",true,busyDoctorQueue),warmUp);
 		reset=new ResetEvent(model,"Queue Reset",true);
-		reset.schedule(new QueueEntity(model,"Queue",true,freeDoctorQueue),warmUp);
+		reset.schedule(new QueueEntity(model,"Queue",true,freeDoctorQueue),warmUp);	
 		reset=new ResetEvent(model,"Queue Reset",true);
-		reset.schedule(new QueueEntity(model,"Queue",true,inTreatmentQueue),warmUp);
-		
+		reset.schedule(new QueueEntity(model,"Queue",true,inTreatmentQueue),warmUp);	
 		emergencyExperiment.stop(new SimTime(simulationTime));
 		emergencyExperiment.start();
 		emergencyExperiment.report();
