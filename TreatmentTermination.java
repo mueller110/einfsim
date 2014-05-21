@@ -40,6 +40,7 @@ public class TreatmentTermination extends Event<PatientEntity> {
 		if (queue != null) {
 			PatientEntity nextPatient = queue.first();
 			queue.remove(nextPatient);
+			nextPatient.treatmentStart = new SimTime(model.currentTime());
 			EmergencyRoomModel.inTreatmentQueue.insert(nextPatient);
 
 			if (nextPatient.getPriority() == 2) {
@@ -58,16 +59,16 @@ public class TreatmentTermination extends Event<PatientEntity> {
 					SimTime.diff(nextPatient.end, nextPatient.start));
 			TreatmentTermination treatmentTerm = new TreatmentTermination(
 					model, "End of Treatment", true);
-			
-			//if (nextPatient.treatementInterrupted == true) {
-			//	treatmentTerm.schedule(nextPatient, nextPatient.rest);
-			//} 
-			//else {
-				treatmentTerm.schedule(
-						nextPatient,
-						new SimTime(model.getTreatmentTime(nextPatient
-								.getPriority())));
-			//}
+
+			if (nextPatient.treatementInterrupted) {
+				nextPatient.treatmentDuration = new SimTime(nextPatient.rest);
+				treatmentTerm.schedule(nextPatient, nextPatient.rest);				
+			} else {
+				nextPatient.treatmentDuration = new SimTime(
+						model.getTreatmentTime(nextPatient.getPriority()));
+				treatmentTerm.schedule(nextPatient, new SimTime(
+						patient.treatmentDuration));
+			}
 			nextPatient.treatmentTermination = treatmentTerm;
 
 		} else {

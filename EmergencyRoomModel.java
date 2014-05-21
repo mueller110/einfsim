@@ -8,7 +8,7 @@ import desmoj.core.simulator.SimTime;
 @SuppressWarnings("deprecation")
 public class EmergencyRoomModel extends Model {
 	public static int numberOfDoctors = 2;
-	public static int simulationTime = 288000;
+	public static int simulationTime =700;
 	public static int arrivalTime = 40;
 	public static int underFive = 0;
 	public static int dist1Min,dist1Max,dist2Min,dist2Max,dist3Min,dist3Max;

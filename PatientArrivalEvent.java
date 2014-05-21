@@ -21,13 +21,13 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 		total++;
 		if (cPriority == 1) {
 			if (!patient.treatementInterrupted){
-				patient.arrivalTime = model.currentTime();
+				patient.arrivalTime = new SimTime(model.currentTime());
 			}
 			queue = model.lowPriorityPatientQueue;
 		} else if (cPriority == 2) {
 			queue = model.lastCheckPatientQueue;
 		} else {
-			patient.arrivalTime = model.currentTime();
+			patient.arrivalTime = new SimTime(model.currentTime());
 			queue = model.highPriorityPatientQueue;
 		}
 		if (patient.waitingTime==null)
@@ -40,13 +40,16 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 			model.freeDoctorQueue.remove(doctor);
 			model.busyDoctorQueue.insert(doctor);
 			queue.remove(patient);
+			patient.treatmentStart=new SimTime(model.currentTime());
 			TreatmentTermination treatmentTerm = new TreatmentTermination(
 					model, "End of Treatment", true);
 			if (!patient.treatementInterrupted){
+				patient.treatmentDuration=new SimTime(model.getTreatmentTime(patient.getPriority()));
 			treatmentTerm.schedule(patient,
-					new SimTime(model.getTreatmentTime(patient.getPriority())));
+					new SimTime(patient.treatmentDuration));
 			}else{
-				treatmentTerm.schedule(patient,patient.rest);
+				patient.treatmentDuration=new SimTime(patient.rest);
+				treatmentTerm.schedule(patient,new SimTime(patient.rest));
 			}
 			patient.treatementInterrupted=false;
 			patient.treatmentTermination = treatmentTerm;		
@@ -63,14 +66,13 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 					model.inTreatmentQueue.remove(tmpPatient);		
 					model.inTreatmentQueue.insert(tmpPatient);
 				}while(firstPatient!=tmpPatient && tmpPatient.getPriority()!=1);
-				
+					
 				if(tmpPatient.getPriority()==1){
 					tmpPatient.treatementInterrupted=true;
 					SimTime drtime = SimTime.diff(model.currentTime(), tmpPatient.end);
-					SimTime absolut = SimTime.add(tmpPatient.end, new SimTime (tmpPatient.treatmentTermination.scheduledAt().getTimeValue()));
-					tmpPatient.rest = SimTime.diff(absolut, drtime);
+					SimTime absolut = SimTime.add(tmpPatient.end, tmpPatient.treatmentDuration);					
+					tmpPatient.rest = SimTime.diff(absolut,SimTime.add(tmpPatient.end, drtime));
 					System.out.println(tmpPatient.rest);
-					
 					tmpPatient.treatmentTermination.cancel();
 					queue.remove(patient);
 					model.inTreatmentQueue.remove(tmpPatient);
