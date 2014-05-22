@@ -1,5 +1,6 @@
 
 ------------------------------------------------------------------------------
+Pres: 26.06.14
 TODO:
 Todesfälle,
 Initialisierungsphase-dauer variierbar,
