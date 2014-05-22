@@ -65,15 +65,16 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 					tmpPatient = model.inTreatmentQueue.first();		
 					model.inTreatmentQueue.remove(tmpPatient);		
 					model.inTreatmentQueue.insert(tmpPatient);
+//					System.out.println("Wer ist drin: " + tmpPatient.getPriority() + " von " + tmpPatient.getName());
 				}while(firstPatient!=tmpPatient && tmpPatient.getPriority()!=1);
-					
 				if(tmpPatient.getPriority()==1){
+//					System.out.println("priority: " + tmpPatient.getPriority());
 					tmpPatient.treatementInterrupted=true;
 					SimTime drtime = SimTime.diff(model.currentTime(), tmpPatient.end);
 					SimTime absolut = SimTime.add(tmpPatient.end, tmpPatient.treatmentDuration);					
 					tmpPatient.rest = SimTime.diff(absolut,SimTime.add(tmpPatient.end, drtime));
 					
-					System.out.println(tmpPatient.getName() + ": " + tmpPatient.getPriority() + " " + tmpPatient.rest);
+//					System.out.println(tmpPatient.getName() + ": " + tmpPatient.getPriority() + " " + tmpPatient.rest);
 					tmpPatient.treatmentTermination.cancel();
 					queue.remove(patient);
 					model.inTreatmentQueue.remove(tmpPatient);
@@ -83,6 +84,10 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 					PatientArrivalEvent arrival = new PatientArrivalEvent(model,
 							"Reschedule", true);
 					arrival.schedule(tmpPatient, new SimTime(0.0)); // instant arrival
+					TreatmentTermination te = new TreatmentTermination(model, "3 vor 1", true);
+					patient.treatmentDuration=new SimTime(model.getTreatmentTime(patient.getPriority()));
+					te.schedule(patient,
+							new SimTime(patient.treatmentDuration));
 				}else{
 					patient.start = model.currentTime();
 					patient.isZero=false;

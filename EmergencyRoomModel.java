@@ -8,7 +8,7 @@ import desmoj.core.simulator.SimTime;
 @SuppressWarnings("deprecation")
 public class EmergencyRoomModel extends Model {
 	public static int numberOfDoctors = 2;
-	public static int simulationTime = 700;
+	public static int simulationTime = 28800; // 31680
 	public static int arrivalTime = 40;
 	public static int underFive = 0;
 	public static int dist1Min, dist1Max, dist2Min, dist2Max, dist3Min,
@@ -153,7 +153,7 @@ public class EmergencyRoomModel extends Model {
 		int count = 0;
 		for (int i = 0; i < simTimeArr.length; i++) {
 			PatientEntity patient = allPatientsQueue.first();
-			if (SimTime.isLarger(patient.arrivalTime, warmUp)) {
+			if (SimTime.isLarger(patient.arrivalTime, warmUp) && initialPhaseFlag) {
 				// problem: there are patients with no departure time at end of
 				// simulation
 				// approach: just set the simulation end time as departure time
@@ -181,6 +181,10 @@ public class EmergencyRoomModel extends Model {
 				}
 			}
 		}
+		
+//		for(int i = 0; i < simTimeArr.length; i++){
+//			System.out.println(simTimeArr[i]);
+//		}
 
 		int n = (int) (count * 0.9);
 		double quantile;
