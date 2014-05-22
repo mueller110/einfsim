@@ -83,7 +83,7 @@ public class EmergencyRoomModel extends Model {
 				false);
 
 		inTreatmentQueue = new Queue<PatientEntity>(this, "Patient with Dr.",
-				true, true);
+				false, true);
 
 		// for prio 2 patients
 		lastCheckPatientQueue = new Queue<PatientEntity>(this,
@@ -148,7 +148,7 @@ public class EmergencyRoomModel extends Model {
 						+ (highPriorityPatientQueue.zeroWaits()
 								+ lastCheckPatientQueue.zeroWaits() + lowPriorityPatientQueue
 									.zeroWaits()));
-		System.out.println("allPatientsQueuesize " + allPatientsQueue.size());
+//		System.out.println("allPatientsQueuesize " + allPatientsQueue.size());
 		SimTime[] simTimeArr = new SimTime[allPatientsQueue.size()];
 		int count = 0;
 		for (int i = 0; i < simTimeArr.length; i++) {
@@ -169,7 +169,6 @@ public class EmergencyRoomModel extends Model {
 			allPatientsQueue.removeFirst();
 		}
 
-		System.out.println("count: " + count);
 
 		SimTime temp;
 		for (int i = 0; i < count; i++) {
@@ -198,6 +197,6 @@ public class EmergencyRoomModel extends Model {
 			}
 			System.out.println("Quantile: " + quantile);
 		}
-		System.out.println("SimTime: " + simulationTime);
+//		System.out.println("SimTime: " + simulationTime);
 	}
 }

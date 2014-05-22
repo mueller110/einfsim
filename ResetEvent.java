@@ -13,6 +13,6 @@ public class ResetEvent extends Event<QueueEntity> {
 	@Override
 	public void eventRoutine(QueueEntity queueEntity) {
 		queueEntity.queue.reset();
-		System.out.println("Doing the fancy stuff");
+//		System.out.println("Doing the fancy stuff");
 	}
 }

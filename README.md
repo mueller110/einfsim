@@ -1,8 +1,9 @@
 
 ------------------------------------------------------------------------------
 TODO:
-neues Erfinden (Tod der Notf√§lle?, Unterbrechung: High priority vor Low priority?)
-
+Todesf‰lle,
+Initialisierungsphase-dauer variierbar,
+fix patientp1 insert before first,
 
 Notaufnahme
 
