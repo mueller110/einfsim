@@ -31,6 +31,7 @@ public class GUI extends JFrame {
 	JSpinner spinP1min, spinP2min, spinP3min, spinP1max, spinP2max, spinP3max,
 			spinNrDr, spinAvgPatArr, spinSimuTime;
 	JCheckBox chkInitialphase;
+	JCheckBox chkDeathOfPatients;
 	
 
 	public GUI() {
@@ -66,6 +67,8 @@ public class GUI extends JFrame {
 				spinNrDr.setValue(new Integer(2));
 				spinAvgPatArr.setValue(new Integer(40));
 				spinSimuTime.setValue(new Integer(28800));
+				chkDeathOfPatients.setSelected(false);
+				chkInitialphase.setSelected(false);
 			}
 		});
 
@@ -210,6 +213,7 @@ public class GUI extends JFrame {
 				EmergencyRoomModel.arrivalTime=(int)spinAvgPatArr.getValue();
 				EmergencyRoomModel.simulationTime=(int)spinSimuTime.getValue();
 				EmergencyRoomModel.initialPhaseFlag=chkInitialphase.isSelected();
+				EmergencyRoomModel.deathOfPatientsFlag=chkDeathOfPatients.isSelected();
 				EmergencyRoomModel.underFive = 0;
 				EmergencyRoomModel.runSimulation();
 
@@ -225,6 +229,11 @@ public class GUI extends JFrame {
 		chkInitialphase.setSelected(false);
 		chkInitialphase.setBounds(127, (height-150), 120, 20);
 		panel.add(chkInitialphase);
+		
+		chkDeathOfPatients = new JCheckBox("Patients P3 can die");
+		chkDeathOfPatients.setSelected(false);
+		chkDeathOfPatients.setBounds(127, (height-125), 180, 20);
+		panel.add(chkDeathOfPatients);
 		
 		
 		setTitle("Emergency Room Model");

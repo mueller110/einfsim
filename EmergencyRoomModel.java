@@ -14,6 +14,7 @@ public class EmergencyRoomModel extends Model {
 	public static int dist1Min, dist1Max, dist2Min, dist2Max, dist3Min,
 			dist3Max;
 	public static boolean initialPhaseFlag = false;
+	public static boolean deathOfPatientsFlag = false;
 
 	public static SimTime warmUp = new SimTime(2880.0);
 

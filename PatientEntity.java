@@ -16,7 +16,7 @@ public class PatientEntity extends Entity {
 	public SimTime treatmentDuration;
 	boolean isZero=false;
 	TreatmentTermination treatmentTermination;
-
+	public SimTime deathTime; // added: deathTime: after time runs out, the patient dies (wow much comment, so useful)
 
 	public PatientEntity(Model owner, String name, boolean showInTrace,
 			int priority) {
