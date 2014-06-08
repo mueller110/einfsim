@@ -182,8 +182,7 @@ public class EmergencyRoomModel extends Model {
 		int count = 0;
 		for (int i = 0; i < simTimeArr.length; i++) {
 			PatientEntity patient = allPatientsQueue.first();
-			if (SimTime.isLarger(patient.arrivalTime, warmUp)
-					&& initialPhaseFlag) {
+			if (SimTime.isLarger(patient.arrivalTime, warmUp)) {
 				// problem: there are patients with no departure time at end of
 				// simulation
 				// approach: just set the simulation end time as departure time
@@ -193,9 +192,10 @@ public class EmergencyRoomModel extends Model {
 					tmp = SimTime.diff(new SimTime(simulationTime),
 							patient.arrivalTime);
 				}
-				simTimeArr[count] = tmp;
-				count++;
+				simTimeArr[count++] = tmp;
+				
 			}
+			
 			allPatientsQueue.removeFirst();
 		}
 
@@ -211,7 +211,7 @@ public class EmergencyRoomModel extends Model {
 		}
 
 		// for(int i = 0; i < simTimeArr.length; i++){
-		// System.out.println(simTimeArr[i]);
+		// 	System.out.println(simTimeArr[i]);
 		// }
 
 		int n = (int) (count * 0.9);
