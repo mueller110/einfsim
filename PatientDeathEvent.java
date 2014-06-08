@@ -15,6 +15,7 @@ public class PatientDeathEvent extends Event<PatientEntity>{
 	public void eventRoutine(PatientEntity patient) {
 		System.out.println("Patient died: " + patient.getName());
 		model.deaths++;
+		model.highPriorityPatientQueue.remove(patient);
 	}
 
 }
