@@ -1,3 +1,7 @@
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+
 import desmoj.core.dist.RealDistExponential;
 import desmoj.core.dist.RealDistUniform;
 import desmoj.core.simulator.Experiment;
@@ -111,6 +115,17 @@ public class EmergencyRoomModel extends Model {
 	}
 
 	public static void runSimulation() {
+		//cause this is how you write into a file shut up!!!
+		PrintStream out = null;
+		try {
+			out = new PrintStream(new FileOutputStream("output.txt"));
+			System.setOut(out);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+			
 		Experiment emergencyExperiment = new Experiment("Emergency-Room");
 		EmergencyRoomModel model = new EmergencyRoomModel(null,
 				"Emergency-Room Model", true, true);

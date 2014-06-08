@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 import desmoj.core.simulator.Event;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.Queue;
@@ -38,7 +40,20 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 		}
 		if (patient.waitingTime == null)
 			patient.waitingTime = new SimTime(0.0);
-		queue.insert(patient);
+
+		if (patient.treatementInterrupted) {
+			if (queue.isEmpty())
+				queue.insert(patient);
+			else
+				queue.insertBefore(patient, queue.first());
+		} else {
+			queue.insert(patient);
+		}
+		System.out.println("Printing da queues");
+		printQueue(model.lowPriorityPatientQueue);
+		printQueue(model.lastCheckPatientQueue);
+		printQueue(model.highPriorityPatientQueue);
+		printQueue(model.inTreatmentQueue);
 		// there is a free doctor?! -> no waiting
 		if (!model.freeDoctorQueue.isEmpty()) {
 			patient.isZero = true;
@@ -67,11 +82,22 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 			patient.end = model.currentTime();
 		} else {
 			if (patient.getPriority() == 3) {
-				PatientEntity tmpPatient;
-				PatientEntity firstPatient = model.inTreatmentQueue.first();
-				model.inTreatmentQueue.remove(firstPatient);
-				model.inTreatmentQueue.insert(firstPatient);
-				do {
+				PatientEntity tmpPatient=null;
+				//lol just use an iterator idiot ^^
+				//PatientEntity firstPatient = model.inTreatmentQueue.first();
+				boolean prio1Found=false;
+				Iterator <PatientEntity> it=model.inTreatmentQueue.iterator();
+				while(!prio1Found && it.hasNext()){
+					tmpPatient=it.next();
+					if (tmpPatient.getPriority()==1){
+						prio1Found=true;
+					}
+				}
+				
+				/*
+				 	model.inTreatmentQueue.remove(firstPatient);
+					model.inTreatmentQueue.insert(firstPatient);
+				  do {
 					tmpPatient = model.inTreatmentQueue.first();
 					model.inTreatmentQueue.remove(tmpPatient);
 					model.inTreatmentQueue.insert(tmpPatient);
@@ -79,8 +105,9 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 					// tmpPatient.getPriority() + " von " +
 					// tmpPatient.getName());
 				} while (firstPatient != tmpPatient
-						&& tmpPatient.getPriority() != 1);
-				if (tmpPatient.getPriority() == 1) {
+						&& tmpPatient.getPriority() != 1);*/
+			
+				if (prio1Found) {
 					// System.out.println("priority: " +
 					// tmpPatient.getPriority());
 					tmpPatient.treatementInterrupted = true;
@@ -99,10 +126,10 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 					model.inTreatmentQueue.insert(patient);
 					tmpPatient.treatementInterrupted = true;
 					patient.isZero = true;
+					System.out.println("3 vor 1 ALARM !!!!!!!!!!!!");
 					PatientArrivalEvent arrival = new PatientArrivalEvent(
 							model, "Reschedule", true);
-					arrival.schedule(tmpPatient, new SimTime(0.0)); // instant
-																	// arrival
+					arrival.schedule(tmpPatient, new SimTime(0.0));
 					TreatmentTermination te = new TreatmentTermination(model,
 							"3 vor 1", true);
 					patient.treatmentDuration = new SimTime(
@@ -122,5 +149,12 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 		}
 
 	}
-
+	private void printQueue(Queue<PatientEntity> queue){
+		System.out.println("Printing: "+queue.getName());
+		Iterator <PatientEntity> it=queue.iterator();
+		while(it.hasNext()){
+			System.out.print(it.next().getName()+" ");
+		}
+		System.out.println();		
+	}
 }
