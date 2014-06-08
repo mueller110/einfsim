@@ -1,4 +1,5 @@
 import desmoj.core.simulator.Entity;
+import desmoj.core.simulator.Event;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.SimTime;
 
@@ -16,7 +17,7 @@ public class PatientEntity extends Entity {
 	public SimTime treatmentDuration;
 	boolean isZero=false;
 	TreatmentTermination treatmentTermination;
-	public SimTime deathTime; // added: deathTime: after time runs out, the patient dies (wow much comment, so useful)
+	PatientDeathEvent deathEvent;
 
 	public PatientEntity(Model owner, String name, boolean showInTrace,
 			int priority) {

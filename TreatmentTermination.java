@@ -42,6 +42,11 @@ public class TreatmentTermination extends Event<PatientEntity> {
 			queue.remove(nextPatient);
 			nextPatient.treatmentStart = new SimTime(model.currentTime());
 			EmergencyRoomModel.inTreatmentQueue.insert(nextPatient);
+			if (nextPatient.getPriority() == 3 && model.deathOfPatientsFlag) {
+				System.out.println("now: " + model.currentTime() + " "
+						+ nextPatient.getPriority() + " " + nextPatient.getName());
+				nextPatient.deathEvent.cancel();
+			}
 
 			if (nextPatient.getPriority() == 2) {
 				// this was the last waiting time for nextPatient => we can set
@@ -62,7 +67,7 @@ public class TreatmentTermination extends Event<PatientEntity> {
 
 			if (nextPatient.treatementInterrupted) {
 				nextPatient.treatmentDuration = new SimTime(nextPatient.rest);
-				treatmentTerm.schedule(nextPatient, nextPatient.rest);				
+				treatmentTerm.schedule(nextPatient, nextPatient.rest);
 			} else {
 				nextPatient.treatmentDuration = new SimTime(
 						model.getTreatmentTime(nextPatient.getPriority()));
@@ -70,7 +75,6 @@ public class TreatmentTermination extends Event<PatientEntity> {
 						nextPatient.treatmentDuration));
 			}
 			nextPatient.treatmentTermination = treatmentTerm;
-
 		} else {
 			DoctorEntity doctor = (DoctorEntity) model.busyDoctorQueue.first();
 			// make doc available

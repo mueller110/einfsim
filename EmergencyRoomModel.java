@@ -37,10 +37,10 @@ public class EmergencyRoomModel extends Model {
 		return treatmentTime[cprio - 1].sample();
 	}
 
-	public double getDeathTime(){
+	public double getDeathTime() {
 		return deathTime.sample();
 	}
-	
+
 	public static Queue<PatientEntity> highPriorityPatientQueue;
 	public static Queue<PatientEntity> lowPriorityPatientQueue;
 	public static Queue<PatientEntity> lastCheckPatientQueue;
@@ -210,8 +210,12 @@ public class EmergencyRoomModel extends Model {
 						.getTimeValue();
 			}
 			System.out.println("Quantile: " + quantile);
-			System.out.println("Deaths: " + deaths);
 		}
-		// System.out.println("SimTime: " + simulationTime);
+		if (deathOfPatientsFlag) {
+			System.out.println("Deaths: " + deaths);
+			System.out.println("DeathMin: " + deathOfPatientsMin);
+			System.out.println("DeathMax: " + deathOfPatientsMax);
+			// System.out.println("SimTime: " + simulationTime);
+		}
 	}
 }

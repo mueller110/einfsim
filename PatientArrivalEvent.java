@@ -20,7 +20,7 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 		int cPriority = patient.getPriority();
 		total++;
 		if (cPriority == 1) {
-			if (!patient.treatementInterrupted){
+			if (!patient.treatementInterrupted) {
 				patient.arrivalTime = new SimTime(model.currentTime());
 			}
 			queue = model.lowPriorityPatientQueue;
@@ -29,76 +29,98 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 		} else {
 			patient.arrivalTime = new SimTime(model.currentTime());
 			queue = model.highPriorityPatientQueue;
+			if (model.deathOfPatientsFlag) {
+				PatientDeathEvent pde = new PatientDeathEvent(model, "Death",
+						true);
+				pde.schedule(patient, new SimTime(model.getDeathTime()));
+				patient.deathEvent = pde;
+			}
 		}
-		if (patient.waitingTime==null)
-			patient.waitingTime=new SimTime(0.0);
+		if (patient.waitingTime == null)
+			patient.waitingTime = new SimTime(0.0);
 		queue.insert(patient);
 		// there is a free doctor?! -> no waiting
 		if (!model.freeDoctorQueue.isEmpty()) {
-			patient.isZero=true;
+			patient.isZero = true;
 			DoctorEntity doctor = (DoctorEntity) model.freeDoctorQueue.first();
 			model.freeDoctorQueue.remove(doctor);
 			model.busyDoctorQueue.insert(doctor);
 			queue.remove(patient);
-			patient.treatmentStart=new SimTime(model.currentTime());
+			if (patient.getPriority() == 3 && model.deathOfPatientsFlag) {
+				patient.deathEvent.cancel();
+			}
+			patient.treatmentStart = new SimTime(model.currentTime());
 			TreatmentTermination treatmentTerm = new TreatmentTermination(
 					model, "End of Treatment", true);
-			if (!patient.treatementInterrupted){
-				patient.treatmentDuration=new SimTime(model.getTreatmentTime(patient.getPriority()));
-			treatmentTerm.schedule(patient,
-					new SimTime(patient.treatmentDuration));
-			}else{
-				patient.treatmentDuration=new SimTime(patient.rest);
-				treatmentTerm.schedule(patient,new SimTime(patient.rest));
+			if (!patient.treatementInterrupted) {
+				patient.treatmentDuration = new SimTime(
+						model.getTreatmentTime(patient.getPriority()));
+				treatmentTerm.schedule(patient, new SimTime(
+						patient.treatmentDuration));
+			} else {
+				patient.treatmentDuration = new SimTime(patient.rest);
+				treatmentTerm.schedule(patient, new SimTime(patient.rest));
 			}
-			patient.treatementInterrupted=false;
-			patient.treatmentTermination = treatmentTerm;		
+			patient.treatementInterrupted = false;
+			patient.treatmentTermination = treatmentTerm;
 			EmergencyRoomModel.inTreatmentQueue.insert(patient);
 			patient.end = model.currentTime();
 		} else {
-			if(patient.getPriority()==3){
+			if (patient.getPriority() == 3) {
 				PatientEntity tmpPatient;
 				PatientEntity firstPatient = model.inTreatmentQueue.first();
 				model.inTreatmentQueue.remove(firstPatient);
 				model.inTreatmentQueue.insert(firstPatient);
-				do{
-					tmpPatient = model.inTreatmentQueue.first();		
-					model.inTreatmentQueue.remove(tmpPatient);		
+				do {
+					tmpPatient = model.inTreatmentQueue.first();
+					model.inTreatmentQueue.remove(tmpPatient);
 					model.inTreatmentQueue.insert(tmpPatient);
-//					System.out.println("Wer ist drin: " + tmpPatient.getPriority() + " von " + tmpPatient.getName());
-				}while(firstPatient!=tmpPatient && tmpPatient.getPriority()!=1);
-				if(tmpPatient.getPriority()==1){
-//					System.out.println("priority: " + tmpPatient.getPriority());
-					tmpPatient.treatementInterrupted=true;
-					SimTime drtime = SimTime.diff(model.currentTime(), tmpPatient.end);
-					SimTime absolut = SimTime.add(tmpPatient.end, tmpPatient.treatmentDuration);					
-					tmpPatient.rest = SimTime.diff(absolut,SimTime.add(tmpPatient.end, drtime));
-					
-//					System.out.println(tmpPatient.getName() + ": " + tmpPatient.getPriority() + " " + tmpPatient.rest);
+					// System.out.println("Wer ist drin: " +
+					// tmpPatient.getPriority() + " von " +
+					// tmpPatient.getName());
+				} while (firstPatient != tmpPatient
+						&& tmpPatient.getPriority() != 1);
+				if (tmpPatient.getPriority() == 1) {
+					// System.out.println("priority: " +
+					// tmpPatient.getPriority());
+					tmpPatient.treatementInterrupted = true;
+					SimTime drtime = SimTime.diff(model.currentTime(),
+							tmpPatient.end);
+					SimTime absolut = SimTime.add(tmpPatient.end,
+							tmpPatient.treatmentDuration);
+					tmpPatient.rest = SimTime.diff(absolut,
+							SimTime.add(tmpPatient.end, drtime));
+
+					// System.out.println(tmpPatient.getName() + ": " +
+					// tmpPatient.getPriority() + " " + tmpPatient.rest);
 					tmpPatient.treatmentTermination.cancel();
 					queue.remove(patient);
 					model.inTreatmentQueue.remove(tmpPatient);
-					model.inTreatmentQueue.insert(patient);	
-					tmpPatient.treatementInterrupted=true;
-					patient.isZero=true;
-					PatientArrivalEvent arrival = new PatientArrivalEvent(model,
-							"Reschedule", true);
-					arrival.schedule(tmpPatient, new SimTime(0.0)); // instant arrival
-					TreatmentTermination te = new TreatmentTermination(model, "3 vor 1", true);
-					patient.treatmentDuration=new SimTime(model.getTreatmentTime(patient.getPriority()));
-					te.schedule(patient,
-							new SimTime(patient.treatmentDuration));
-				}else{
+					model.inTreatmentQueue.insert(patient);
+					tmpPatient.treatementInterrupted = true;
+					patient.isZero = true;
+					PatientArrivalEvent arrival = new PatientArrivalEvent(
+							model, "Reschedule", true);
+					arrival.schedule(tmpPatient, new SimTime(0.0)); // instant
+																	// arrival
+					TreatmentTermination te = new TreatmentTermination(model,
+							"3 vor 1", true);
+					patient.treatmentDuration = new SimTime(
+							model.getTreatmentTime(patient.getPriority()));
+					te.schedule(patient, new SimTime(patient.treatmentDuration));
+					if (model.deathOfPatientsFlag) {
+						patient.deathEvent.cancel();
+					}
+				} else {
 					patient.start = model.currentTime();
-					patient.isZero=false;
+					patient.isZero = false;
 				}
-			}else{
+			} else {
 				patient.start = model.currentTime();
-				patient.isZero=false;
+				patient.isZero = false;
 			}
 		}
 
-		
 	}
 
 }

@@ -193,12 +193,12 @@ public class GUI extends JFrame {
 		panel.add(lblP3max);
 		panel.add(spinP3max);
 
-		SpinnerModel DeathMin = new SpinnerNumberModel(50, 1, 1000, 1);
+		SpinnerModel DeathMin = new SpinnerNumberModel(15, 1, 1000, 1);
 		spinDeathMin = new JSpinner(DeathMin);
 		spinDeathMin.setBounds(280, (height - 125), 40, 20);
 		((DefaultEditor) spinDeathMin.getEditor()).getTextField().setEditable(
 				false);
-		SpinnerModel DeathMax = new SpinnerNumberModel(50,1,100,1);
+		SpinnerModel DeathMax = new SpinnerNumberModel(25,1,100,1);
 		spinDeathMax = new JSpinner(DeathMax);
 		spinDeathMax.setBounds(330, (height - 125), 40, 20);
 		((DefaultEditor) spinDeathMax.getEditor()).getTextField().setEditable(false);
@@ -239,6 +239,7 @@ public class GUI extends JFrame {
 					EmergencyRoomModel.deathOfPatientsMax = (int) spinDeathMax.getValue();
 				}
 				EmergencyRoomModel.underFive = 0;
+				EmergencyRoomModel.deaths = 0;
 				EmergencyRoomModel.runSimulation();
 
 			}
