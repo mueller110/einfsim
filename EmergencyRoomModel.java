@@ -11,8 +11,9 @@ public class EmergencyRoomModel extends Model {
 	public static int simulationTime = 28800; // 31680
 	public static int arrivalTime = 40;
 	public static int underFive = 0;
+	public static int deaths = 0;
 	public static int dist1Min, dist1Max, dist2Min, dist2Max, dist3Min,
-			dist3Max;
+			dist3Max, deathOfPatientsMin, deathOfPatientsMax;
 	public static boolean initialPhaseFlag = false;
 	public static boolean deathOfPatientsFlag = false;
 
@@ -30,11 +31,16 @@ public class EmergencyRoomModel extends Model {
 	}
 
 	private RealDistUniform treatmentTime[] = new RealDistUniform[3];
+	private RealDistUniform deathTime;
 
 	public double getTreatmentTime(int cprio) {
 		return treatmentTime[cprio - 1].sample();
 	}
 
+	public double getDeathTime(){
+		return deathTime.sample();
+	}
+	
 	public static Queue<PatientEntity> highPriorityPatientQueue;
 	public static Queue<PatientEntity> lowPriorityPatientQueue;
 	public static Queue<PatientEntity> lastCheckPatientQueue;
@@ -74,6 +80,12 @@ public class EmergencyRoomModel extends Model {
 				"treatment time inverval (Priority 3)", dist3Min, dist3Max,
 				true, true); // bedienZeitPrio
 		// 3
+
+		if (deathOfPatientsFlag) {
+			deathTime = new RealDistUniform(this,
+					"Time remaining until treatement (Priority3)",
+					deathOfPatientsMin, deathOfPatientsMax, true, true);
+		}
 
 		highPriorityPatientQueue = new Queue<PatientEntity>(this,
 				"High-Priority Queue", true, true);
@@ -149,12 +161,14 @@ public class EmergencyRoomModel extends Model {
 						+ (highPriorityPatientQueue.zeroWaits()
 								+ lastCheckPatientQueue.zeroWaits() + lowPriorityPatientQueue
 									.zeroWaits()));
-//		System.out.println("allPatientsQueuesize " + allPatientsQueue.size());
+		// System.out.println("allPatientsQueuesize " +
+		// allPatientsQueue.size());
 		SimTime[] simTimeArr = new SimTime[allPatientsQueue.size()];
 		int count = 0;
 		for (int i = 0; i < simTimeArr.length; i++) {
 			PatientEntity patient = allPatientsQueue.first();
-			if (SimTime.isLarger(patient.arrivalTime, warmUp) && initialPhaseFlag) {
+			if (SimTime.isLarger(patient.arrivalTime, warmUp)
+					&& initialPhaseFlag) {
 				// problem: there are patients with no departure time at end of
 				// simulation
 				// approach: just set the simulation end time as departure time
@@ -170,7 +184,6 @@ public class EmergencyRoomModel extends Model {
 			allPatientsQueue.removeFirst();
 		}
 
-
 		SimTime temp;
 		for (int i = 0; i < count; i++) {
 			for (int j = 0; j < count - i - 1; j++) {
@@ -181,10 +194,10 @@ public class EmergencyRoomModel extends Model {
 				}
 			}
 		}
-		
-//		for(int i = 0; i < simTimeArr.length; i++){
-//			System.out.println(simTimeArr[i]);
-//		}
+
+		// for(int i = 0; i < simTimeArr.length; i++){
+		// System.out.println(simTimeArr[i]);
+		// }
 
 		int n = (int) (count * 0.9);
 		double quantile;
@@ -197,7 +210,8 @@ public class EmergencyRoomModel extends Model {
 						.getTimeValue();
 			}
 			System.out.println("Quantile: " + quantile);
+			System.out.println("Deaths: " + deaths);
 		}
-//		System.out.println("SimTime: " + simulationTime);
+		// System.out.println("SimTime: " + simulationTime);
 	}
 }
