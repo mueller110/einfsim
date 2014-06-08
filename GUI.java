@@ -64,7 +64,9 @@ public class GUI extends JFrame {
 				spinP2max.setValue(new Integer(20));
 				spinP3min.setValue(new Integer(50));
 				spinP3max.setValue(new Integer(120));
-
+				spinDeathMin.setValue(new Integer(15));
+				spinDeathMax.setValue(new Integer(25));
+				
 				spinNrDr.setValue(new Integer(2));
 				spinAvgPatArr.setValue(new Integer(40));
 				spinSimuTime.setValue(new Integer(28800));
