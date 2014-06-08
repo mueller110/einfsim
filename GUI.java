@@ -235,8 +235,8 @@ public class GUI extends JFrame {
 				EmergencyRoomModel.deathOfPatientsFlag = chkDeathOfPatients
 						.isSelected();
 				if(chkDeathOfPatients.isSelected()){
-					EmergencyRoomModel.deathOfPatientsMin = spinDeathMin.getValue();
-					EmergencyRoomModel.deathOfPatientsMax = spinDeathMax.getValue();
+					EmergencyRoomModel.deathOfPatientsMin = (int) spinDeathMin.getValue();
+					EmergencyRoomModel.deathOfPatientsMax = (int) spinDeathMax.getValue();
 				}
 				EmergencyRoomModel.underFive = 0;
 				EmergencyRoomModel.runSimulation();
