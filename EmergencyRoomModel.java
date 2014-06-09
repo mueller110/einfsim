@@ -189,11 +189,11 @@ public class EmergencyRoomModel extends Model {
 
 		
 		fileContent += "<p>maximale Anzahl wartender akuter Notfaelle: "+highPriorityPatientQueue.maxLength()+"<br>";
-		fileContent += "mittlere Anzahl wartender akuter Notfaelle: "+highPriorityPatientQueue.averageLength();
-		fileContent += "maximale Anzahl wartender nicht akuter Notfaelle: "+lowPriorityPatientQueue.maxLength()+lastCheckPatientQueue.maxLength()+"<br>";
-		fileContent += "mittlere Anzahl wartender nicht akuter Notfaelle: "+lowPriorityPatientQueue.averageLength()+lastCheckPatientQueue.averageLength()+"<br>";
+		fileContent += "mittlere Anzahl wartender akuter Notfaelle: "+highPriorityPatientQueue.averageLength()+"<br>";
+		fileContent += "maximale Anzahl wartender nicht akuter Notfaelle: "+(lowPriorityPatientQueue.maxLength()+lastCheckPatientQueue.maxLength())+"<br>";
+		fileContent += "mittlere Anzahl wartender nicht akuter Notfaelle: "+(lowPriorityPatientQueue.averageLength()+lastCheckPatientQueue.averageLength())+"<br>";
 		fileContent += "mittlere Wartezeit akuter Notfaelle: "+highPriorityPatientQueue.averageWaitTime()+"<br>";
-		fileContent += "mittlere Wartezeit nicht akuter Notfaelle: "+lowPriorityPatientQueue.averageWaitTime()+lastCheckPatientQueue.averageWaitTime()+"<br>";
+		fileContent += "mittlere Wartezeit nicht akuter Notfaelle: "+((lowPriorityPatientQueue.averageWaitTime().getTimeAsDouble()+lastCheckPatientQueue.averageWaitTime().getTimeAsDouble())/2)+"<br>";
 		//fileContent += "Zeros: "+ (highPriorityPatientQueue.zeroWaits()+lastCheckPatientQueue.zeroWaits() + lowPriorityPatientQueue.zeroWaits()) + "<br>";
 		
 		int totalZeros = 0;
