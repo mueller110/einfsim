@@ -17,14 +17,13 @@ public class NewPatientEvent extends ExternalEvent {
 
 	@Override
 	public void eventRoutine() {
-		int prio;
-		
+		int prio;	
 		if (rand.nextDouble() <= 0.2) {
 			prio = 3;
 		} else {
 			prio = 1;
 		}
-		
+	
 		PatientEntity patient = new PatientEntity(model, "Patient", true, prio);
 		PatientArrivalEvent arrival = new PatientArrivalEvent(model,
 				"Arrival of Patient", true);
@@ -32,6 +31,6 @@ public class NewPatientEvent extends ExternalEvent {
 		NewPatientEvent nextPatient = new NewPatientEvent(model,
 				"Creation of Patient", true);
 		nextPatient.schedule(new SimTime(model.getPatientArrivalTime()));
-
+		
 	}
 }

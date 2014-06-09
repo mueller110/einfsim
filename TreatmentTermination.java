@@ -31,26 +31,21 @@ public class TreatmentTermination extends Event<PatientEntity> {
 			PatientArrivalEvent arrival = new PatientArrivalEvent(model,
 					"Last check of Patient", true);
 			arrival.schedule(patient, new SimTime(0.0)); // instant arrival
-		} else {
-			model.allPatientsQueue.insert(patient);
-		
+		} else {		
 				// this was the last waiting time for nextPatient => we can set
 				// its departure time
 				patient.departureTime = new SimTime(model.currentTime());
-				if (SimTime.isSmallerOrEqual(patient.waitingTime,
-						new SimTime(5.0))) {
-					model.underFive++;
-				}
+				
 			
 		}
 
 		EmergencyRoomModel.inTreatmentQueue.remove(patient);
-
 		if (queue != null) {
 			PatientEntity nextPatient = queue.first();
 			queue.remove(nextPatient);
 			nextPatient.treatmentStart = new SimTime(model.currentTime());
 			EmergencyRoomModel.inTreatmentQueue.insert(nextPatient);
+			
 			if (nextPatient.getPriority() == 3 && model.deathOfPatientsFlag) {
 				System.out.println("now: " + model.currentTime() + " "
 						+ nextPatient.getPriority() + " " + nextPatient.getName());

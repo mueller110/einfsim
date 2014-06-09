@@ -15,7 +15,7 @@ public class PatientEntity extends Entity {
 	public SimTime rest;
 	public SimTime treatmentStart;
 	public SimTime treatmentDuration;
-	boolean isZero=false;
+	boolean isZero=true;
 	TreatmentTermination treatmentTermination;
 	PatientDeathEvent deathEvent;
 
@@ -23,6 +23,7 @@ public class PatientEntity extends Entity {
 			int priority) {
 		super(owner, name, showInTrace);
 		this.priority = priority;
+		
 		
 	}
 

@@ -1,5 +1,12 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 
 import desmoj.core.dist.RealDistExponential;
@@ -21,7 +28,7 @@ public class EmergencyRoomModel extends Model {
 	public static boolean initialPhaseFlag = false;
 	public static boolean deathOfPatientsFlag = false;
 
-	public static SimTime warmUp = new SimTime(2880.0);
+	public static SimTime warmUp;
 
 	public EmergencyRoomModel(Model owner, String name, boolean showInReport,
 			boolean showInTrace) {
@@ -115,17 +122,16 @@ public class EmergencyRoomModel extends Model {
 	}
 
 	public static void runSimulation() {
-		//cause this is how you write into a file shut up!!!
-		PrintStream out = null;
-		try {
-			out = new PrintStream(new FileOutputStream("output.txt"));
-			System.setOut(out);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-			
+//		// cause this is how you write into a file shut up!!!
+//		PrintStream out = null;
+//		try {
+//			out = new PrintStream(new FileOutputStream("output.txt"));
+//			System.setOut(out);
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+	
 		Experiment emergencyExperiment = new Experiment("Emergency-Room");
 		EmergencyRoomModel model = new EmergencyRoomModel(null,
 				"Emergency-Room Model", true, true);
@@ -135,6 +141,7 @@ public class EmergencyRoomModel extends Model {
 		emergencyExperiment.debugPeriod(new SimTime(0.0), new SimTime(
 				simulationTime));
 		if (initialPhaseFlag) {
+			warmUp= new SimTime(2880.0);
 			ResetEvent reset = new ResetEvent(model, "Queue Reset", true);
 			reset.schedule(new QueueEntity(model, "Queue", true,
 					highPriorityPatientQueue), warmUp);
@@ -156,49 +163,68 @@ public class EmergencyRoomModel extends Model {
 			reset = new ResetEvent(model, "Queue Reset", true);
 			reset.schedule(new QueueEntity(model, "Queue", true,
 					inTreatmentQueue), warmUp);
+		}else{
+			warmUp= new SimTime(0);
 		}
 		emergencyExperiment.stop(new SimTime(simulationTime));
 		emergencyExperiment.start();
 		emergencyExperiment.report();
 		emergencyExperiment.finish();
+		String fileContent = "";
+		try {
+			FileInputStream fstream = new FileInputStream(
+					"Emergency-Room_report.html");
+			DataInputStream in = new DataInputStream(fstream);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			String strLine;
 
-		// TODO rm output
-		System.out.println("\nunder five minutes: " + underFive);
-		System.out
-				.println("avg waiting patients, rest: "
-						+ (lastCheckPatientQueue.averageLength() + lowPriorityPatientQueue
-								.averageLength()));
-		System.out.println("max wating patients, rest: "
-				+ (lastCheckPatientQueue.maxLength() + lowPriorityPatientQueue
-						.maxLength()));
-		System.out
-				.println("Zeros: "
-						+ (highPriorityPatientQueue.zeroWaits()
-								+ lastCheckPatientQueue.zeroWaits() + lowPriorityPatientQueue
-									.zeroWaits()));
-		// System.out.println("allPatientsQueuesize " +
-		// allPatientsQueue.size());
+			while ((strLine = br.readLine()) != null)
+				fileContent += strLine;
+			in.close();
+			System.out.println(fileContent.substring(0,
+					fileContent.length() - 14));
+		} catch (Exception e) {
+			System.err.println("Error: " + e.getMessage());
+		}
+
+		
+		fileContent += "<p>maximale Anzahl wartender akuter Notfaelle: "+highPriorityPatientQueue.maxLength()+"<br>";
+		fileContent += "mittlere Anzahl wartender akuter Notfaelle: "+highPriorityPatientQueue.averageLength();
+		fileContent += "maximale Anzahl wartender nicht akuter Notfaelle: "+lowPriorityPatientQueue.maxLength()+lastCheckPatientQueue.maxLength()+"<br>";
+		fileContent += "mittlere Anzahl wartender nicht akuter Notfaelle: "+lowPriorityPatientQueue.averageLength()+lastCheckPatientQueue.averageLength()+"<br>";
+		fileContent += "mittlere Wartezeit akuter Notfaelle: "+highPriorityPatientQueue.averageWaitTime()+"<br>";
+		fileContent += "mittlere Wartezeit nicht akuter Notfaelle: "+lowPriorityPatientQueue.averageWaitTime()+lastCheckPatientQueue.averageWaitTime()+"<br>";
+		//fileContent += "Zeros: "+ (highPriorityPatientQueue.zeroWaits()+lastCheckPatientQueue.zeroWaits() + lowPriorityPatientQueue.zeroWaits()) + "<br>";
+		
+		int totalZeros = 0;
+		int totalPatientCount;
 		SimTime[] simTimeArr = new SimTime[allPatientsQueue.size()];
 		int count = 0;
+		
+		
 		for (int i = 0; i < simTimeArr.length; i++) {
 			PatientEntity patient = allPatientsQueue.first();
 			if (SimTime.isLarger(patient.arrivalTime, warmUp)) {
-				// problem: there are patients with no departure time at end of
-				// simulation
-				// approach: just set the simulation end time as departure time
-				// but: problem we have to talk about^^
 				SimTime tmp = patient.getStay();
+				if (patient.isZero)
+					totalZeros++;
+				if (SimTime.isSmallerOrEqual(patient.waitingTime,
+						new SimTime(5.0))) {
+					model.underFive++;
+				}
 				if (tmp == null) {
 					tmp = SimTime.diff(new SimTime(simulationTime),
 							patient.arrivalTime);
 				}
 				simTimeArr[count++] = tmp;
-				
+
 			}
-			
 			allPatientsQueue.removeFirst();
 		}
 
+		fileContent += "Anzahl der Patienten die nicht warten mussten(waehrend gesamten Aufenthalt in Notaufnahme): "+(totalZeros/(double)count)*100+"%<br>";
+		fileContent += "Anteil der Patienten, welche maximal 5 min warten muessen: " + (underFive /(double)count)*100+"%<br>";
+		
 		SimTime temp;
 		for (int i = 0; i < count; i++) {
 			for (int j = 0; j < count - i - 1; j++) {
@@ -210,10 +236,6 @@ public class EmergencyRoomModel extends Model {
 			}
 		}
 
-		// for(int i = 0; i < simTimeArr.length; i++){
-		// 	System.out.println(simTimeArr[i]);
-		// }
-
 		int n = (int) (count * 0.9);
 		double quantile;
 		if (count > 5) {
@@ -224,13 +246,25 @@ public class EmergencyRoomModel extends Model {
 				quantile = 0.5 * SimTime.add(simTimeArr[n], simTimeArr[n + 1])
 						.getTimeValue();
 			}
-			System.out.println("Quantile: " + quantile);
+			fileContent+="90%-Quantile: " + quantile+"<br>";
 		}
+
 		if (deathOfPatientsFlag) {
-			System.out.println("Deaths: " + deaths);
-			System.out.println("DeathMin: " + deathOfPatientsMin);
-			System.out.println("DeathMax: " + deathOfPatientsMax);
-			// System.out.println("SimTime: " + simulationTime);
+			fileContent+="Tode: "+deaths+"<br>";
+			
+			
 		}
+		
+		try {
+			FileWriter fw = new FileWriter("Emergency-Room_report.html");
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(fileContent+"</p></BODY></HTML>");
+			bw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 }
