@@ -18,6 +18,10 @@ import desmoj.core.simulator.SimTime;
 
 @SuppressWarnings("deprecation")
 public class EmergencyRoomModel extends Model {
+	public static int runs = 1;
+	public static int totalZeros = 0;
+	public static int zeros = 0;
+	public static int allPatients = 0;
 	public static int numberOfDoctors = 2;
 	public static int simulationTime = 28800; // 31680
 	public static int arrivalTime = 40;
@@ -71,6 +75,9 @@ public class EmergencyRoomModel extends Model {
 	}
 
 	public void init() {
+		underFive = 0;
+		deaths = 0;
+		zeros = 0;
 		// new patient every 40 mins (average)
 		patientArrivalTime = new RealDistExponential(this,
 				"arrival time interval", arrivalTime, true, true);
@@ -122,149 +129,195 @@ public class EmergencyRoomModel extends Model {
 	}
 
 	public static void runSimulation() {
-//		// cause this is how you write into a file shut up!!!
-//		PrintStream out = null;
-//		try {
-//			out = new PrintStream(new FileOutputStream("output.txt"));
-//			System.setOut(out);
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-	
-		Experiment emergencyExperiment = new Experiment("Emergency-Room");
-		EmergencyRoomModel model = new EmergencyRoomModel(null,
-				"Emergency-Room Model", true, true);
-		model.connectToExperiment(emergencyExperiment);
-		emergencyExperiment.tracePeriod(new SimTime(0.0), new SimTime(
-				simulationTime));
-		emergencyExperiment.debugPeriod(new SimTime(0.0), new SimTime(
-				simulationTime));
-		if (initialPhaseFlag) {
-			warmUp= new SimTime(2880.0);
-			ResetEvent reset = new ResetEvent(model, "Queue Reset", true);
-			reset.schedule(new QueueEntity(model, "Queue", true,
-					highPriorityPatientQueue), warmUp);
-			reset = new ResetEvent(model, "Queue Reset", true);
-			reset.schedule(new QueueEntity(model, "Queue", true,
-					lowPriorityPatientQueue), warmUp);
-			reset = new ResetEvent(model, "Queue Reset", true);
-			reset.schedule(new QueueEntity(model, "Queue", true,
-					lastCheckPatientQueue), warmUp);
-			reset = new ResetEvent(model, "Queue Reset", true);
-			reset.schedule(new QueueEntity(model, "Queue", true,
-					allPatientsQueue), warmUp);
-			reset = new ResetEvent(model, "Queue Reset", true);
-			reset.schedule(new QueueEntity(model, "Queue", true,
-					busyDoctorQueue), warmUp);
-			reset = new ResetEvent(model, "Queue Reset", true);
-			reset.schedule(new QueueEntity(model, "Queue", true,
-					freeDoctorQueue), warmUp);
-			reset = new ResetEvent(model, "Queue Reset", true);
-			reset.schedule(new QueueEntity(model, "Queue", true,
-					inTreatmentQueue), warmUp);
-		}else{
-			warmUp= new SimTime(0);
-		}
-		emergencyExperiment.stop(new SimTime(simulationTime));
-		emergencyExperiment.start();
-		emergencyExperiment.report();
-		emergencyExperiment.finish();
-		String fileContent = "";
-		try {
-			FileInputStream fstream = new FileInputStream(
-					"Emergency-Room_report.html");
-			DataInputStream in = new DataInputStream(fstream);
-			BufferedReader br = new BufferedReader(new InputStreamReader(in));
-			String strLine;
-
-			while ((strLine = br.readLine()) != null)
-				fileContent += strLine;
-			in.close();
-			System.out.println(fileContent.substring(0,
-					fileContent.length() - 14));
-		} catch (Exception e) {
-			System.err.println("Error: " + e.getMessage());
-		}
-
-		
-		fileContent += "<p>maximale Anzahl wartender akuter Notfaelle: "+highPriorityPatientQueue.maxLength()+"<br>";
-		fileContent += "mittlere Anzahl wartender akuter Notfaelle: "+highPriorityPatientQueue.averageLength()+"<br>";
-		fileContent += "maximale Anzahl wartender nicht akuter Notfaelle: "+(lowPriorityPatientQueue.maxLength()+lastCheckPatientQueue.maxLength())+"<br>";
-		fileContent += "mittlere Anzahl wartender nicht akuter Notfaelle: "+(lowPriorityPatientQueue.averageLength()+lastCheckPatientQueue.averageLength())+"<br>";
-		fileContent += "mittlere Wartezeit akuter Notfaelle: "+highPriorityPatientQueue.averageWaitTime()+"<br>";
-		fileContent += "mittlere Wartezeit nicht akuter Notfaelle: "+((lowPriorityPatientQueue.averageWaitTime().getTimeAsDouble()+lastCheckPatientQueue.averageWaitTime().getTimeAsDouble())/2)+"<br>";
-		//fileContent += "Zeros: "+ (highPriorityPatientQueue.zeroWaits()+lastCheckPatientQueue.zeroWaits() + lowPriorityPatientQueue.zeroWaits()) + "<br>";
-		
-		int totalZeros = 0;
-		int totalPatientCount;
-		SimTime[] simTimeArr = new SimTime[allPatientsQueue.size()];
-		int count = 0;
+		// // cause this is how you write into a file shut up!!!
+		// PrintStream out = null;
+		// try {
+		// out = new PrintStream(new FileOutputStream("output.txt"));
+		// System.setOut(out);
+		// } catch (FileNotFoundException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		int overallUnderFive = 0;
+		int overallDeaths = 0;
+		totalZeros = 0;
+		zeros = 0;
 		
 		
-		for (int i = 0; i < simTimeArr.length; i++) {
-			PatientEntity patient = allPatientsQueue.first();
-			if (SimTime.isLarger(patient.arrivalTime, warmUp)) {
-				SimTime tmp = patient.getStay();
-				if (patient.isZero)
-					totalZeros++;
-				if (SimTime.isSmallerOrEqual(patient.waitingTime,
-						new SimTime(5.0))) {
-					model.underFive++;
-				}
-				if (tmp == null) {
-					tmp = SimTime.diff(new SimTime(simulationTime),
-							patient.arrivalTime);
-				}
-				simTimeArr[count++] = tmp;
+		for (int r = 0; r < runs; r++) {
 
-			}
-			allPatientsQueue.removeFirst();
-		}
-
-		fileContent += "Anzahl der Patienten die nicht warten mussten(waehrend gesamten Aufenthalt in Notaufnahme): "+(totalZeros/(double)count)*100+"%<br>";
-		fileContent += "Anteil der Patienten, welche maximal 5 min warten muessen: " + (underFive /(double)count)*100+"%<br>";
-		
-		SimTime temp;
-		for (int i = 0; i < count; i++) {
-			for (int j = 0; j < count - i - 1; j++) {
-				if (SimTime.isLarger(simTimeArr[j], simTimeArr[j + 1])) {
-					temp = simTimeArr[j];
-					simTimeArr[j] = simTimeArr[j + 1];
-					simTimeArr[j + 1] = temp;
-				}
-			}
-		}
-
-		int n = (int) (count * 0.9);
-		double quantile;
-		if (count > 5) {
-			if (n == count - 1) {
-				quantile = 0.5 * SimTime.add(simTimeArr[n], simTimeArr[n - 1])
-						.getTimeValue();
+			Experiment emergencyExperiment = new Experiment("Emergency-Room");
+			EmergencyRoomModel model = new EmergencyRoomModel(null,
+					"Emergency-Room Model", true, true);
+			model.connectToExperiment(emergencyExperiment);
+			emergencyExperiment.tracePeriod(new SimTime(0.0), new SimTime(
+					simulationTime));
+			emergencyExperiment.debugPeriod(new SimTime(0.0), new SimTime(
+					simulationTime));
+			if (initialPhaseFlag) {
+				warmUp = new SimTime(2880.0);
+				ResetEvent reset = new ResetEvent(model, "Queue Reset", true);
+				reset.schedule(new QueueEntity(model, "Queue", true,
+						highPriorityPatientQueue), warmUp);
+				reset = new ResetEvent(model, "Queue Reset", true);
+				reset.schedule(new QueueEntity(model, "Queue", true,
+						lowPriorityPatientQueue), warmUp);
+				reset = new ResetEvent(model, "Queue Reset", true);
+				reset.schedule(new QueueEntity(model, "Queue", true,
+						lastCheckPatientQueue), warmUp);
+				reset = new ResetEvent(model, "Queue Reset", true);
+				reset.schedule(new QueueEntity(model, "Queue", true,
+						allPatientsQueue), warmUp);
+				reset = new ResetEvent(model, "Queue Reset", true);
+				reset.schedule(new QueueEntity(model, "Queue", true,
+						busyDoctorQueue), warmUp);
+				reset = new ResetEvent(model, "Queue Reset", true);
+				reset.schedule(new QueueEntity(model, "Queue", true,
+						freeDoctorQueue), warmUp);
+				reset = new ResetEvent(model, "Queue Reset", true);
+				reset.schedule(new QueueEntity(model, "Queue", true,
+						inTreatmentQueue), warmUp);
 			} else {
-				quantile = 0.5 * SimTime.add(simTimeArr[n], simTimeArr[n + 1])
-						.getTimeValue();
+				warmUp = new SimTime(0);
 			}
-			fileContent+="90%-Quantile: " + quantile+"<br>";
-		}
+			emergencyExperiment.stop(new SimTime(simulationTime));
+			emergencyExperiment.start();
+			emergencyExperiment.report();
+			emergencyExperiment.finish();
+			String fileContent = "";
+			try {
+				FileInputStream fstream = new FileInputStream(
+						"Emergency-Room_report.html");
+				DataInputStream in = new DataInputStream(fstream);
+				BufferedReader br = new BufferedReader(
+						new InputStreamReader(in));
+				String strLine;
 
-		if (deathOfPatientsFlag) {
-			fileContent+="Tode: "+deaths+"<br>";
-			
-			
+				while ((strLine = br.readLine()) != null)
+					fileContent += strLine;
+				in.close();
+				//System.out.println(fileContent.substring(0,
+				//		fileContent.length() - 14));
+			} catch (Exception e) {
+				System.err.println("Error: " + e.getMessage());
+			}
+
+			fileContent += "<p>maximale Anzahl wartender akuter Notfaelle: "
+					+ highPriorityPatientQueue.maxLength() + "<br>";
+			fileContent += "mittlere Anzahl wartender akuter Notfaelle: "
+					+ highPriorityPatientQueue.averageLength() + "<br>";
+			fileContent += "maximale Anzahl wartender nicht akuter Notfaelle: "
+					+ (lowPriorityPatientQueue.maxLength() + lastCheckPatientQueue
+							.maxLength()) + "<br>";
+			fileContent += "mittlere Anzahl wartender nicht akuter Notfaelle: "
+					+ (lowPriorityPatientQueue.averageLength() + lastCheckPatientQueue
+							.averageLength()) + "<br>";
+			fileContent += "mittlere Wartezeit akuter Notfaelle: "
+					+ highPriorityPatientQueue.averageWaitTime() + "<br>";
+			fileContent += "mittlere Wartezeit nicht akuter Notfaelle: "
+					+ ((lowPriorityPatientQueue.averageWaitTime()
+							.getTimeAsDouble() + lastCheckPatientQueue
+							.averageWaitTime().getTimeAsDouble()) / 2) + "<br>";
+			// fileContent += "Zeros: "+
+			// (highPriorityPatientQueue.zeroWaits()+lastCheckPatientQueue.zeroWaits()
+			// + lowPriorityPatientQueue.zeroWaits()) + "<br>";
+
+			int totalPatientCount = 0;
+			SimTime[] simTimeArr = new SimTime[allPatientsQueue.size()];
+			allPatients += allPatientsQueue.size();
+			int patients = allPatientsQueue.size();
+			int count = 0;
+
+			for (int i = 0; i < simTimeArr.length; i++) {
+				PatientEntity patient = allPatientsQueue.first();
+				if (SimTime.isLarger(patient.arrivalTime, warmUp)) {
+					SimTime tmp = patient.getStay();
+					if (patient.isZero){
+						totalZeros++;
+						zeros++;
+					}
+					if (SimTime.isSmallerOrEqual(patient.waitingTime,
+							new SimTime(5.0))) {
+						model.underFive++;
+					}
+					if (tmp == null) {
+						tmp = SimTime.diff(new SimTime(simulationTime),
+								patient.arrivalTime);
+					}
+					simTimeArr[count++] = tmp;
+
+				}
+				allPatientsQueue.removeFirst();
+			}
+
+			fileContent += "Anzahl der Patienten die nicht warten mussten(waehrend gesamten Aufenthalt in Notaufnahme): "
+					+ (totalZeros / (double) count) * 100 + "%<br>";
+			fileContent += "Anteil der Patienten, welche maximal 5 min warten muessen: "
+					+ (underFive / (double) count) * 100 + "%<br>";
+
+			SimTime temp;
+			for (int i = 0; i < count; i++) {
+				for (int j = 0; j < count - i - 1; j++) {
+					if (SimTime.isLarger(simTimeArr[j], simTimeArr[j + 1])) {
+						temp = simTimeArr[j];
+						simTimeArr[j] = simTimeArr[j + 1];
+						simTimeArr[j + 1] = temp;
+					}
+				}
+			}
+
+			int n = (int) (count * 0.9);
+			double quantile;
+			if (count > 5) {
+				if (n == count - 1) {
+					quantile = 0.5 * SimTime.add(simTimeArr[n],
+							simTimeArr[n - 1]).getTimeValue();
+				} else {
+					quantile = 0.5 * SimTime.add(simTimeArr[n],
+							simTimeArr[n + 1]).getTimeValue();
+				}
+				fileContent += "90%-Quantile: " + quantile + "<br>";
+			}
+
+			if (deathOfPatientsFlag) {
+				fileContent += "Tode: " + deaths + "<br>";
+
+			}
+
+			try {
+				FileWriter fw = new FileWriter("Emergency-Room_report.html");
+				BufferedWriter bw = new BufferedWriter(fw);
+				bw.write(fileContent + "</p></BODY></HTML>");
+				bw.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("Zeros: " + zeros);
+			System.out.println("UnderFive: " + underFive);
+			overallUnderFive += underFive;
+			System.out.println("Deaths: " + deaths);
+			overallDeaths += deaths;
+			System.out.println("Patients: " + patients);
+			System.out.println("Run: " + (r+1) + " finished.\n-------------------------------------------------------------------\n");
 		}
-		
-		try {
-			FileWriter fw = new FileWriter("Emergency-Room_report.html");
-			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(fileContent+"</p></BODY></HTML>");
-			bw.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		System.out.println("Finished all runs!");
+		System.out.println("\n-------------------------------------------------------------------");
+		System.out.println("After " + runs + " runs:");
+		System.out.println("Zeros: " + totalZeros);
+		System.out.println("ZerosAvg: " + ((double)totalZeros/runs));
+		System.out.println("Patients: " + allPatients);
+		System.out.println("PatientsAvg: " + ((double)allPatients/runs));
+		System.out.println("UnderFiveSum: " + overallUnderFive);
+		System.out.println("AvgUnderFive: " + ((double)overallUnderFive/runs));
+		System.out.println("Deaths: " + deathOfPatientsFlag);
+		if(deathOfPatientsFlag){
+			System.out.println("\tDeathsSum: " + overallDeaths);
+			System.out.println("\tAvgDeaths: " + ((double)overallDeaths/runs));
 		}
-		
-		
+		System.out.println("InitialPhase: " + initialPhaseFlag);
+		if(initialPhaseFlag){
+			System.out.println("\tInitialPhaseDur: " + warmUp);
+		}
 	}
 }

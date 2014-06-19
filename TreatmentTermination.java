@@ -47,8 +47,8 @@ public class TreatmentTermination extends Event<PatientEntity> {
 			EmergencyRoomModel.inTreatmentQueue.insert(nextPatient);
 			
 			if (nextPatient.getPriority() == 3 && model.deathOfPatientsFlag) {
-				System.out.println("now: " + model.currentTime() + " "
-						+ nextPatient.getPriority() + " " + nextPatient.getName());
+				//System.out.println("now: " + model.currentTime() + " "
+				//		+ nextPatient.getPriority() + " " + nextPatient.getName());
 				nextPatient.deathEvent.cancel();
 			}
 

@@ -52,11 +52,11 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 		} else {
 			queue.insert(patient);
 		}
-		System.out.println("Printing da queues");
-		printQueue(model.lowPriorityPatientQueue);
-		printQueue(model.lastCheckPatientQueue);
-		printQueue(model.highPriorityPatientQueue);
-		printQueue(model.inTreatmentQueue);
+//		System.out.println("Printing da queues");
+//		printQueue(model.lowPriorityPatientQueue);
+//		printQueue(model.lastCheckPatientQueue);
+//		printQueue(model.highPriorityPatientQueue);
+//		printQueue(model.inTreatmentQueue);
 		// there is a free doctor?! -> no waiting
 		if (!model.freeDoctorQueue.isEmpty()) {
 			DoctorEntity doctor = (DoctorEntity) model.freeDoctorQueue.first();
@@ -127,7 +127,7 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 					model.inTreatmentQueue.remove(tmpPatient);
 					model.inTreatmentQueue.insert(patient);
 					tmpPatient.treatementInterrupted = true;
-					System.out.println("3 vor 1 ALARM !!!!!!!!!!!!");
+					//System.out.println("3 vor 1 ALARM !!!!!!!!!!!!");
 					PatientArrivalEvent arrival = new PatientArrivalEvent(
 							model, "Reschedule", true);
 					arrival.schedule(tmpPatient, new SimTime(0.0));

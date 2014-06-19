@@ -31,7 +31,7 @@ public class GUI extends JFrame {
 	JLabel lblNrDr, lblAvgPatArr, lblSimuTime, lblP1min, lblP1max, lblP2min,
 			lblP2max, lblP3min, lblP3max;
 	JSpinner spinP1min, spinP2min, spinP3min, spinP1max, spinP2max, spinP3max,
-			spinNrDr, spinAvgPatArr, spinSimuTime, spinDeathMin, spinDeathMax;
+			spinNrDr, spinAvgPatArr, spinSimuTime, spinDeathMin, spinDeathMax, spinRuns;
 	JCheckBox chkInitialphase;
 	JCheckBox chkDeathOfPatients;
 
@@ -66,6 +66,7 @@ public class GUI extends JFrame {
 				spinP3max.setValue(new Integer(120));
 				spinDeathMin.setValue(new Integer(15));
 				spinDeathMax.setValue(new Integer(25));
+				spinRuns.setValue(new Integer(1));
 				
 				spinNrDr.setValue(new Integer(2));
 				spinAvgPatArr.setValue(new Integer(40));
@@ -211,6 +212,18 @@ public class GUI extends JFrame {
 		panel.add(spinDeathMin);
 		panel.add(spinDeathMax);
 		
+		SpinnerModel runs = new SpinnerNumberModel(1, 1, 1000, 1);
+		spinRuns = new JSpinner(runs);
+		spinRuns.setBounds(345, 5, 40, 20);
+		((DefaultEditor) spinRuns.getEditor()).getTextField().setEditable(false);
+		
+		JLabel lblRuns = new JLabel("Runs:");
+		lblRuns.setBounds(305, 3, 40, 20);
+		
+		panel.add(lblRuns);
+		panel.add(spinRuns);
+		
+		
 		/*
 		 * Buttons
 		 */
@@ -242,6 +255,7 @@ public class GUI extends JFrame {
 				}
 				EmergencyRoomModel.underFive = 0;
 				EmergencyRoomModel.deaths = 0;
+				EmergencyRoomModel.runs = (int) spinRuns.getValue();
 				EmergencyRoomModel.runSimulation();
 
 			}
