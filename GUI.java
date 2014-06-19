@@ -52,6 +52,7 @@ public class GUI extends JFrame {
 		menuSettings.setMnemonic(KeyEvent.VK_S);
 		JMenuItem menuitemReset = new JMenuItem("Reset");
 		menuitemReset.setToolTipText("Restore default settings");
+		menuitemReset.setMnemonic(KeyEvent.VK_R);
 
 		menuitemReset.addActionListener(new ActionListener() {
 
@@ -75,8 +76,23 @@ public class GUI extends JFrame {
 				chkInitialphase.setSelected(false);
 			}
 		});
-
+		
+		JMenuItem menuitemsetRuns100 = new JMenuItem("Runs 100");
+		menuitemsetRuns100.setToolTipText("Set the runs to 100");
+		menuitemsetRuns100.setMnemonic(KeyEvent.VK_H);
+		
+		menuitemsetRuns100.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Runs are set to 100");
+				spinRuns.setValue(new Integer(100));
+			}
+		});
+		
+		
 		menuSettings.add(menuitemReset);
+		menuSettings.add(menuitemsetRuns100);
 
 		menubar.add(menuSettings);
 		setJMenuBar(menubar);
