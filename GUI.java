@@ -246,6 +246,7 @@ public class GUI extends JFrame {
 		btnStart = new JButton("start");
 		btnStart.setBounds((width / 2 - 40), (height - 100), 80, 30);
 		btnStart.setToolTipText("Start the simulation");
+		btnStart.setMnemonic(KeyEvent.VK_ENTER);
 		btnStart.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

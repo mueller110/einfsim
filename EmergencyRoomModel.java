@@ -27,6 +27,8 @@ public class EmergencyRoomModel extends Model {
 	public static int arrivalTime = 40;
 	public static int underFive = 0;
 	public static int deaths = 0;
+	public static double quantile = 0;
+	public static int quantileCount;
 	public static int dist1Min, dist1Max, dist2Min, dist2Max, dist3Min,
 			dist3Max, deathOfPatientsMin, deathOfPatientsMax;
 	public static boolean initialPhaseFlag = false;
@@ -78,6 +80,7 @@ public class EmergencyRoomModel extends Model {
 		underFive = 0;
 		deaths = 0;
 		zeros = 0;
+		quantile = 0;
 		// new patient every 40 mins (average)
 		patientArrivalTime = new RealDistExponential(this,
 				"arrival time interval", arrivalTime, true, true);
@@ -140,9 +143,18 @@ public class EmergencyRoomModel extends Model {
 		// }
 		int overallUnderFive = 0;
 		int overallDeaths = 0;
+		int P1MaxWSum = 0;
+		double P1AvgWSum = 0;
+		int P23MaxWSum = 0;
+		double P23AvgWSum = 0;
+		double P1AvgWaitingTime = 0;
+		double P23AvgWaitingTime = 0;
+		quantile = 0;
+		double overallQuantile = 0;
+		quantileCount = 0;
 		totalZeros = 0;
 		zeros = 0;
-		
+		allPatients = 0;
 		
 		for (int r = 0; r < runs; r++) {
 
@@ -201,7 +213,13 @@ public class EmergencyRoomModel extends Model {
 			} catch (Exception e) {
 				System.err.println("Error: " + e.getMessage());
 			}
-
+			P1MaxWSum += highPriorityPatientQueue.maxLength();
+			P23MaxWSum += (lowPriorityPatientQueue.maxLength() + lastCheckPatientQueue.maxLength());
+			P1AvgWSum +=highPriorityPatientQueue.averageLength();
+			P23AvgWSum +=(lowPriorityPatientQueue.averageLength() + lastCheckPatientQueue.averageLength());
+			P1AvgWaitingTime += highPriorityPatientQueue.averageWaitTime().getTimeAsDouble();
+			P23AvgWaitingTime += (lowPriorityPatientQueue.averageWaitTime().getTimeAsDouble() + lastCheckPatientQueue
+					.averageWaitTime().getTimeAsDouble());
 			fileContent += "<p>maximale Anzahl wartender akuter Notfaelle: "
 					+ highPriorityPatientQueue.maxLength() + "<br>";
 			fileContent += "mittlere Anzahl wartender akuter Notfaelle: "
@@ -267,7 +285,7 @@ public class EmergencyRoomModel extends Model {
 			}
 
 			int n = (int) (count * 0.9);
-			double quantile;
+			
 			if (count > 5) {
 				if (n == count - 1) {
 					quantile = 0.5 * SimTime.add(simTimeArr[n],
@@ -277,6 +295,7 @@ public class EmergencyRoomModel extends Model {
 							simTimeArr[n + 1]).getTimeValue();
 				}
 				fileContent += "90%-Quantile: " + quantile + "<br>";
+				quantileCount++;
 			}
 
 			if (deathOfPatientsFlag) {
@@ -293,6 +312,8 @@ public class EmergencyRoomModel extends Model {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			System.out.println("Quantile: " + quantile);
+			overallQuantile +=quantile;
 			System.out.println("Zeros: " + zeros);
 			System.out.println("UnderFive: " + underFive);
 			overallUnderFive += underFive;
@@ -304,20 +325,42 @@ public class EmergencyRoomModel extends Model {
 		System.out.println("Finished all runs!");
 		System.out.println("\n-------------------------------------------------------------------");
 		System.out.println("After " + runs + " runs:");
-		System.out.println("Zeros: " + totalZeros);
-		System.out.println("ZerosAvg: " + ((double)totalZeros/runs));
-		System.out.println("Patients: " + allPatients);
-		System.out.println("PatientsAvg: " + ((double)allPatients/runs));
-		System.out.println("UnderFiveSum: " + overallUnderFive);
-		System.out.println("AvgUnderFive: " + ((double)overallUnderFive/runs));
+		
+		System.out.println("Zeros:");
+		System.out.println("\tZSum:\t"+ totalZeros);
+		System.out.println("\tZAvg:\t" + ((double)totalZeros/runs));
+		
+		System.out.println("Patients: ");
+		System.out.println("\tPSum:\t"+ allPatients);
+		System.out.println("\tPAvg:\t" + ((double)allPatients/runs));
+		System.out.println("\tP1Max:\t" + ((double)P1MaxWSum/runs));
+		System.out.println("\tP1Avg:\t" + ((double)P1AvgWSum/runs));
+		System.out.println("\tRMax:\t" + ((double)P23MaxWSum/runs));
+		System.out.println("\tRAvg:\t" + ((double)P23AvgWSum/runs));
+
+		System.out.println("WaitingTimeAvg: " + runs);
+		System.out.println("\tP1: \t"+(P1AvgWaitingTime/runs));
+		System.out.println("\tP2+P3: \t"+(P23AvgWaitingTime/runs));
 		System.out.println("Deaths: " + deathOfPatientsFlag);
+		
+		System.out.println("UnderFive:");
+		System.out.println("\tUFSum: \t" + overallUnderFive);
+		System.out.println("\tUFAvg: \t" + ((double)overallUnderFive/runs));
+		
 		if(deathOfPatientsFlag){
-			System.out.println("\tDeathsSum: " + overallDeaths);
-			System.out.println("\tAvgDeaths: " + ((double)overallDeaths/runs));
+			System.out.println("\tDSum:\t" + overallDeaths);
+			System.out.println("\tDAvg:\t" + ((double)overallDeaths/runs));
 		}
 		System.out.println("InitialPhase: " + initialPhaseFlag);
 		if(initialPhaseFlag){
-			System.out.println("\tInitialPhaseDur: " + warmUp);
+			System.out.print("\tIPDur:\t" + warmUp + " (" + ((double)warmUp.getTimeValue()/1440) + " day");
+			if(((double)warmUp.getTimeValue()/1440)!=1){
+				System.out.print("s");
+			}
+			System.out.println(")");
 		}
+		System.out.println("Quantile:");
+		System.out.println("\tQSum:\t" + overallQuantile);
+		System.out.println("\tQAvg:\t" + ((double)overallQuantile/quantileCount));
 	}
 }
