@@ -83,7 +83,7 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 			EmergencyRoomModel.inTreatmentQueue.insert(patient);
 			patient.end = model.currentTime();
 		} else {
-			if (patient.getPriority() == 3) {
+			if (patient.getPriority() == 3 && EmergencyRoomModel.prio3kicks1) {
 				PatientEntity tmpPatient=null;
 				//lol just use an iterator idiot ^^
 				//PatientEntity firstPatient = model.inTreatmentQueue.first();

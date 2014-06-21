@@ -32,8 +32,8 @@ public class GUI extends JFrame {
 			lblP2max, lblP3min, lblP3max;
 	JSpinner spinP1min, spinP2min, spinP3min, spinP1max, spinP2max, spinP3max,
 			spinNrDr, spinAvgPatArr, spinSimuTime, spinDeathMin, spinDeathMax, spinRuns;
-	JCheckBox chkInitialphase;
-	JCheckBox chkDeathOfPatients;
+	JCheckBox chkInitialphase,chkDeathOfPatients,chkPrio3Kicks1;
+	
 
 	public GUI() {
 		int width = 400;
@@ -74,6 +74,7 @@ public class GUI extends JFrame {
 				spinSimuTime.setValue(new Integer(28800));
 				chkDeathOfPatients.setSelected(false);
 				chkInitialphase.setSelected(false);
+				chkPrio3Kicks1.setSelected(false);
 			}
 		});
 		
@@ -244,14 +245,14 @@ public class GUI extends JFrame {
 		 * Buttons
 		 */
 		btnStart = new JButton("start");
-		btnStart.setBounds((width / 2 - 40), (height - 100), 80, 30);
+		btnStart.setBounds((width / 2 - 40), (height - 70), 80, 30);
 		btnStart.setToolTipText("Start the simulation");
 		btnStart.setMnemonic(KeyEvent.VK_ENTER);
 		btnStart.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Starting Simulation.");
-				int params[] = new int[9]; // ???
+				
 				EmergencyRoomModel.dist1Min = (int) spinP1min.getValue();
 				EmergencyRoomModel.dist1Max = (int) spinP1max.getValue();
 				EmergencyRoomModel.dist2Min = (int) spinP2min.getValue();
@@ -262,10 +263,12 @@ public class GUI extends JFrame {
 				EmergencyRoomModel.arrivalTime = (int) spinAvgPatArr.getValue();
 				EmergencyRoomModel.simulationTime = (int) spinSimuTime
 						.getValue();
+				EmergencyRoomModel.prio3kicks1=chkPrio3Kicks1.isSelected();
 				EmergencyRoomModel.initialPhaseFlag = chkInitialphase
 						.isSelected();
 				EmergencyRoomModel.deathOfPatientsFlag = chkDeathOfPatients
 						.isSelected();
+				
 				if(chkDeathOfPatients.isSelected()){
 					EmergencyRoomModel.deathOfPatientsMin = (int) spinDeathMin.getValue();
 					EmergencyRoomModel.deathOfPatientsMax = (int) spinDeathMax.getValue();
@@ -288,10 +291,15 @@ public class GUI extends JFrame {
 		chkInitialphase.setBounds(127, (height - 150), 120, 20);
 		panel.add(chkInitialphase);
 
-		chkDeathOfPatients = new JCheckBox("Patients P3 can die");
+		chkDeathOfPatients = new JCheckBox("Death of prio 3 patients");
 		chkDeathOfPatients.setSelected(false);
-		chkDeathOfPatients.setBounds(127, (height - 125), 140, 20);
+		chkDeathOfPatients.setBounds(127, (height - 125), 300, 20);
 		panel.add(chkDeathOfPatients);
+		
+		chkPrio3Kicks1 = new JCheckBox("3 kicks 1");
+		chkPrio3Kicks1.setSelected(false);
+		chkPrio3Kicks1.setBounds(127, (height - 100), 140, 20);
+		panel.add(chkPrio3Kicks1);
 
 		setTitle("Emergency Room Model");
 		setSize(width, height);
