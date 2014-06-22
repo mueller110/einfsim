@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JSpinner.DefaultEditor;
@@ -251,14 +252,25 @@ public class GUI extends JFrame {
 		btnStart.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Starting Simulation.");
-				
+				boolean ok = true;
 				EmergencyRoomModel.dist1Min = (int) spinP1min.getValue();
 				EmergencyRoomModel.dist1Max = (int) spinP1max.getValue();
+				if(EmergencyRoomModel.dist1Min > EmergencyRoomModel.dist1Max){
+					ok = false;
+					JOptionPane.showMessageDialog(null, "Distr. 1 min>max");
+				}
 				EmergencyRoomModel.dist2Min = (int) spinP2min.getValue();
 				EmergencyRoomModel.dist2Max = (int) spinP2max.getValue();
+				if(EmergencyRoomModel.dist2Min > EmergencyRoomModel.dist2Max){
+					ok = false;
+					JOptionPane.showMessageDialog(null, "Distr. 2 min>max");
+				}
 				EmergencyRoomModel.dist3Min = (int) spinP3min.getValue();
 				EmergencyRoomModel.dist3Max = (int) spinP3max.getValue();
+				if(EmergencyRoomModel.dist3Min > EmergencyRoomModel.dist3Max){
+					ok = false;
+					JOptionPane.showMessageDialog(null, "Distr. 3 min>max");
+				}
 				EmergencyRoomModel.numberOfDoctors = (int) spinNrDr.getValue();
 				EmergencyRoomModel.arrivalTime = (int) spinAvgPatArr.getValue();
 				EmergencyRoomModel.simulationTime = (int) spinSimuTime
@@ -272,12 +284,18 @@ public class GUI extends JFrame {
 				if(chkDeathOfPatients.isSelected()){
 					EmergencyRoomModel.deathOfPatientsMin = (int) spinDeathMin.getValue();
 					EmergencyRoomModel.deathOfPatientsMax = (int) spinDeathMax.getValue();
+					if(EmergencyRoomModel.deathOfPatientsMin > EmergencyRoomModel.deathOfPatientsMax){
+						ok = false;
+						JOptionPane.showMessageDialog(null, "Death distr. min > max");
+					}
 				}
 				EmergencyRoomModel.underFive = 0;
 				EmergencyRoomModel.deaths = 0;
 				EmergencyRoomModel.runs = (int) spinRuns.getValue();
-				EmergencyRoomModel.runSimulation();
-
+				if(ok){
+					System.out.println("Starting Simulation.");
+					EmergencyRoomModel.runSimulation();
+				}
 			}
 		});
 
