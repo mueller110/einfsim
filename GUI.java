@@ -291,9 +291,9 @@ public class GUI extends JFrame {
 		chkInitialphase.setBounds(127, (height - 150), 120, 20);
 		panel.add(chkInitialphase);
 
-		chkDeathOfPatients = new JCheckBox("Death of prio 3 patients");
+		chkDeathOfPatients = new JCheckBox("Death prio 3");
 		chkDeathOfPatients.setSelected(false);
-		chkDeathOfPatients.setBounds(127, (height - 125), 300, 20);
+		chkDeathOfPatients.setBounds(127, (height - 125), 125, 20);
 		panel.add(chkDeathOfPatients);
 		
 		chkPrio3Kicks1 = new JCheckBox("3 kicks 1");
@@ -302,7 +302,7 @@ public class GUI extends JFrame {
 		panel.add(chkPrio3Kicks1);
 
 		setTitle("Emergency Room Model");
-		setSize(width, height);
+		setSize(width, height+50);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		

@@ -333,8 +333,8 @@ public class EmergencyRoomModel extends Model {
 		
 		
 		result+="Patients: \n";
-		//System.out.println("\tPSum:\t"+ allPatients);
-		//System.out.println("\tPAvg:\t" + ((double)allPatients/runs));
+		System.out.println("\tPSum:\t"+ allPatients);
+		System.out.println("\tPAvg:\t" + ((double)allPatients/runs));
 		result+="\tMaximale Anzahl wartender akuter Notfaelle:\t\t" + ((double)P3MaxWSum/runs)+"\n";
 		result+="\tMittlere Anzahl wartender akuter Notfaelle:\t\t" + ((double)P3AvgWSum/runs)+"\n";
 		result+="\tMaximale Anzahl wartender nicht akuter Notfaelle:\t" + ((double)P12MaxWSum/runs)+"\n";
