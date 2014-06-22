@@ -1,0 +1,85 @@
+\documentclass{beamer}
+%
+% may be included in the beamer package, but just to be sure:
+%
+\usepackage{graphicx}
+% hide subsections+: 1, hide subsubsections+: 2
+\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
+% show bookmarks in pdf
+\usepackage{hyperref}
+% every section (until it has reached the depth of 10 (yeah I overexaggerate with this depth)) will be shown
+% in the pdf as a bookmark
+%\hypersetup{bookmarksdepth=10}
+%
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}[numbered]
+% dolphin = blue
+\usetheme{Madrid}
+\usecolortheme{dolphin}
+%
+\setcounter{secnumdepth}{5}
+
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor%~~\beamer@ifempty{\insertshortinstitute}{}{(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.266666\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+
+\subtitle{Einführung Simulation}
+	\institute{University of Salzburg, Departement of Computer Sciences\\[0.5cm]
+		\includegraphics[scale=0.2]{uniLogo.jpeg}		
+	}
+	\author{Auinger Tobias, M\"{u}ller Christian, Potzkov Georgi}
+	\date{\today}
+	
+%
+% + titlepage
+%
+\begin{document}
+\pdfbookmark[1]{Notaufnahme}{title}
+\title{Notaufnahme}
+\maketitle
+
+	
+
+%
+% table of contents
+%
+\begin{frame}
+	\frametitle{Table of contents}
+	\pdfbookmark[2]{Table of Contents}{toc}\tableofcontents
+\end{frame}
+
+%
+\section{Aufgabe}
+%
+%
+\begin{frame}
+	\frametitle{Aufgabe:}
+	\begin{itemize}
+		\item Notaufnahme simulieren
+		\item 20 Tage Simulationszeit (+2 Tage Initialisierungsphase)
+		\item 2 \"{A}rzte
+		\item Drei Patientenprioritäten
+		\item max. und avg. Wartezeit der Patienten
+		\item \#Patienten mit max. 5min Wartezeit
+		\item 90\% Quantile
+	\end{itemize}
+
+\end{frame}
+
+\end{document}
