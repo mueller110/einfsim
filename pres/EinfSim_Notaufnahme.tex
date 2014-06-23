@@ -39,7 +39,7 @@
 }
 \makeatother
 
-\subtitle{Einführung Simulation}
+\subtitle{Einf\"{u}hrung Simulation}
 	\institute{University of Salzburg, Departement of Computer Sciences\\[0.5cm]
 		\includegraphics[scale=0.2]{img/UniLogo.jpeg}		
 	}
@@ -74,12 +74,157 @@
 		\item Notaufnahme simulieren
 		\item 20 Tage Simulationszeit (+2 Tage Initialisierungsphase)
 		\item 2 \"{A}rzte
-		\item Drei Patientenprioritäten
-		\item max. und avg. Wartezeit der Patienten
-		\item \#Patienten mit max. 5min Wartezeit
-		\item 90\% Quantile
+		\item Drei Patientenpriorit\"{a}ten
 	\end{itemize}
 
 \end{frame}
+
+%
+\section{Implementierung}
+%
+%
+\begin{frame}
+	\frametitle{NewPatientEvent Modell}
+	\includegraphics[scale=1]{img/newPatientEventModell.jpg}
+\end{frame}
+
+\begin{frame}
+	\frametitle{NewPatientEvent}
+	\begin{itemize}
+		\item Neuer Patient wird erstellt
+		\item 20\% sind Priorit\"{a}t 3
+		\item Rest sind Priorit\"{a}t 1
+	\end{itemize}		
+\end{frame}
+
+\begin{frame}
+	\frametitle{PatientArrivalEvent Modell}
+	\includegraphics[scale=1]{img/patientArrivalEventModell.jpg}
+\end{frame}
+
+\begin{frame}
+	\frametitle{PatientArrivalEvent}
+	\begin{itemize}
+		\item FreeDoctorQueue leer? 
+		\begin{itemize}
+			\item ja $\implies$ Sofortbehandlung
+			\item nein $\implies$ Queue der jeweiligen Priorit\"{a}t
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{TreatmentTermination Modell}
+	\includegraphics[scale=1]{img/treatmentTermination.jpg}
+\end{frame}
+
+\begin{frame}
+	\frametitle{TreatmentTermination}
+	\begin{itemize}
+		\item Patient wird behandelt
+		\item Behandelnde Arzt $\implies$ BusyDoctorQueue
+		\item Berechnen der Behandlungszeit
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Busy/Free Doctor}
+	\includegraphics[scale=1]{img/busyFreeDoctor.jpg}
+\end{frame}
+
+%
+\section{Erweiterungen}
+%
+%
+\begin{frame}
+	\frametitle{Erweiterungen}
+	\begin{itemize}
+		\item Tod der Patienten
+		\item akute Notf\"{a}lle Verdr\"{a}ngen 1 Priorit\"{a}t
+	\end{itemize}
+\end{frame}
+
+%
+%
+%
+\begin{frame}
+	\frametitle{Ergebnisse}
+	\begin{minipage}{.5\textwidth}
+		\begin{flushleft}		
+			\begin{itemize}
+				\item[] Zu beachten:
+				\item Initial phase
+				\item Max. und avg. Wartezeit
+				\item \# Patienten die max. 5 Min warten
+				\item 90\% Quantile
+			\end{itemize}
+		\end{flushleft}
+	\end{minipage}
+	\begin{minipage}{.4\textwidth}
+		\begin{flushright}
+			\begin{itemize}
+				\item[] Zus\"{a}tzlich:
+				\item Tode
+				\item Bevorzugung der akuten Notf\"{a}lle
+			\end{itemize}
+		\end{flushright}
+	\end{minipage}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Initial Phase}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Max. und avg. Wartezeit}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\# Patienten die max. 5 Min. warten}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/U5.png}
+	\end{center}
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{\# Patienten die max. 5 Min. warten}
+%	\begin{center}
+%		\includegraphics[scale=0.46]{img/U53D.png}
+%	\end{center}
+%\end{frame}
+
+%\begin{frame}
+%	\frametitle{\# Patienten die max. 5 Min. warten}
+%	\begin{center}
+%		\includegraphics[scale=0.46]{img/U53D2.png}
+%	\end{center}
+%\end{frame}
+
+\begin{frame}
+	\frametitle{90\% Quantile}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Tode}
+	\begin{center}
+		\includegraphics[scale=0.77]{img/Deaths.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Tode - Nr. Dr}
+	\begin{center}
+		\includegraphics[scale=0.65]{img/DeathsNrDr.png}
+	\end{center}
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{Tode - Nr. Dr}
+%	\begin{center}
+%		\includegraphics[scale=0.5]{img/DeathsNrDr3D.png}
+%	\end{center}
+%\end{frame}
+
+
 
 \end{document}

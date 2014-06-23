@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.3.10)  22 JUN 2014 18:21
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.4.28)  23 JUN 2014 07:58
 entering extended mode
 **EinfSim_Notaufnahme.tex
-(D:\_Studium\4Semester\simu\pres\EinfSim_Notaufnahme.tex
+(D:\_eclipseWorkspace\EinfSim\src\pres\EinfSim_Notaufnahme.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -732,7 +732,7 @@ Package: beamerouterthemeinfolines 2012/10/16  (rcs-revision 51a8c72084af)
 ("C:\Program Files\MiKTeX 2.9\tex\latex\beamer\base\themes\color\beamercolorthe
 medolphin.sty"
 Package: beamercolorthemedolphin 2010/06/17  (rcs-revision d02a7cf4d8ae)
-) (D:\_Studium\4Semester\simu\pres\EinfSim_Notaufnahme.aux)
+) (D:\_eclipseWorkspace\EinfSim\src\pres\EinfSim_Notaufnahme.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
 LaTeX Font Info:    ... okay on input line 52.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
@@ -747,7 +747,6 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
 LaTeX Font Info:    ... okay on input line 52.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 52.
 LaTeX Font Info:    ... okay on input line 52.
-
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -811,8 +810,8 @@ LaTeX Info: Redefining \ref on input line 52.
 LaTeX Info: Redefining \pageref on input line 52.
 LaTeX Info: Redefining \nameref on input line 52.
 
-(D:\_Studium\4Semester\simu\pres\EinfSim_Notaufnahme.out)
-(D:\_Studium\4Semester\simu\pres\EinfSim_Notaufnahme.out)
+(D:\_eclipseWorkspace\EinfSim\src\pres\EinfSim_Notaufnahme.out)
+(D:\_eclipseWorkspace\EinfSim\src\pres\EinfSim_Notaufnahme.out)
 \@outlinefile=\write5
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 52.
@@ -893,14 +892,11 @@ Dictionary: translator-theorem-dictionary, Language: English
 )
 LaTeX Info: Redefining \includegraphics on input line 52.
 
-(D:\_Studium\4Semester\simu\pres\EinfSim_Notaufnahme.nav)
-Missing character: There is no Ã in font cmss10!
-Missing character: There is no ¼ in font cmss10!
-
-<uniLogo.jpeg, id=25, 140.525pt x 140.525pt>
-File: uniLogo.jpeg Graphic file (type jpg)
- <use uniLogo.jpeg>
-Package pdftex.def Info: uniLogo.jpeg used on input line 55.
+(D:\_eclipseWorkspace\EinfSim\src\pres\EinfSim_Notaufnahme.nav)
+<img/UniLogo.jpeg, id=33, 140.525pt x 140.525pt>
+File: img/UniLogo.jpeg Graphic file (type jpg)
+ <use img/UniLogo.jpeg>
+Package pdftex.def Info: img/UniLogo.jpeg used on input line 55.
 (pdftex.def)             Requested size: 28.10449pt x 28.10449pt.
 
 
@@ -909,48 +905,150 @@ LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4> not available
 
 [1
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <D:/_Studium/4Semester/sim
-u/pres/uniLogo.jpeg>]
-(D:\_Studium\4Semester\simu\pres\EinfSim_Notaufnahme.toc) [2
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <D:/_eclipseWorkspace/Einf
+Sim/src/pres/img/UniLogo.jpeg>]
+(D:\_eclipseWorkspace\EinfSim\src\pres\EinfSim_Notaufnahme.toc) [2
+
+] [3
 
 ]
-Missing character: There is no Ã in font cmss10!
-Missing character: There is no ¤ in font cmss10!
- [3
+<img/newPatientEventModell.jpg, id=126, 328.22626pt x 123.46124pt>
+File: img/newPatientEventModell.jpg Graphic file (type jpg)
+
+<use img/newPatientEventModell.jpg>
+Package pdftex.def Info: img/newPatientEventModell.jpg used on input line 89.
+(pdftex.def)             Requested size: 328.22545pt x 123.46092pt.
+ [4
+
+ <D:/_eclipseWorkspace/EinfSim/src/pres/img/newPatientEventModell.jpg>] [5
 
 ]
+<img/patientArrivalEventModell.jpg, id=180, 328.22626pt x 123.46124pt>
+File: img/patientArrivalEventModell.jpg Graphic file (type jpg)
+
+<use img/patientArrivalEventModell.jpg>
+Package pdftex.def Info: img/patientArrivalEventModell.jpg used on input line 1
+03.
+(pdftex.def)             Requested size: 328.22545pt x 123.46092pt.
+ [6
+
+ <D:/_eclipseWorkspace/EinfSim/src/pres/img/patientArrivalEventModell.jpg>]
+LaTeX Font Info:    Try loading font information for U+msa on input line 114.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 114.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Try loading font information for OT1+mathkerncmss on input 
+line 114.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\sansmathaccent\ot1mathkerncmss.fd"
+File: ot1mathkerncmss.fd 2013/03/27 Fontinst v1.933 font definitions for OT1/ma
+thkerncmss.
+)
+[7
+
+] <img/treatmentTermination.jpg, id=237, 328.22626pt x 123.46124pt>
+File: img/treatmentTermination.jpg Graphic file (type jpg)
+
+<use img/treatmentTermination.jpg>
+Package pdftex.def Info: img/treatmentTermination.jpg used on input line 119.
+(pdftex.def)             Requested size: 328.22545pt x 123.46092pt.
+ [8
+
+ <D:/_eclipseWorkspace/EinfSim/src/pres/img/treatmentTermination.jpg>] [9
+
+]
+<img/busyFreeDoctor.jpg, id=289, 328.22626pt x 123.46124pt>
+File: img/busyFreeDoctor.jpg Graphic file (type jpg)
+
+<use img/busyFreeDoctor.jpg>
+Package pdftex.def Info: img/busyFreeDoctor.jpg used on input line 133.
+(pdftex.def)             Requested size: 328.22545pt x 123.46092pt.
+ [10
+
+ <D:/_eclipseWorkspace/EinfSim/src/pres/img/busyFreeDoctor.jpg>] [11
+
+] [12
+
+] [13
+
+] [14
+
+]
+<img/U5.png, id=420, 471.26062pt x 292.84406pt>
+File: img/U5.png Graphic file (type png)
+ <use img/U5.png>
+Package pdftex.def Info: img/U5.png used on input line 187.
+(pdftex.def)             Requested size: 282.75856pt x 175.70778pt.
+ [15
+
+ <D:/_eclipseWorkspace/EinfSim/src/pres/img/U5.png>] [16
+
+]
+<img/Deaths.png, id=473, 362.10281pt x 217.5628pt>
+File: img/Deaths.png Graphic file (type png)
+ <use img/Deaths.png>
+Package pdftex.def Info: img/Deaths.png used on input line 212.
+(pdftex.def)             Requested size: 278.82pt x 167.52386pt.
+
+[17
+
+ <D:/_eclipseWorkspace/EinfSim/src/pres/img/Deaths.png>]
+<img/DeathsNrDr.png, id=499, 435.87843pt x 344.03531pt>
+File: img/DeathsNrDr.png Graphic file (type png)
+
+<use img/DeathsNrDr.png>
+Package pdftex.def Info: img/DeathsNrDr.png used on input line 219.
+(pdftex.def)             Requested size: 283.31761pt x 223.6203pt.
+ [18
+
+ <D:/_eclipseWorkspace/EinfSim/src/pres/img/DeathsNrDr.png>] <img/DeathsNrDr3D.
+png, id=525, 607.51968pt x 429.10312pt>
+File: img/DeathsNrDr3D.png Graphic file (type png)
+
+<use img/DeathsNrDr3D.png>
+Package pdftex.def Info: img/DeathsNrDr3D.png used on input line 226.
+(pdftex.def)             Requested size: 303.7591pt x 214.55103pt.
+ [19
+
+ <D:/_eclipseWorkspace/EinfSim/src/pres/img/DeathsNrDr3D.png>]
 \tf@nav=\write6
 \tf@toc=\write7
 \tf@snm=\write8
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 85.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 85.
-
-(D:\_Studium\4Semester\simu\pres\EinfSim_Notaufnahme.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 85.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 85.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 230.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 230.
+ (D:\_eclipseWorkspace\EinfSim\src\pres\EinfSim_Notaufnahme.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 230.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 230.
 Package rerunfilecheck Info: File `EinfSim_Notaufnahme.out' has not changed.
-(rerunfilecheck)             Checksum: E06ABA49D21D81BF65C97B5EDF403FCB;149.
+(rerunfilecheck)             Checksum: 50A996AAAEC34508CA571CB9C319B286;263.
 
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 85.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 230.
  ) 
 Here is how much of TeX's memory you used:
- 16474 strings out of 493921
- 317397 string characters out of 3147285
- 380729 words of memory out of 3000000
- 19384 multiletter control sequences out of 15000+200000
- 5452 words of font info for 20 fonts, out of 3000000 for 9000
+ 16709 strings out of 493921
+ 322051 string characters out of 3147279
+ 381744 words of memory out of 3000000
+ 19551 multiletter control sequences out of 15000+200000
+ 13884 words of font info for 51 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  56i,16n,60p,421b,606s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Pr
 ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Program Fi
-les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss8.pfb>
-Output written on EinfSim_Notaufnahme.pdf (3 pages, 76158 bytes).
+les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss8.pfb><C:/Program Files/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on EinfSim_Notaufnahme.pdf (19 pages, 247849 bytes).
 PDF statistics:
- 128 PDF objects out of 1000 (max. 8388607)
- 10 named destinations out of 1000 (max. 500000)
- 84 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 580 PDF objects out of 1000 (max. 8388607)
+ 44 named destinations out of 1000 (max. 500000)
+ 146 words of extra memory for PDF output out of 10000 (max. 10000000)
 

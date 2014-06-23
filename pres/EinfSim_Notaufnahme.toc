@@ -1,3 +1,5 @@
 \setcounter {tocdepth}{2}
 \beamer@endinputifotherversion {3.33pt}
 \beamer@sectionintoc {1}{Aufgabe}{3}{0}{1}
+\beamer@sectionintoc {2}{Implementierung}{4}{0}{2}
+\beamer@sectionintoc {3}{Erweiterungen}{11}{0}{3}
