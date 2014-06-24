@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.4.28)  23 JUN 2014 07:58
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.4.28)  24 JUN 2014 07:07
 entering extended mode
 **EinfSim_Notaufnahme.tex
 (D:\_eclipseWorkspace\EinfSim\src\pres\EinfSim_Notaufnahme.tex
@@ -979,52 +979,49 @@ Package pdftex.def Info: img/busyFreeDoctor.jpg used on input line 133.
 
 ] [14
 
+] [15
+
+] [16
+
+] [17
+
 ]
-<img/U5.png, id=420, 471.26062pt x 292.84406pt>
+<img/U5.png, id=498, 471.26062pt x 292.84406pt>
 File: img/U5.png Graphic file (type png)
  <use img/U5.png>
-Package pdftex.def Info: img/U5.png used on input line 187.
+Package pdftex.def Info: img/U5.png used on input line 201.
 (pdftex.def)             Requested size: 282.75856pt x 175.70778pt.
- [15
+ [18
 
- <D:/_eclipseWorkspace/EinfSim/src/pres/img/U5.png>] [16
+ <D:/_eclipseWorkspace/EinfSim/src/pres/img/U5.png>] [19
 
 ]
-<img/Deaths.png, id=473, 362.10281pt x 217.5628pt>
+<img/Deaths.png, id=550, 362.10281pt x 217.5628pt>
 File: img/Deaths.png Graphic file (type png)
  <use img/Deaths.png>
-Package pdftex.def Info: img/Deaths.png used on input line 212.
+Package pdftex.def Info: img/Deaths.png used on input line 226.
 (pdftex.def)             Requested size: 278.82pt x 167.52386pt.
 
-[17
+[20
 
  <D:/_eclipseWorkspace/EinfSim/src/pres/img/Deaths.png>]
-<img/DeathsNrDr.png, id=499, 435.87843pt x 344.03531pt>
+<img/DeathsNrDr.png, id=577, 435.87843pt x 344.03531pt>
 File: img/DeathsNrDr.png Graphic file (type png)
 
 <use img/DeathsNrDr.png>
-Package pdftex.def Info: img/DeathsNrDr.png used on input line 219.
+Package pdftex.def Info: img/DeathsNrDr.png used on input line 233.
 (pdftex.def)             Requested size: 283.31761pt x 223.6203pt.
- [18
+ [21
 
- <D:/_eclipseWorkspace/EinfSim/src/pres/img/DeathsNrDr.png>] <img/DeathsNrDr3D.
-png, id=525, 607.51968pt x 429.10312pt>
-File: img/DeathsNrDr3D.png Graphic file (type png)
-
-<use img/DeathsNrDr3D.png>
-Package pdftex.def Info: img/DeathsNrDr3D.png used on input line 226.
-(pdftex.def)             Requested size: 303.7591pt x 214.55103pt.
- [19
-
- <D:/_eclipseWorkspace/EinfSim/src/pres/img/DeathsNrDr3D.png>]
+ <D:/_eclipseWorkspace/EinfSim/src/pres/img/DeathsNrDr.png>]
 \tf@nav=\write6
 \tf@toc=\write7
 \tf@snm=\write8
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 230.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 230.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 244.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 244.
  (D:\_eclipseWorkspace\EinfSim\src\pres\EinfSim_Notaufnahme.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 230.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 230.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 244.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 244.
 Package rerunfilecheck Info: File `EinfSim_Notaufnahme.out' has not changed.
 (rerunfilecheck)             Checksum: 50A996AAAEC34508CA571CB9C319B286;263.
 
@@ -1032,13 +1029,13 @@ Package rerunfilecheck Info: File `EinfSim_Notaufnahme.out' has not changed.
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 230.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 244.
  ) 
 Here is how much of TeX's memory you used:
- 16709 strings out of 493921
- 322051 string characters out of 3147279
+ 16710 strings out of 493921
+ 321990 string characters out of 3147279
  381744 words of memory out of 3000000
- 19551 multiletter control sequences out of 15000+200000
+ 19549 multiletter control sequences out of 15000+200000
  13884 words of font info for 51 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  56i,16n,60p,421b,606s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1046,9 +1043,9 @@ Here is how much of TeX's memory you used:
 ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Program Fi
 les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss8.pfb><C:/Program Files/MiKTe
 X 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on EinfSim_Notaufnahme.pdf (19 pages, 247849 bytes).
+Output written on EinfSim_Notaufnahme.pdf (21 pages, 242972 bytes).
 PDF statistics:
- 580 PDF objects out of 1000 (max. 8388607)
- 44 named destinations out of 1000 (max. 500000)
- 146 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 631 PDF objects out of 1000 (max. 8388607)
+ 48 named destinations out of 1000 (max. 500000)
+ 141 words of extra memory for PDF output out of 10000 (max. 10000000)
 
