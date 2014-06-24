@@ -63,9 +63,9 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 			model.freeDoctorQueue.remove(doctor);
 			model.busyDoctorQueue.insert(doctor);
 			queue.remove(patient);
-			if (patient.getPriority() == 3 && model.deathOfPatientsFlag) {
+			if (patient.getPriority() == 3 && model.deathOfPatientsFlag)
 				patient.deathEvent.cancel();
-			}
+			
 			patient.treatmentStart = new SimTime(model.currentTime());
 			TreatmentTermination treatmentTerm = new TreatmentTermination(
 					model, "End of Treatment", true);
