@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.3.10)  26 JUN 2014 00:53
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.3.10)  26 JUN 2014 01:01
 entering extended mode
 **EinfSim_Notaufnahme.tex
 (D:\_eclipse\eclipseworkspace\EinfSim\src\pres\EinfSim_Notaufnahme.tex
@@ -907,7 +907,7 @@ Dictionary: translator-theorem-dictionary, Language: English
 LaTeX Info: Redefining \includegraphics on input line 53.
 
 (D:\_eclipse\eclipseworkspace\EinfSim\src\pres\EinfSim_Notaufnahme.nav)
-<img/UniLogo.jpeg, id=33, 140.525pt x 140.525pt>
+<img/UniLogo.jpeg, id=37, 140.525pt x 140.525pt>
 File: img/UniLogo.jpeg Graphic file (type jpg)
  <use img/UniLogo.jpeg>
 Package pdftex.def Info: img/UniLogo.jpeg used on input line 56.
@@ -940,7 +940,7 @@ verted-to.pdf img/NewPatientEvent.eps>
 (epstopdf)             \includegraphics on input line 103.
 Package epstopdf Info: Output file is already uptodate.
 
-<img/NewPatientEvent-eps-converted-to.pdf, id=151, 335.2525pt x 181.67876pt>
+<img/NewPatientEvent-eps-converted-to.pdf, id=157, 335.2525pt x 181.67876pt>
 File: img/NewPatientEvent-eps-converted-to.pdf Graphic file (type pdf)
 
 <use img/NewPatientEvent-eps-converted-to.pdf>
@@ -965,7 +965,7 @@ df>
 (epstopdf)             \includegraphics on input line 119.
 Package epstopdf Info: Output file is already uptodate.
 
-<img/PatientArrivalEvent-eps-converted-to.pdf, id=210, 364.36125pt x 245.91875p
+<img/PatientArrivalEvent-eps-converted-to.pdf, id=217, 364.36125pt x 245.91875p
 t>
 File: img/PatientArrivalEvent-eps-converted-to.pdf Graphic file (type pdf)
  <use img/PatientArrivalEvent-eps-converted-to.pdf>
@@ -1008,7 +1008,7 @@ s-converted-to.pdf img/TreatmentTermination.eps>
 (epstopdf)             \includegraphics on input line 137.
 Package epstopdf Info: Output file is already uptodate.
 
-<img/TreatmentTermination-eps-converted-to.pdf, id=273, 361.35pt x 216.81pt>
+<img/TreatmentTermination-eps-converted-to.pdf, id=280, 361.35pt x 216.81pt>
 File: img/TreatmentTermination-eps-converted-to.pdf Graphic file (type pdf)
 
 <use img/TreatmentTermination-eps-converted-to.pdf>
@@ -1032,7 +1032,7 @@ d-to.pdf img/freeDoctor.eps>
 (epstopdf)             \includegraphics on input line 154.
 Package epstopdf Info: Output file is already uptodate.
 
-<img/freeDoctor-eps-converted-to.pdf, id=332, 245.91875pt x 162.6075pt>
+<img/freeDoctor-eps-converted-to.pdf, id=338, 245.91875pt x 162.6075pt>
 File: img/freeDoctor-eps-converted-to.pdf Graphic file (type pdf)
 
 <use img/freeDoctor-eps-converted-to.pdf>
@@ -1045,137 +1045,137 @@ Package pdftex.def Info: img/freeDoctor-eps-converted-to.pdf used on input line
 .pdf>] [12
 
 ]
-<img/U5.png, id=391, 471.26062pt x 292.84406pt>
+<img/U5.png, id=396, 471.26062pt x 292.84406pt>
 File: img/U5.png Graphic file (type png)
  <use img/U5.png>
-Package pdftex.def Info: img/U5.png used on input line 188.
+Package pdftex.def Info: img/U5.png used on input line 189.
 (pdftex.def)             Requested size: 282.75856pt x 175.70778pt.
  [13
 
  <D:/_eclipse/eclipseworkspace/EinfSim/src/pres/img/U5.png>]
-<img/Quantile.png, id=419, 532.99126pt x 374.90062pt>
+<img/Quantile.png, id=424, 532.99126pt x 374.90062pt>
 File: img/Quantile.png Graphic file (type png)
  <use img/Quantile.png>
-Package pdftex.def Info: img/Quantile.png used on input line 209.
+Package pdftex.def Info: img/Quantile.png used on input line 210.
 (pdftex.def)             Requested size: 319.79723pt x 224.94211pt.
 
-Overfull \vbox (0.33562pt too high) detected at line 209
+Overfull \vbox (0.33562pt too high) detected at line 210
  []
 
 [14
 
  <D:/_eclipse/eclipseworkspace/EinfSim/src/pres/img/Quantile.png>]
-<img/Quantile2.png, id=446, 532.99126pt x 374.90062pt>
+<img/Quantile2.png, id=451, 532.99126pt x 374.90062pt>
 File: img/Quantile2.png Graphic file (type png)
  <use img/Quantile2.png>
-Package pdftex.def Info: img/Quantile2.png used on input line 216.
+Package pdftex.def Info: img/Quantile2.png used on input line 217.
 (pdftex.def)             Requested size: 319.79723pt x 224.94211pt.
 
-Overfull \vbox (0.33562pt too high) detected at line 216
+Overfull \vbox (0.33562pt too high) detected at line 217
  []
 
 [15
 
  <D:/_eclipse/eclipseworkspace/EinfSim/src/pres/img/Quantile2.png>]
-<img/Zeros.png, id=473, 505.89pt x 322.20375pt>
+<img/Zeros.png, id=478, 505.89pt x 322.20375pt>
 File: img/Zeros.png Graphic file (type png)
  <use img/Zeros.png>
-Package pdftex.def Info: img/Zeros.png used on input line 223.
+Package pdftex.def Info: img/Zeros.png used on input line 224.
 (pdftex.def)             Requested size: 303.53633pt x 193.32373pt.
  [16
 
  <D:/_eclipse/eclipseworkspace/EinfSim/src/pres/img/Zeros.png>]
-<img/Deaths.png, id=500, 362.10281pt x 217.5628pt>
+<img/Deaths.png, id=505, 362.10281pt x 217.5628pt>
 File: img/Deaths.png Graphic file (type png)
  <use img/Deaths.png>
-Package pdftex.def Info: img/Deaths.png used on input line 230.
+Package pdftex.def Info: img/Deaths.png used on input line 231.
 (pdftex.def)             Requested size: 278.82pt x 167.52386pt.
 
 [17
 
  <D:/_eclipse/eclipseworkspace/EinfSim/src/pres/img/Deaths.png>]
-<img/DeathsNrDr.png, id=527, 435.87843pt x 344.03531pt>
+<img/DeathsNrDr.png, id=532, 435.87843pt x 344.03531pt>
 File: img/DeathsNrDr.png Graphic file (type png)
 
 <use img/DeathsNrDr.png>
-Package pdftex.def Info: img/DeathsNrDr.png used on input line 237.
+Package pdftex.def Info: img/DeathsNrDr.png used on input line 238.
 (pdftex.def)             Requested size: 283.31761pt x 223.6203pt.
  [18
 
  <D:/_eclipse/eclipseworkspace/EinfSim/src/pres/img/DeathsNrDr.png>] <img/1Dokt
-or.jpg, id=554, 867.24pt x 487.8225pt>
+or.jpg, id=559, 867.24pt x 487.8225pt>
 File: img/1Doktor.jpg Graphic file (type jpg)
 
 <use img/1Doktor.jpg>
-Package pdftex.def Info: img/1Doktor.jpg used on input line 248.
+Package pdftex.def Info: img/1Doktor.jpg used on input line 249.
 (pdftex.def)             Requested size: 346.88986pt x 195.12553pt.
 
-Overfull \hbox (4.59456pt too wide) in paragraph at lines 248--248
+Overfull \hbox (4.59456pt too wide) in paragraph at lines 249--249
 [][]  
  []
 
 [19
 
  <D:/_eclipse/eclipseworkspace/EinfSim/src/pres/img/1Doktor.jpg>]
-<img/2Doktoren.jpg, id=582, 867.24pt x 487.8225pt>
+<img/2Doktoren.jpg, id=587, 867.24pt x 487.8225pt>
 File: img/2Doktoren.jpg Graphic file (type jpg)
  <use img/2Doktoren.jpg>
-Package pdftex.def Info: img/2Doktoren.jpg used on input line 252.
+Package pdftex.def Info: img/2Doktoren.jpg used on input line 253.
 (pdftex.def)             Requested size: 346.88986pt x 195.12553pt.
 
-Overfull \hbox (4.59456pt too wide) in paragraph at lines 252--252
+Overfull \hbox (4.59456pt too wide) in paragraph at lines 253--253
 [][]  
  []
 
 [20
 
  <D:/_eclipse/eclipseworkspace/EinfSim/src/pres/img/2Doktoren.jpg>]
-<img/3Doktoren.jpg, id=609, 867.24pt x 487.8225pt>
+<img/3Doktoren.jpg, id=614, 867.24pt x 487.8225pt>
 File: img/3Doktoren.jpg Graphic file (type jpg)
  <use img/3Doktoren.jpg>
-Package pdftex.def Info: img/3Doktoren.jpg used on input line 256.
+Package pdftex.def Info: img/3Doktoren.jpg used on input line 257.
 (pdftex.def)             Requested size: 346.88986pt x 195.12553pt.
 
-Overfull \hbox (4.59456pt too wide) in paragraph at lines 256--256
+Overfull \hbox (4.59456pt too wide) in paragraph at lines 257--257
 [][]  
  []
 
 [21
 
  <D:/_eclipse/eclipseworkspace/EinfSim/src/pres/img/3Doktoren.jpg>]
-<img/4Doktoren.jpg, id=636, 867.24pt x 487.8225pt>
+<img/4Doktoren.jpg, id=641, 867.24pt x 487.8225pt>
 File: img/4Doktoren.jpg Graphic file (type jpg)
  <use img/4Doktoren.jpg>
-Package pdftex.def Info: img/4Doktoren.jpg used on input line 260.
+Package pdftex.def Info: img/4Doktoren.jpg used on input line 261.
 (pdftex.def)             Requested size: 346.88986pt x 195.12553pt.
 
-Overfull \hbox (4.59456pt too wide) in paragraph at lines 260--260
+Overfull \hbox (4.59456pt too wide) in paragraph at lines 261--261
 [][]  
  []
 
 [22
 
  <D:/_eclipse/eclipseworkspace/EinfSim/src/pres/img/4Doktoren.jpg>]
-<img/5Doktoren.jpg, id=663, 867.24pt x 487.8225pt>
+<img/5Doktoren.jpg, id=668, 867.24pt x 487.8225pt>
 File: img/5Doktoren.jpg Graphic file (type jpg)
  <use img/5Doktoren.jpg>
-Package pdftex.def Info: img/5Doktoren.jpg used on input line 264.
+Package pdftex.def Info: img/5Doktoren.jpg used on input line 265.
 (pdftex.def)             Requested size: 346.88986pt x 195.12553pt.
 
-Overfull \hbox (4.59456pt too wide) in paragraph at lines 264--264
+Overfull \hbox (4.59456pt too wide) in paragraph at lines 265--265
 [][]  
  []
 
 [23
 
  <D:/_eclipse/eclipseworkspace/EinfSim/src/pres/img/5Doktoren.jpg>]
-<img/6Doktoren.jpg, id=689, 867.24pt x 487.8225pt>
+<img/6Doktoren.jpg, id=694, 867.24pt x 487.8225pt>
 File: img/6Doktoren.jpg Graphic file (type jpg)
  <use img/6Doktoren.jpg>
-Package pdftex.def Info: img/6Doktoren.jpg used on input line 268.
+Package pdftex.def Info: img/6Doktoren.jpg used on input line 269.
 (pdftex.def)             Requested size: 346.88986pt x 195.12553pt.
 
-Overfull \hbox (4.59456pt too wide) in paragraph at lines 268--268
+Overfull \hbox (4.59456pt too wide) in paragraph at lines 269--269
 [][]  
  []
 
@@ -1185,26 +1185,26 @@ Overfull \hbox (4.59456pt too wide) in paragraph at lines 268--268
 \tf@nav=\write6
 \tf@toc=\write7
 \tf@snm=\write8
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 271.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 271.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 272.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 272.
 
 (D:\_eclipse\eclipseworkspace\EinfSim\src\pres\EinfSim_Notaufnahme.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 271.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 271.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 272.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 272.
 Package rerunfilecheck Info: File `EinfSim_Notaufnahme.out' has not changed.
-(rerunfilecheck)             Checksum: 4D1B9F7544A96FF21ED3146C7DA4B1CD;263.
+(rerunfilecheck)             Checksum: FF91C29CEE9D4C6124EEBCAFCC1D3B45;316.
 
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 271.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 272.
  ) 
 Here is how much of TeX's memory you used:
- 16885 strings out of 493921
- 325411 string characters out of 3147285
+ 16890 strings out of 493921
+ 325457 string characters out of 3147285
  384047 words of memory out of 3000000
- 19698 multiletter control sequences out of 15000+200000
+ 19702 multiletter control sequences out of 15000+200000
  13884 words of font info for 51 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  56i,16n,60p,421b,606s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1212,9 +1212,9 @@ Here is how much of TeX's memory you used:
 ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Program Fi
 les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss8.pfb><C:/Program Files/MiKTe
 X 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on EinfSim_Notaufnahme.pdf (24 pages, 911270 bytes).
+Output written on EinfSim_Notaufnahme.pdf (24 pages, 911973 bytes).
 PDF statistics:
- 743 PDF objects out of 1000 (max. 8388607)
- 54 named destinations out of 1000 (max. 500000)
- 186 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 749 PDF objects out of 1000 (max. 8388607)
+ 55 named destinations out of 1000 (max. 500000)
+ 194 words of extra memory for PDF output out of 10000 (max. 10000000)
 
