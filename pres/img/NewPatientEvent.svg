@@ -7,10 +7,37 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.2"
    width="453.5433"
    height="340.15747"
-   id="svg2">
+   id="svg2"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="NewPatientEvent.svg"
+   inkscape:export-filename="D:\_eclipseWorkspace\EinfSim\src\pres\img\NewPatientEvent.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="640"
+     inkscape:window-height="480"
+     id="namedview3323"
+     showgrid="false"
+     inkscape:zoom="0.69379632"
+     inkscape:cx="226.77165"
+     inkscape:cy="170.07874"
+     inkscape:window-x="159"
+     inkscape:window-y="21"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
   <defs
      id="defs4">
     <marker
@@ -124,7 +151,7 @@
            x="-33.756084"
            y="71.407104"
            id="rect3037" /></flowRegion><flowPara
-         id="flowPara3039"></flowPara></flowRoot>    <rect
+         id="flowPara3039" /></flowRoot>    <rect
        width="137.88411"
        height="23.949764"
        x="141.97504"
@@ -234,7 +261,7 @@
            x="159.69225"
            y="249.92487"
            id="rect3236" /></flowRegion><flowPara
-         id="flowPara3238"></flowPara></flowRoot>    <flowRoot
+         id="flowPara3238" /></flowRoot>    <flowRoot
        transform="translate(-4.149475e-6,698.0315)"
        id="flowRoot3240"
        xml:space="preserve"
@@ -245,5 +272,5 @@
            x="179.81607"
            y="261.60965"
            id="rect3244" /></flowRegion><flowPara
-         id="flowPara3246"></flowPara></flowRoot>  </g>
+         id="flowPara3246" /></flowRoot>  </g>
 </svg>
