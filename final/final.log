@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.3.10)  28 JUL 2014 16:29
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.3.10)  28 JUL 2014 20:25
 entering extended mode
 **final.tex
 (D:\_eclipse\eclipseworkspace\EinfSim\src\final\final.tex
@@ -258,18 +258,18 @@ LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 \l_MT_below_shortintertext_sep=\dimen126
 )
 (D:\_eclipse\eclipseworkspace\EinfSim\src\final\final.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
 
 ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -285,12 +285,12 @@ LaTeX Font Info:    ... okay on input line 38.
 \makeMPintoPDFobject=\count112
 \everyMPtoPDFconversion=\toks29
 )
-Underfull \hbox (badness 10000) in paragraph at lines 63--68
+Underfull \hbox (badness 10000) in paragraph at lines 57--62
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 69--73
+Underfull \hbox (badness 10000) in paragraph at lines 63--67
 
  []
 
@@ -298,29 +298,64 @@ Underfull \hbox (badness 10000) in paragraph at lines 69--73
 Non-PDF special ignored!
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-(D:\_eclipse\eclipseworkspace\EinfSim\src\final\final.toc)
+(D:\_eclipse\eclipseworkspace\EinfSim\src\final\final.toc
+LaTeX Font Info:    Try loading font information for U+lasy on input line 6.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\ulasy.fd"
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+)
+LaTeX Font Info:    Try loading font information for U+msa on input line 6.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 6.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+))
 \tf@toc=\write5
  [1
 
 
-] [2]
+]
+<img/NewPatientEvent.png, id=12, 334.851pt x 180.675pt>
+File: img/NewPatientEvent.png Graphic file (type png)
+
+<use img/NewPatientEvent.png>
+Package pdftex.def Info: img/NewPatientEvent.png used on input line 105.
+(pdftex.def)             Requested size: 334.85017pt x 180.67455pt.
+ [2] [3 <D:/_eclipse/eclipseworkspace/EinfSim/src/final/img/NewPatientEvent.png
+>]
+<img/freeDoctor.png, id=21, 245.718pt x 160.6pt>
+File: img/freeDoctor.png Graphic file (type png)
+ <use img/freeDoctor.png>
+Package pdftex.def Info: img/freeDoctor.png used on input line 141.
+(pdftex.def)             Requested size: 245.71739pt x 160.5996pt.
+
+Overfull \hbox (9.3993pt too wide) in paragraph at lines 147--150
+\OT1/cmr/m/n/12 Im fol-gen-den sollen die Ergeb-nisse, welche das Re-sul-tat vo
+n jew-eils hun-dert Sim-u-la-tionslaufen
+ []
+
+[4 <D:/_eclipse/eclipseworkspace/EinfSim/src/final/img/freeDoctor.png>]
 (D:\_eclipse\eclipseworkspace\EinfSim\src\final\final.aux) ) 
 Here is how much of TeX's memory you used:
- 3627 strings out of 493921
- 46966 string characters out of 3147285
- 104459 words of memory out of 3000000
- 6874 multiletter control sequences out of 15000+200000
- 5800 words of font info for 21 fonts, out of 3000000 for 9000
+ 3696 strings out of 493921
+ 48158 string characters out of 3147285
+ 108467 words of memory out of 3000000
+ 6914 multiletter control sequences out of 15000+200000
+ 10772 words of font info for 42 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 34i,5n,43p,251b,159s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 34i,5n,43p,726b,221s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/M
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.
 9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
 ype1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
 ic/amsfonts/cm/cmsl12.pfb>
-Output written on final.pdf (3 pages, 47705 bytes).
+Output written on final.pdf (5 pages, 95649 bytes).
 PDF statistics:
- 28 PDF objects out of 1000 (max. 8388607)
+ 39 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
