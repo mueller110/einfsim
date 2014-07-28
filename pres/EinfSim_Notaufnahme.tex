@@ -103,15 +103,6 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{NewPatientEvent}
-	\begin{itemize}
-		\item Neuer Patient wird erstellt
-		\item 20\% sind Priorit\"{a}t 3
-		\item Rest sind Priorit\"{a}t 1
-	\end{itemize}		
-\end{frame}
-
-\begin{frame}
 	\frametitle{PatientArrivalEvent Modell}
 	\begin{center}
 		\includegraphics[scale=0.8]{img/PatientArrivalEvent.eps}
@@ -119,30 +110,10 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{PatientArrivalEvent}
-	\begin{itemize}
-		\item FreeDoctorQueue leer? 
-		\begin{itemize}
-			\item ja $\implies$ Sofortbehandlung
-			\item nein $\implies$ Queue der jeweiligen Priorit\"{a}t
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
 	\frametitle{TreatmentTermination Modell}
 	\begin{center}
 		\includegraphics[scale=0.9]{img/TreatmentTermination.eps}
 	\end{center}
-\end{frame}
-
-\begin{frame}
-	\frametitle{TreatmentTermination}
-	\begin{itemize}
-		\item Patient wird behandelt
-		\item Behandelnde Arzt $\implies$ BusyDoctorQueue
-		\item Berechnen der Behandlungszeit
-	\end{itemize}
 \end{frame}
 
 \begin{frame}
