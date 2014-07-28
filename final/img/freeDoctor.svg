@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="453.5433"
+   height="340.15747"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="freeDoctor.svg"
+   version="1.0"
+   inkscape:export-filename="D:\_eclipseWorkspace\EinfSim\src\pres\img\freeDoctor.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4056"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-3"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4056-3"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-1"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4056-0"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker3224"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3226"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-36"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4056-8"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker3344"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3346"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-33"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4056-9"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-5"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4056-39"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.540463"
+     inkscape:cx="45.798375"
+     inkscape:cy="169.15397"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="1304"
+     inkscape:window-height="745"
+     inkscape:window-x="54"
+     inkscape:window-y="-8"
+     width="12.8cm"
+     height="9.6cm"
+     units="cm"
+     showgrid="true"
+     grid_units="mm"
+     inkscape:object-paths="false"
+     inkscape:grid-points="true"
+     inkscape:grid-bbox="true"
+     inkscape:guide-points="true"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-maximized="1">
+    <sodipodi:guide
+       orientation="vertical"
+       position="56.476527"
+       id="guide3573" />
+    <sodipodi:guide
+       orientation="horizontal"
+       position="11.035643"
+       id="guide3579" />
+    <sodipodi:guide
+       orientation="horizontal"
+       position="24.018753"
+       id="guide3886" />
+    <sodipodi:guide
+       orientation="horizontal"
+       position="285.62841"
+       id="guide3988" />
+    <sodipodi:guide
+       orientation="horizontal"
+       position="303.15561"
+       id="guide4081" />
+    <inkscape:grid
+       id="GridFromPre046Settings"
+       type="xygrid"
+       originx="0px"
+       originy="0px"
+       spacingx="2mm"
+       spacingy="2mm"
+       color="#3f3fff"
+       empcolor="#3f3fff"
+       opacity="0.15"
+       empopacity="0.38"
+       empspacing="5" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(4.149475e-6,-698.0315)">
+    <rect
+       style="fill:#f9f9f9;fill-opacity:1;stroke:#000000;stroke-width:1.5009048;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect2995-4-8-0-3"
+       width="77.461334"
+       height="23.592075"
+       x="64.689117"
+       y="720.7785" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot5842"
+       style="font-size:9px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       transform="translate(-121.98475,583.3882)"><flowRegion
+         id="flowRegion5844"><rect
+           id="rect5846"
+           width="196.91049"
+           height="82.659126"
+           x="199.9399"
+           y="144.11252"
+           style="font-size:9px" /></flowRegion><flowPara
+         id="flowPara5848">busy doctor</flowPara></flowRoot>    <rect
+       style="fill:#f9f9f9;fill-opacity:1;stroke:#000000;stroke-width:1.63134897;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect2995-4-8-0-3-7"
+       width="92.0196"
+       height="23.461632"
+       x="275.89536"
+       y="796.04242" />
+    <rect
+       style="fill:#f9f9f9;fill-opacity:1;stroke:#000000;stroke-width:1.5009048;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect2995-4-8-0-3-5"
+       width="77.461334"
+       height="23.592075"
+       x="277.99081"
+       y="720.12933" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="290.55118"
+       y="735.03339"
+       id="text3063"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3065"
+         x="290.55118"
+         y="735.03339"
+         style="font-size:10px">free doctor</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3067"
+       style="font-size:9px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       transform="translate(120.31545,693.42246)"><flowRegion
+         id="flowRegion3069"><rect
+           id="rect3071"
+           width="120.26382"
+           height="44.525158"
+           x="156.06757"
+           y="101.92493"
+           style="font-size:9px" /></flowRegion><flowPara
+         id="flowPara3073">get first <flowSpan
+   style="font-size:9px;fill:#0000ff"
+   id="flowSpan3075">doctor</flowSpan> from <flowSpan
+   style="font-size:9px;fill:#00ff00"
+   id="flowSpan3077"><flowSpan
+     style="font-size:9px;fill:#008000"
+     id="flowSpan3079">busyDoctor </flowSpan></flowSpan></flowPara></flowRoot>    <rect
+       style="fill:#f9f9f9;fill-opacity:1;stroke:#000000;stroke-width:1.63134897;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect2995-4-8-0-3-7-4"
+       width="92.0196"
+       height="23.461632"
+       x="275.89536"
+       y="845.64868" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3067-5"
+       style="font-size:9px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       transform="translate(120.31545,743.02876)"><flowRegion
+         id="flowRegion3069-6"><rect
+           id="rect3071-5"
+           width="120.26382"
+           height="44.525158"
+           x="156.06757"
+           y="101.92493"
+           style="font-size:9px" /></flowRegion><flowPara
+         id="flowPara3073-4"><flowSpan
+   style="font-size:9px;fill:#0000ff"
+   id="flowSpan3075-9"><flowSpan
+   style="fill:#000000"
+   id="flowSpan3120">remove</flowSpan> doctor</flowSpan> from <flowSpan
+   style="font-size:9px;fill:#008000"
+   id="flowSpan3077-1">busyDoctor </flowSpan></flowPara></flowRoot>    <path
+       style="fill:none;stroke:#000000;stroke-width:0.43673968;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow1Lend)"
+       d="m 317.16474,818.53869 -0.72708,24.58123"
+       id="path3099-5"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.43673968;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow1Lend)"
+       d="m 315.52993,870.27071 -0.72708,24.58123"
+       id="path3099-5-8"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="fill:#f9f9f9;fill-opacity:1;stroke:#000000;stroke-width:1.63134897;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect2995-4-8-0-3-7-4-4"
+       width="92.0196"
+       height="23.461632"
+       x="275.89536"
+       y="895.255" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3067-5-3"
+       style="font-size:9px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       transform="translate(120.31545,792.63505)"><flowRegion
+         id="flowRegion3069-6-0"><rect
+           id="rect3071-5-8"
+           width="120.26382"
+           height="44.525158"
+           x="156.06757"
+           y="101.92493"
+           style="font-size:9px" /></flowRegion><flowPara
+         id="flowPara3073-4-1"><flowSpan
+           style="font-size:9px;fill:#0000ff"
+           id="flowSpan3075-9-2"><flowSpan
+   style="fill:#000000"
+   id="flowSpan3196">add </flowSpan>doctor</flowSpan><flowSpan
+           style="font-size:9px;fill:#008000"
+           id="flowSpan3077-1-2"><flowSpan
+             style="fill:#000000"
+             id="flowSpan3198"> to </flowSpan></flowSpan></flowPara><flowPara
+         id="flowPara3200"><flowSpan
+           style="font-size:9px;fill:#008000"
+           id="flowSpan3202">freeDoctor </flowSpan></flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3204"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Sans;font-style:normal;font-weight:normal;font-size:12px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion3206"><rect
+           id="rect3208"
+           width="252.92125"
+           height="224.9209"
+           x="-47.279289"
+           y="66.580215" /></flowRegion><flowPara
+         id="flowPara3210" /></flowRoot>    <rect
+       style="fill:#f9f9f9;fill-opacity:1;stroke:#000000;stroke-width:1.63134897;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect2995-4-8-0-3-7-6"
+       width="92.0196"
+       height="23.461632"
+       x="63.296928"
+       y="796.04242" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3067-1"
+       style="font-size:9px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       transform="translate(-92.282977,693.42246)"><flowRegion
+         id="flowRegion3069-4"><rect
+           id="rect3071-8"
+           width="120.26382"
+           height="44.525158"
+           x="156.06757"
+           y="101.92493"
+           style="font-size:9px" /></flowRegion><flowPara
+         id="flowPara3073-1">get first <flowSpan
+   style="font-size:9px;fill:#0000ff"
+   id="flowSpan3075-95">doctor</flowSpan> from <flowSpan
+   style="fill:#008000"
+   id="flowSpan3328">free</flowSpan><flowSpan
+   style="font-size:9px;fill:#008000"
+   id="flowSpan3077-2">Doctor </flowSpan></flowPara></flowRoot>    <rect
+       style="fill:#f9f9f9;fill-opacity:1;stroke:#000000;stroke-width:1.63134897;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect2995-4-8-0-3-7-4-6"
+       width="92.0196"
+       height="23.461632"
+       x="63.296928"
+       y="845.64868" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3067-5-7"
+       style="font-size:9px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       transform="translate(-92.282977,743.02876)"><flowRegion
+         id="flowRegion3069-6-4"><rect
+           id="rect3071-5-2"
+           width="120.26382"
+           height="44.525158"
+           x="156.06757"
+           y="101.92493"
+           style="font-size:9px" /></flowRegion><flowPara
+         id="flowPara3073-4-4"><flowSpan
+   style="font-size:9px;fill:#0000ff"
+   id="flowSpan3075-9-0"><flowSpan
+   style="fill:#000000"
+   id="flowSpan3120-2">remove</flowSpan> doctor</flowSpan> from <flowSpan
+   style="fill:#008000"
+   id="flowSpan3330">freeDoctor  </flowSpan></flowPara></flowRoot>    <path
+       style="fill:none;stroke:#000000;stroke-width:0.43673968;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow1Lend)"
+       d="m 104.5663,818.53869 -0.72708,24.58123"
+       id="path3099-5-9"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.43673968;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow1Lend)"
+       d="m 102.93149,870.27071 -0.72708,24.58123"
+       id="path3099-5-8-7"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="fill:#f9f9f9;fill-opacity:1;stroke:#000000;stroke-width:1.63134897;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect2995-4-8-0-3-7-4-4-1"
+       width="92.0196"
+       height="23.461632"
+       x="63.296928"
+       y="895.255" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3067-5-3-7"
+       style="font-size:9px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       transform="translate(-92.282977,792.63506)"><flowRegion
+         id="flowRegion3069-6-0-3"><rect
+           id="rect3071-5-8-4"
+           width="120.26382"
+           height="44.525158"
+           x="156.06757"
+           y="101.92493"
+           style="font-size:9px" /></flowRegion><flowPara
+         id="flowPara3073-4-1-9"><flowSpan
+           style="font-size:9px;fill:#0000ff"
+           id="flowSpan3075-9-2-1"><flowSpan
+   style="fill:#000000"
+   id="flowSpan3196-7">add </flowSpan>doctor</flowSpan><flowSpan
+           style="font-size:9px;fill:#008000"
+           id="flowSpan3077-1-2-2"><flowSpan
+             style="fill:#000000"
+             id="flowSpan3198-1"> to </flowSpan></flowSpan></flowPara><flowPara
+         id="flowPara3200-0"><flowSpan
+           style="font-size:9px;fill:#008000"
+           id="flowSpan3202-5">busyDoctor </flowSpan></flowPara></flowRoot>    <path
+       style="fill:none;stroke:#000000;stroke-width:0.43673968;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow1Lend)"
+       d="m 318.97626,769.90689 -0.72708,24.58123"
+       id="path3099-5-2"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.43673968;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow1Lend)"
+       d="m 104.48526,768.0708 -0.72708,24.58123"
+       id="path3099-5-2-5"
+       inkscape:connector-curvature="0" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3553"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Sans;font-style:normal;font-weight:normal;font-size:12px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion3555"><rect
+           id="rect3557"
+           width="460.90039"
+           height="251.87233"
+           x="-50.634129"
+           y="7.7898645" /></flowRegion><flowPara
+         id="flowPara3559" /></flowRoot>  </g>
+</svg>

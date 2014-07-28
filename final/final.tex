@@ -1,0 +1,106 @@
+\documentclass[12pt,fleqn,a4paper]{article}
+
+\usepackage{latexsym}
+\usepackage{url}
+\usepackage{xspace}
+\usepackage{epsfig}
+\usepackage{psfrag}
+\usepackage{comment}
+%\usepackage{a4wide}
+\usepackage{marvosym}
+\usepackage{amsmath,amsfonts,amssymb,amsthm,latexsym}
+\usepackage{graphics,graphicx,color}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{mathtools}
+% added this package solely because "our" title is way too long and it
+% allows to add a line break in the title
+%\usepackage[usestackEOL]{stackengine}
+
+\textheight 680pt
+\textwidth 460pt
+\topmargin -40pt
+\oddsidemargin 5pt
+\evensidemargin 5pt
+\parindent 0pt
+
+\pagestyle{fancyplain} \setlength{\headheight}{16pt}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\lhead[\fancyplain{}{\thepage}]
+    {\fancyplain{}{\rightmark}}
+\rhead[\fancyplain{}{\leftmark}]
+    {\fancyplain{}{\thepage}}
+\cfoot{}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+
+\begin{document}
+\begin{titlepage}%Institution
+\vspace{2cm}
+\centerline{
+\large{Department of Computer Sciences}}
+\vspace{0.2cm}
+\centerline{\large{University of Salzburg}}%Title with one or two Lines(More if wanted)
+%\hline
+\vspace{2cm}
+
+\centerline{\large{Einf\"{u}hrung Simulation}}
+\centerline{SS 13/14}
+\vspace{1cm}
+
+\centerline{\huge{Notaufnahme}}
+%\centerline{\Large{\bf\Longstack{SIMMA\\Design and implementation of a robot task\\demonstration the effect of
+%neuromodulators}} }%Type of the Document
+\vspace{1cm}
+
+\vspace{0.4cm}%Date
+\centerline{\today}
+\vspace{5cm}%Authors
+
+%\hline
+\vspace{0.2cm}
+Project Members:\\
+\centerline{Tobias Auinger, 1220321, auingerto@stud.sbg.ac.at}\\
+\centerline{Christian M\"{u}ller, 1123410, mueller110@gmx.net}\\
+\centerline{Georgi Potzkov, 0123456, potzkovge@stud.sbg.ac.at}
+\vspace {0.8cm}\\
+
+Academic Supervisor: \\
+\centerline{asdf}
+\centerline{asdf}
+\vspace{0.8cm}\\
+\clearpage
+\end{titlepage}
+
+
+
+%%%
+%Table of Content
+% \setcounter{page}{1}
+% \pagenumbering{Roman} %I,II,III... in the TOC
+% \tableofcontents
+
+\clearpage
+\pagestyle{headings}
+\pagenumbering{arabic}  %Better if TOC is variable (more than one page)
+\setcounter{page}{1}
+\pagenumbering{arabic}  %Better if TOC is variable (more than one page)
+\setcounter{page}{1}
+
+\tableofcontents
+\newpage
+
+%%%
+\section{asdf}
+asdf
+
+
+
+\newpage
+
+%
+% end of document
+%
+
+\end{document}
