@@ -87,25 +87,25 @@ Academic Supervisor: \\
 %%%
 \section{Einleitung}
 In folgender Ausarbeitung sollen  Modell und Ergebnisse der von uns im Rahmen des Proseminars Einf\"{u}hrung Simulation implementierten Projektes besprochen werden.
-Ziel des Projektes war es eine auf DesmoJ basierende Simulation einer Notaufnahme zu erstellen. Wir haben uns f\"{u}r den Ansatz der ereignisorientierten Simulation entschieden dh. Zustands\"{a}nderungen erfolgen stets nur zu bestimmten Ereigniszeitpunkten.
+Ziel des Projektes war es eine auf DesmoJ basierende Simulation einer Notaufnahme zu erstellen. Wir haben uns f\"{u}r den Ansatz der ereignisorientierten Simulation entschieden, dh. Zustands\"{a}nderungen erfolgen stets nur zu bestimmten Ereigniszeitpunkten.
 
 \section{Aufgabe}\label{sec:Aufgabe}
-Unsere Aufgabe war es eine Notaufnahme eines Krankenhauses zu simulieren. Die Notaufnahme wird von 2 \"{A}rzten betreut.Durchschnittlich alle 40 Minuten wird ein Patient eingeliefert. Jedem Patient wird bei seinem Eintreffen eine Priorit\"{a}t zugewiesen.
-Diese Priorit\"{a} beschreibt wie Dringlich seine Behandlung ist.
+Unsere Aufgabe war es eine Notaufnahme eines Krankenhauses zu simulieren. Die Notaufnahme wird von 2 \"{A}rzten betreut. Durchschnittlich wird alle 40 Minuten ein Patient eingeliefert. Jedem Patient wird bei seinem Eintreffen eine Priorit\"{a}t zugewiesen.
+Diese Priorit\"{a}t beschreibt wie Dringlich seine Behandlung ist.
 Etwa 20\% der ankommenden Patienten haben die Priorit\"{a}t 3 und m\"{u}ssen so schnell wie m\"{o}glich behandelt werden. Sie sind also akute Notf\"{a}lle. Patienten mit der Priorit\"{a}t 1, sind weniger schwere Notf\"{a}lle und k\"{o}nnen daher warten. Nach einer Behandlung eines Patienten der Priorit\"{a}t 1 oder 3, wird dessen Priorit\"{a}t auf 2 gesetzt. Diese Patienten werden einer Nachbehandlung zugef\"{u}hrt, bevor sie die Notaufnahme endg\"{u}ltig verlassen d\"{u}rfen.
 Zu Simulieren war ein l\"{a}ngerer Zeitraum, wie etwa 20 Tage. Die Notaufnahme sollte dabei st\"{a}ndig ge\"{o}ffnet bleiben.
 Ebenso war es unsere Aufgabe Erweiterungen zu \"{u}berlegen und zu implementieren.
 
 \section{Erweiterungen}
-Wie schon in \ref{sec:Aufgabe} angesprochen,war es ebenfalls Teil der Aufgabe das gegebene Modell zu erweitern.
+Wie schon in \ref{sec:Aufgabe} angesprochen, war es ebenfalls Teil der Aufgabe das gegebene Modell zu erweitern.
 Mit dem Ziel der Realit\"{a}t gerechter zu werden, implementierten wir unsere Simulation sodass dringendere Notf\"{a}lle (Patienten der Priorit\"{a}t 3) weniger dringliche Notf\"{a}lle (Patienten mit Priorit\"{a}t 1) verdr\"{a}ngen(Behandlung des Priorit\"{a}t 1 Patienten wird zugunsten des Priorit\"{a}t 1 Patienten abgebrochen) k\"{o}nnen. 
-Desweiteren dachten wir uns, dass akute Notf\"{a}lle auch versterben k\"{o}nnen sollten. Jedem Patienten der Priorit\"{a}t 3 wird also bei dessen Ankunft ein bestimmter Zeitpunkt zugewiesen(PatientDeathEvent wird der Ereignisliste hinzugef\"{u}gt), zu welchem der Patient sollte er bis dahin nicht behandelt worden sein verstirbt.
+Desweiteren dachten wir uns, dass akute Notf\"{a}lle auch versterben k\"{o}nnen sollten. Jedem Patienten der Priorit\"{a}t 3 wird also bei dessen Ankunft ein bestimmter Zeitpunkt zugewiesen(\textit{Patient Death Event} wird der Ereignisliste hinzugef\"{u}gt), zu welchem der Patient, sollte er bis dahin nicht behandelt worden sein, verstirbt.
 
 \section{Events und Warteschlangen}
 \subsection{New Patient Event}
-Im Rahmen des NewPatient Events wird ein neuer Patient erstellt und eine Priorit\"{a}t zugewiesen.
+Im Rahmen des \textit{NewPatient Events} wird ein neuer Patient erstellt und eine Priorit\"{a}t zugewiesen.
 Hierbei bekommt jeder 5-te Patient die Priorit\"{a}t 3,
-Allen anderen wird die Priorit\"{a}t 1 zugewiesen. Um eine stetige Ankunft von Patienten zu gew\"{a}hrleisten, wird dann in weiterer Folge ein neues New Patient Event der Ereignisliste hinzugef\"{u}gt. Der gerade neu erstellte Patient kommt ohne dass Simulationszeit vergeht in der Notaufnahme an. (Patient Arrival Event)
+Allen anderen wird die Priorit\"{a}t 1 zugewiesen. Um eine stetige Ankunft von Patienten zu gew\"{a}hrleisten, wird dann in weiterer Folge ein neues \textit{New Patient Event} der Ereignisliste hinzugef\"{u}gt. Der gerade neu erstellte Patient kommt ohne dass Simulationszeit vergeht in der Notaufnahme an. (\textit{Patient Arrival Event})
 %\frametitle{NewPatientEvent Modell}
 \begin{center}
 %\includegraphics[scale=1]{img/NewPatientEvent}
@@ -115,8 +115,8 @@ Allen anderen wird die Priorit\"{a}t 1 zugewiesen. Um eine stetige Ankunft von P
 
 
 \subsection{Patient Arrival Event}
-Patient Arrival Event modelliert die Ankunft eines Patienten.
-Abh\"{a}ngig von der Priorit\"{a}t des Patienten wird dieser in einer der 3 Warteschlangen gegeben. Wurde der Patient im Sinne unserer Erweiterung von einem Patienten mit Priorit\"{a}t 3 abgel\"{o}\ss t dh. wurde seine Behandlung durch einen Priorit\"{a}t 3 abgebrochen, wird dieser in vorne in die Warteschlange seiner Priorit\"{a}t eingereiht. Handelt es sich bei dem Patienten um einen Patienten der Priorit\"{a}t 3 wird f\"{u}r diesen weiter die Zeitpunkt seines Todes bestimmt. (PatientDeathEvent)
+\textit{Patient Arrival Event} modelliert die Ankunft eines Patienten.
+Abh\"{a}ngig von der Priorit\"{a}t des Patienten wird dieser in einer der 3 Warteschlangen gegeben. Wurde der Patient im Sinne unserer Erweiterung von einem Patienten mit Priorit\"{a}t 3 abgel\"{o}\ss t dh. wurde seine Behandlung durch einen Priorit\"{a}t 3 abgebrochen, wird dieser in vorne in die Warteschlange seiner Priorit\"{a}t eingereiht. Handelt es sich bei dem Patienten um einen Patienten der Priorit\"{a}t 3 wird f\"{u}r diesen weiter die Zeitpunkt seines Todes bestimmt. (\textit{Patient Death Event})
 Abh\"{a}ngig davon ob ein Doktor frei ist (dh. gerade keinen Patienten behandelt) oder nicht wird der Patient einem Doktor zugewiesen oder aber er verbleibt in der Warteschlange.
 Handelt es sich beim Patienten um einen Notfall hat dieser auch wenn kein Doktor frei sein sollte durch Abl\"{o}sung eines sich in Behandlung befindlichen Priorit\"{a}t 1 Patienten die M\"{o}glichkeit sofort behandelt zu werden.
 
@@ -128,9 +128,9 @@ Handelt es sich beim Patienten um einen Notfall hat dieser auch wenn kein Doktor
 
 
 \subsection{Treatment Termination Event}
-Das Treatment Termination Event ist sowhol auschlaggebend f\"{u}r den weiteren Verlauf in der Notaufnahme des Patienten, als auch f\"{u}r die Dauer seiner Behandlung. Der Patient wird aus der Behandlungswarteschlange genommen. Ist dessen Priorit\"{a}t nicht 2 (sondern 3 oder 1), dann wird seine Priorit\"{a}t auf 2 gesetzt und anschlie\ss end ein Patient Arrival Event f\"{u}r diesen erstellt. Ist jedoch seine Priorit\"{a}t 2, so verl\"{a}sst er die Notaufnahme.
-Beinhalten nun alle Warteschlangen der Patienten keine Patienten, so wird der Doktor (der diesen Patienten behandelte) auf verf\"{u}gbar gesetzt, in dem er der Free Doctor Warteschlange hinzugef\"{u}gt wird. Enth\"{a}lt jedoch eine der Patienten Warteschlangen einen Patienten (\"{U}berpr\"{a}fung erfolgt absteigend (3,2,1)),  so wird dieser aus der Warteschlange entfernt und wird von einem Doktor behandelt (Hinzuf\"{u}gen der Treatement Warteschlange). Ebenso wird ein neues Treatement Termination Event f\"{u}r den neuen Patienten mit einer Behandlungszeit erstellt und der Ereignisliste hinzugef\"{u}gt.
-Hat dieser neue Patient eine Priorit\"{a}t von 3, so wird sein Patient Death Event, welches den Tod f\"{u}r diesen nicht behandelten akuten Notfall darstellt, abgebrochen.
+\textit{Treatment Termination Event} ist sowhol auschlaggebend f\"{u}r den weiteren Verlauf des Patienten in der Notaufnahme, als auch f\"{u}r die Dauer seiner Behandlung. Der Patient wird aus der Behandlungswarteschlange genommen. Ist dessen Priorit\"{a}t nicht 2 (sondern 3 oder 1), dann wird seine Priorit\"{a}t auf 2 gesetzt und anschlie\ss end ein \textit{Patient Arrival Event} f\"{u}r diesen erstellt. Ist jedoch seine Priorit\"{a}t 2, so verl\"{a}sst er die Notaufnahme.
+Beinhalten nun alle Warteschlangen der Patienten keine Patienten, so wird der Doktor (der diesen Patienten behandelte) auf verf\"{u}gbar gesetzt, in dem er der \textit{Free Doctor Warteschlange} hinzugef\"{u}gt wird. Enth\"{a}lt jedoch eine der Patienten Warteschlangen einen Patienten (\"{U}berpr\"{a}fung erfolgt absteigend (3,2,1)),  so wird dieser aus der Warteschlange entfernt und wird von einem Doktor behandelt (Hinzuf\"{u}gen der \textit{Treatement Warteschlange}). Ebenso wird ein neues \textit{Treatement Termination} Event f\"{u}r den neuen Patienten mit einer Behandlungszeit erstellt und der Ereignisliste hinzugef\"{u}gt.
+Hat dieser neue Patient eine Priorit\"{a}t von 3, so wird sein \textit{Patient Death Event}, welches den Tod f\"{u}r diesen nicht behandelten akuten Notfall darstellt, abgebrochen.
 %\frametitle{TreatmentTermination Modell}
 \begin{center}
 %    \includegraphics[scale=0.9]{img/TreatmentTermination}
@@ -152,7 +152,7 @@ Die Doktoren in unserer Notaufnahme werden mittels zwei Warteschlangen verwaltet
 Im Folgenden sollen die Ergebnisse, welche das Resultat von jeweils hundert Simulationsl\"{a}ufen sind, einer n\"{a}heren Betrachtung unterzogen werden.
 Wie in \ref{sec:Aufgabe} beschrieben, war es Teil der Aufgabenstellung die Simulation mit und ohne Initialisierungsphase durchzuf\"{u}hren.
 Desweiteren haben wir die Auswirkung  der von uns erdachten Erweiterungen betrachtet und analysiert.
-Folgende Ergebni{\ss}gr\"{o}{\ss}en waren f\"{u}r uns von besonderem Interesse:
+Folgende Ergebnisgr\"{o}{\ss}en waren f\"{u}r uns von besonderem Interesse:
 \begin{itemize}
 	\item maximale und mittlere Anzahl der wartenden akuten 	Notf\"{a}lle und restlichen Patienten 
 	\item mittlerer Wartezeit beider Patientenarten\newline
