@@ -100,20 +100,29 @@ Ebenso war es unsere Aufgabe Erweiterungen zu \"{u}berlegen und zu implementiere
 Wie schon in \ref{sec:Aufgabe} angesprochen, war es ebenfalls Teil der Aufgabe das gegebene Modell zu erweitern.
 Mit dem Ziel der Realit\"{a}t gerechter zu werden, implementierten wir unsere Simulation sodass dringendere Notf\"{a}lle (Patienten der Priorit\"{a}t 3) weniger dringliche Notf\"{a}lle (Patienten mit Priorit\"{a}t 1) verdr\"{a}ngen(Behandlung des Priorit\"{a}t 1 Patienten wird zugunsten des Priorit\"{a}t 1 Patienten abgebrochen) k\"{o}nnen. 
 Desweiteren dachten wir uns, dass akute Notf\"{a}lle auch versterben k\"{o}nnen sollten. Jedem Patienten der Priorit\"{a}t 3 wird also bei dessen Ankunft ein bestimmter Zeitpunkt zugewiesen(\textit{Patient Death Event} wird der Ereignisliste hinzugef\"{u}gt), zu welchem der Patient, sollte er bis dahin nicht behandelt worden sein, verstirbt.
+\newpage
 
 \section{Events und Warteschlangen}
+
 \subsection{New Patient Event}
 Im Rahmen des \textit{NewPatient Events} wird ein neuer Patient erstellt und eine Priorit\"{a}t zugewiesen.
 Hierbei bekommt jeder 5-te Patient die Priorit\"{a}t 3,
 Allen anderen wird die Priorit\"{a}t 1 zugewiesen. Um eine stetige Ankunft von Patienten zu gew\"{a}hrleisten, wird dann in weiterer Folge ein neues \textit{New Patient Event} der Ereignisliste hinzugef\"{u}gt. Der gerade neu erstellte Patient kommt ohne dass Simulationszeit vergeht in der Notaufnahme an. (\textit{Patient Arrival Event})
-%\frametitle{NewPatientEvent Modell}
+
+\begin{figure}[h]
+	\centering
+  	\includegraphics{img/NewPatientEvent}
+  	\caption{New Patient Event}
+\end{figure}
+
+\subsection{Busy/Free Doctor Warteschlangen}
+Die Doktoren in unserer Notaufnahme werden mittels zwei Warteschlangen verwaltet. Diese Graphik beschreibt den Statuswechsel der Doktoren.
+%\frametitle{Busy/Free Doctor}
 \begin{center}
-%\includegraphics[scale=1]{img/NewPatientEvent}
+  \includegraphics{img/freeDoctor}
 \end{center}
 
-
-
-
+\newpage
 \subsection{Patient Arrival Event}
 \textit{Patient Arrival Event} modelliert die Ankunft eines Patienten.
 Abh\"{a}ngig von der Priorit\"{a}t des Patienten wird dieser in einer der 3 Warteschlangen gegeben. Wurde der Patient im Sinne unserer Erweiterung von einem Patienten mit Priorit\"{a}t 3 abgel\"{o}\ss t dh. wurde seine Behandlung durch einen Priorit\"{a}t 3 abgebrochen, wird dieser in vorne in die Warteschlange seiner Priorit\"{a}t eingereiht. Handelt es sich bei dem Patienten um einen Patienten der Priorit\"{a}t 3 wird f\"{u}r diesen weiter die Zeitpunkt seines Todes bestimmt. (\textit{Patient Death Event})
@@ -121,29 +130,28 @@ Abh\"{a}ngig davon ob ein Doktor frei ist (dh. gerade keinen Patienten behandelt
 Handelt es sich beim Patienten um einen Notfall hat dieser auch wenn kein Doktor frei sein sollte durch Abl\"{o}sung eines sich in Behandlung befindlichen Priorit\"{a}t 1 Patienten die M\"{o}glichkeit sofort behandelt zu werden.
 
 
-\begin{center}
-%    \includegraphics[scale=0.8]{img/PatientArrivalEvent}
-\end{center}
+\begin{figure}[h]
+	\centering
+	\includegraphics{img/PatientArrivalEvent}
+	\caption{Patient Arrival Event}
+\end{figure}
 
 
+\newpage
 
 \subsection{Treatment Termination Event}
 \textit{Treatment Termination Event} ist sowhol auschlaggebend f\"{u}r den weiteren Verlauf des Patienten in der Notaufnahme, als auch f\"{u}r die Dauer seiner Behandlung. Der Patient wird aus der Behandlungswarteschlange genommen. Ist dessen Priorit\"{a}t nicht 2 (sondern 3 oder 1), dann wird seine Priorit\"{a}t auf 2 gesetzt und anschlie\ss end ein \textit{Patient Arrival Event} f\"{u}r diesen erstellt. Ist jedoch seine Priorit\"{a}t 2, so verl\"{a}sst er die Notaufnahme.
 Beinhalten nun alle Warteschlangen der Patienten keine Patienten, so wird der Doktor (der diesen Patienten behandelte) auf verf\"{u}gbar gesetzt, in dem er der \textit{Free Doctor Warteschlange} hinzugef\"{u}gt wird. Enth\"{a}lt jedoch eine der Patienten Warteschlangen einen Patienten (\"{U}berpr\"{u}fung erfolgt absteigend (3,2,1)),  so wird dieser aus der Warteschlange entfernt und wird von einem Doktor behandelt (Hinzuf\"{u}gen der \textit{Treatement Warteschlange}). Ebenso wird ein neues \textit{Treatement Termination} Event f\"{u}r den neuen Patienten mit einer Behandlungszeit erstellt und der Ereignisliste hinzugef\"{u}gt.
 Hat dieser neue Patient eine Priorit\"{a}t von 3, so wird sein \textit{Patient Death Event}, welches den Tod f\"{u}r diesen nicht behandelten akuten Notfall darstellt, abgebrochen.
-%\frametitle{TreatmentTermination Modell}
-\begin{center}
-%    \includegraphics[scale=0.9]{img/TreatmentTermination}
-\end{center}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics{img/TreatmentTermination}
+	\caption{Treatment Termination Event}
+\end{figure}
 
 
 
-\subsection{Busy/Free Doctor Warteschlangen}
-Die Doktoren in unserer Notaufnahme werden mittels zwei Warteschlangen verwaltet. Diese Graphik beschreibt den Statuswechsel der Doktoren.
-%\frametitle{Busy/Free Doctor}
-\begin{center}
-  % \includegraphics[scale=1]{img/freeDoctor}
-\end{center}
 
 
 \newpage
@@ -157,7 +165,8 @@ Folgende Ergebnisgr\"{o}{\ss}en waren f\"{u}r uns von besonderem Interesse:
 	\item maximale und mittlere Anzahl der wartenden akuten 	Notf\"{a}lle und restlichen Patienten 
 	\item mittlerer Wartezeit beider Patientenarten\newline
 	Die mittlere Wartezeit der Patienten nimmt mit einer zunehmenden Anzahl an Doktoren ab.
-	Weiters konnten wir durch die Notfall-Priorit\"{a}t die Wartezeit der Priorit\"{a}t 3 Patienten um 60\% verk\"{u}rzen. Die Wartezeit der anderen Patienten wird jedoch gleichzeitig 
+	Weiters konnten wir durch die Notfall-Priorit\"{a}t die mittlere Wartezeit der Priorit\"{a}t 3 Patienten um 50\% verk\"{u}rzen. Dies f\"{u}hrte zu eine
+	Verringerung der Tode um etwa 40\%. Gleichzeitig f\"{u}hrte die Notfallpriorit\"{a}t zu einem 10\% Anstieg der mittleren Wartezeit der Priorit\"{a}t 1 und Priorit\"{a}t 2 Patienten. 
 	\item Anteil der Patienten die nicht warten/maximal 5 Minuten warten m\"{u}ssen.\newline
 	Die Anzahl der Patienten, welche maximal 5 Minuten warten mussten nahm erwartungsgem\"{a}{\ss} mit der Anzahl der Doktoren zu und erreichte bei 5 Doktoren ihr Maximum. Eine vorgeschaltete Initialisierungsphase f\"{u}hrt zu einer Verminderung des Anteils solcher Patienten.
 Eine Initialisierungsphase sorgt daf\"{u}r, dass die Warteschlangen zu Begin der eigentlichen Simulation nicht leer sind bzw.
@@ -173,10 +182,6 @@ Eine Initialisierungsphase f\"{u}hrte zu einer h\"{o}hren Zeit.
 
 
 
-\newpage
-%
-% end of document
-%
 \end{document}
 
 
