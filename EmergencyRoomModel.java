@@ -16,27 +16,51 @@ import desmoj.core.simulator.Model;
 import desmoj.core.simulator.Queue;
 import desmoj.core.simulator.SimTime;
 
-
+/**
+ * The emergency room model represents the model.
+ */
 public class EmergencyRoomModel extends Model {
+	// how many times will be run
 	public static int runs = 1;
+	// the total count of the zeros (= non-waiting patients)
 	public static int totalZeros = 0;
+	// the count of the zeros for 1 run
 	public static int zeros = 0;
+	// patient count
 	public static int allPatients = 0;
+	// the number of working doctors
 	public static int numberOfDoctors = 2;
+	// the simulation time (minutes) (28800 = 20 days)
 	public static int simulationTime = 28800; // 31680
+	// interval used for the distribution of the patients to arrive
 	public static int arrivalTime = 40;
+	// the number of patients which waited less than five minutes
 	public static int underFive = 0;
+	// the number of deaths (of priority 3 patients)
 	public static int deaths = 0;
+	// quantile
 	public static double quantile = 0;
 	public static int quantileCount;
+	// the distributions
 	public static int dist1Min, dist1Max, dist2Min, dist2Max, dist3Min,
 			dist3Max, deathOfPatientsMin, deathOfPatientsMax;
+	// intial phase flag
 	public static boolean initialPhaseFlag = false;
+	// death of patients flag
 	public static boolean deathOfPatientsFlag = false;
-	public static boolean prio3kicks1=false;
-	
+	// priority 3 patients can kick priority 1 patients flag
+	public static boolean prio3kicks1 = false;
+
 	public static SimTime warmUp;
 
+	/**
+	 * constructor
+	 * 
+	 * @param owner
+	 * @param name
+	 * @param showInReport
+	 * @param showInTrace
+	 */
 	public EmergencyRoomModel(Model owner, String name, boolean showInReport,
 			boolean showInTrace) {
 		super(owner, name, showInReport, showInTrace);
@@ -44,6 +68,9 @@ public class EmergencyRoomModel extends Model {
 
 	private RealDistExponential patientArrivalTime;
 
+	/**
+	 * @return the arrival time for the patient
+	 */
 	public double getPatientArrivalTime() {
 		return patientArrivalTime.sample();
 	}
@@ -51,32 +78,59 @@ public class EmergencyRoomModel extends Model {
 	private RealDistUniform treatmentTime[] = new RealDistUniform[3];
 	private RealDistUniform deathTime;
 
+	/**
+	 * 
+	 * @param cprio
+	 *            - the priority of the patient
+	 * @return the treatement time of the patient
+	 */
 	public double getTreatmentTime(int cprio) {
 		return treatmentTime[cprio - 1].sample();
 	}
 
+	/**
+	 * 
+	 * @return the time the patient dies (priority 3)
+	 */
 	public double getDeathTime() {
 		return deathTime.sample();
 	}
 
+	// the queues
+	// priority 3 patients queue
 	public static Queue<PatientEntity> highPriorityPatientQueue;
+	// priority 1 patients queue
 	public static Queue<PatientEntity> lowPriorityPatientQueue;
+	// priority 2 patients queue
 	public static Queue<PatientEntity> lastCheckPatientQueue;
+	// all patients queue
 	public static Queue<PatientEntity> allPatientsQueue;
+	// available/free doctors queue
 	public static Queue<DoctorEntity> freeDoctorQueue;
+	// occupied/busy doctors queue
 	public static Queue<DoctorEntity> busyDoctorQueue;
+	// currently treated patients queue
 	public static Queue<PatientEntity> inTreatmentQueue;
 
+	/**
+	 * @return the description of the model
+	 */
 	public String description() {
 		return "TODO: Emergency Department Description";
 	}
 
+	/**
+	 * create a new patient and set its arrival time
+	 */
 	public void doInitialSchedules() {
 		NewPatientEvent firstPatient = new NewPatientEvent(this,
 				"Creation of Patient", true);
 		firstPatient.schedule(new SimTime(getPatientArrivalTime()));
 	}
 
+	/**
+	 * intitialise every needed component
+	 */
 	public void init() {
 		underFive = 0;
 		deaths = 0;
@@ -120,7 +174,7 @@ public class EmergencyRoomModel extends Model {
 		inTreatmentQueue = new Queue<PatientEntity>(this, "Patient with Dr.",
 				false, true);
 
-		// for prio 2 patients
+		// for priority 2 patients
 		lastCheckPatientQueue = new Queue<PatientEntity>(this,
 				"Last-Check queue", true, true);
 		freeDoctorQueue = new Queue<DoctorEntity>(this, "free doctors", true,
@@ -132,16 +186,11 @@ public class EmergencyRoomModel extends Model {
 				true);
 	}
 
+	/**
+	 * runs the simulation
+	 */
+	@SuppressWarnings("deprecation")
 	public static void runSimulation() {
-		// // cause this is how you write into a file shut up!!!
-		// PrintStream out = null;
-		// try {
-		// out = new PrintStream(new FileOutputStream("output.txt"));
-		// System.setOut(out);
-		// } catch (FileNotFoundException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
 		int totalUnderFive = 0;
 		int overallDeaths = 0;
 		int P3MaxWSum = 0;
@@ -157,7 +206,8 @@ public class EmergencyRoomModel extends Model {
 		totalZeros = 0;
 		zeros = 0;
 		allPatients = 0;
-		
+
+		// run as many simulations as runs is set to
 		for (int r = 0; r < runs; r++) {
 
 			Experiment emergencyExperiment = new Experiment("Emergency-Room");
@@ -210,18 +260,22 @@ public class EmergencyRoomModel extends Model {
 				while ((strLine = br.readLine()) != null)
 					fileContent += strLine;
 				in.close();
-				//System.out.println(fileContent.substring(0,
-				//		fileContent.length() - 14));
+				// System.out.println(fileContent.substring(0,
+				// fileContent.length() - 14));
 			} catch (Exception e) {
 				System.err.println("Error: " + e.getMessage());
 			}
-			P3Count+=highPriorityPatientQueue.getObservations();
+			P3Count += highPriorityPatientQueue.getObservations();
 			P3MaxWSum += highPriorityPatientQueue.maxLength();
-			P12MaxWSum += (lowPriorityPatientQueue.maxLength() + lastCheckPatientQueue.maxLength());
-			P3AvgWSum +=highPriorityPatientQueue.averageLength();
-			P12AvgWSum +=(lowPriorityPatientQueue.averageLength() + lastCheckPatientQueue.averageLength());
-			P3AvgWaitingTime += highPriorityPatientQueue.averageWaitTime().getTimeAsDouble();
-			P12AvgWaitingTime += (lowPriorityPatientQueue.averageWaitTime().getTimeAsDouble() + lastCheckPatientQueue
+			P12MaxWSum += (lowPriorityPatientQueue.maxLength() + lastCheckPatientQueue
+					.maxLength());
+			P3AvgWSum += highPriorityPatientQueue.averageLength();
+			P12AvgWSum += (lowPriorityPatientQueue.averageLength() + lastCheckPatientQueue
+					.averageLength());
+			P3AvgWaitingTime += highPriorityPatientQueue.averageWaitTime()
+					.getTimeAsDouble();
+			P12AvgWaitingTime += (lowPriorityPatientQueue.averageWaitTime()
+					.getTimeAsDouble() + lastCheckPatientQueue
 					.averageWaitTime().getTimeAsDouble());
 			fileContent += "<p>maximale Anzahl wartender akuter Notfaelle: "
 					+ highPriorityPatientQueue.maxLength() + "<br>";
@@ -253,7 +307,7 @@ public class EmergencyRoomModel extends Model {
 				PatientEntity patient = allPatientsQueue.first();
 				if (SimTime.isLarger(patient.arrivalTime, warmUp)) {
 					SimTime tmp = patient.getStay();
-					if (patient.isZero){
+					if (patient.isZero) {
 						totalZeros++;
 						zeros++;
 					}
@@ -288,7 +342,7 @@ public class EmergencyRoomModel extends Model {
 			}
 
 			int n = (int) (count * 0.9);
-			
+
 			if (count > 5) {
 				if (n == count - 1) {
 					quantile = 0.5 * SimTime.add(simTimeArr[n],
@@ -297,7 +351,7 @@ public class EmergencyRoomModel extends Model {
 					quantile = 0.5 * SimTime.add(simTimeArr[n],
 							simTimeArr[n + 1]).getTimeValue();
 				}
-				//fileContent += "90%-Quantile: " + quantile + "<br>";
+				// fileContent += "90%-Quantile: " + quantile + "<br>";
 				quantileCount++;
 			}
 
@@ -312,57 +366,67 @@ public class EmergencyRoomModel extends Model {
 				bw.write(fileContent + "</p></BODY></HTML>");
 				bw.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			System.out.println("Quantile: " + quantile);
-			overallQuantile +=quantile;
+			overallQuantile += quantile;
 			System.out.println("Zeros: " + zeros);
 			System.out.println("UnderFive: " + underFive);
 			totalUnderFive += underFive;
 			System.out.println("Deaths: " + deaths);
 			overallDeaths += deaths;
 			System.out.println("Patients: " + patients);
-			System.out.println("Run: " + (r+1) + " finished.\n-------------------------------------------------------------------\n");
+			System.out
+					.println("Run: "
+							+ (r + 1)
+							+ " finished.\n-------------------------------------------------------------------\n");
 		}
-		String result="";
-		
-		result+="\n-------------------------------------------------------------------\n";
-		result+="Finished after " + runs + " runs:\n";
-		
-		
-		
-		result+="Patients: \n";
-		System.out.println("\tPSum:\t"+ allPatients);
-		System.out.println("\tPAvg:\t" + ((double)allPatients/runs));
-		result+="\tMaximale Anzahl wartender akuter Notfaelle:\t\t" + ((double)P3MaxWSum/runs)+"\n";
-		result+="\tMittlere Anzahl wartender akuter Notfaelle:\t\t" + ((double)P3AvgWSum/runs)+"\n";
-		result+="\tMaximale Anzahl wartender nicht akuter Notfaelle:\t" + ((double)P12MaxWSum/runs)+"\n";
-		result+="\tMittlere Anzahl wartender nicht akuter Notfaelle\t" + ((double)P12AvgWSum/runs)+"\n";
+		String result = "";
 
-		result+="WaitingTimeAvg:\n";
-		result+="\tMittlere Wartezeit akuter Notfaelle:\t"+(P3AvgWaitingTime/runs)+"\n";
-		result+="\tMittlere Wartezeit nicht akuter Notfaelle:\t"+(P12AvgWaitingTime/runs)+"\n";
-		
-		
-		result+="Zeros:\n";
-		result+="\tAnteil der Patienten die nicht warten müssen\t" + (((double)totalZeros)/allPatients)*100+"\n";
-		result+="\tAnteil der Patienten die nicht länger als 5 min warten mussten\t"+(((double)totalUnderFive)/allPatients)*100+"\n";
-		
-		result+="Deaths: " + deathOfPatientsFlag+"\n";
-		if(deathOfPatientsFlag)
-			result+="\tDAnteil der verstorbenen Patienten:\t" + ((double)overallDeaths/P3Count)*100+"\n";
+		result += "\n-------------------------------------------------------------------\n";
+		result += "Finished after " + runs + " runs:\n";
+
+		result += "Patients: \n";
+		System.out.println("\tPSum:\t" + allPatients);
+		System.out.println("\tPAvg:\t" + ((double) allPatients / runs));
+		result += "\tMaximale Anzahl wartender akuter Notfaelle:\t\t"
+				+ ((double) P3MaxWSum / runs) + "\n";
+		result += "\tMittlere Anzahl wartender akuter Notfaelle:\t\t"
+				+ ((double) P3AvgWSum / runs) + "\n";
+		result += "\tMaximale Anzahl wartender nicht akuter Notfaelle:\t"
+				+ ((double) P12MaxWSum / runs) + "\n";
+		result += "\tMittlere Anzahl wartender nicht akuter Notfaelle\t"
+				+ ((double) P12AvgWSum / runs) + "\n";
+
+		result += "WaitingTimeAvg:\n";
+		result += "\tMittlere Wartezeit akuter Notfaelle:\t"
+				+ (P3AvgWaitingTime / runs) + "\n";
+		result += "\tMittlere Wartezeit nicht akuter Notfaelle:\t"
+				+ (P12AvgWaitingTime / runs) + "\n";
+
+		result += "Zeros:\n";
+		result += "\tAnteil der Patienten die nicht warten müssen\t"
+				+ (((double) totalZeros) / allPatients) * 100 + "\n";
+		result += "\tAnteil der Patienten die nicht länger als 5 min warten mussten\t"
+				+ (((double) totalUnderFive) / allPatients) * 100 + "\n";
+
+		result += "Deaths: " + deathOfPatientsFlag + "\n";
+		if (deathOfPatientsFlag)
+			result += "\tDAnteil der verstorbenen Patienten:\t"
+					+ ((double) overallDeaths / P3Count) * 100 + "\n";
 		System.out.println(result);
 		System.out.println("InitialPhase: " + initialPhaseFlag);
-		if(initialPhaseFlag){
-			System.out.print("\tIPDur:\t" + warmUp + " (" + ((double)warmUp.getTimeValue()/1440) + " day");
-			if(((double)warmUp.getTimeValue()/1440)!=1){
+		if (initialPhaseFlag) {
+			System.out.print("\tIPDur:\t" + warmUp + " ("
+					+ ((double) warmUp.getTimeValue() / 1440) + " day");
+			if (((double) warmUp.getTimeValue() / 1440) != 1) {
 				System.out.print("s");
 			}
 			System.out.println(")");
 		}
 		System.out.println("Quantile:");
 		System.out.println("\tQSum:\t" + overallQuantile);
-		System.out.println("\tQAvg:\t" + ((double)overallQuantile/quantileCount));
+		System.out.println("\tQAvg:\t"
+				+ ((double) overallQuantile / quantileCount));
 	}
 }

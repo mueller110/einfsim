@@ -19,11 +19,13 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * Our GUI
+ * @author Home
+ *
+ */
 public class GUI extends JFrame {
 
-	/**
-*
-*/
 	private static final long serialVersionUID = 1L;
 
 	JMenuBar menubar;
@@ -32,10 +34,11 @@ public class GUI extends JFrame {
 	JLabel lblNrDr, lblAvgPatArr, lblSimuTime, lblP1min, lblP1max, lblP2min,
 			lblP2max, lblP3min, lblP3max;
 	JSpinner spinP1min, spinP2min, spinP3min, spinP1max, spinP2max, spinP3max,
-			spinNrDr, spinAvgPatArr, spinSimuTime, spinDeathMin, spinDeathMax, spinRuns;
-	JCheckBox chkInitialphase,chkDeathOfPatients,chkPrio3Kicks1;
-	
+			spinNrDr, spinAvgPatArr, spinSimuTime, spinDeathMin, spinDeathMax,
+			spinRuns;
+	JCheckBox chkInitialphase, chkDeathOfPatients, chkPrio3Kicks1;
 
+	@SuppressWarnings("deprecation")
 	public GUI() {
 		int width = 400;
 		int height = 400;
@@ -69,7 +72,7 @@ public class GUI extends JFrame {
 				spinDeathMin.setValue(new Integer(15));
 				spinDeathMax.setValue(new Integer(25));
 				spinRuns.setValue(new Integer(1));
-				
+
 				spinNrDr.setValue(new Integer(2));
 				spinAvgPatArr.setValue(new Integer(40));
 				spinSimuTime.setValue(new Integer(28800));
@@ -78,21 +81,20 @@ public class GUI extends JFrame {
 				chkPrio3Kicks1.setSelected(false);
 			}
 		});
-		
+
 		JMenuItem menuitemsetRuns100 = new JMenuItem("Runs 100");
 		menuitemsetRuns100.setToolTipText("Set the runs to 100");
 		menuitemsetRuns100.setMnemonic(KeyEvent.VK_H);
-		
+
 		menuitemsetRuns100.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Runs are set to 100");
 				spinRuns.setValue(new Integer(100));
 			}
 		});
-		
-		
+
 		menuSettings.add(menuitemReset);
 		menuSettings.add(menuitemsetRuns100);
 
@@ -219,29 +221,30 @@ public class GUI extends JFrame {
 		spinDeathMin.setBounds(280, (height - 125), 40, 20);
 		((DefaultEditor) spinDeathMin.getEditor()).getTextField().setEditable(
 				false);
-		SpinnerModel DeathMax = new SpinnerNumberModel(25,1,100,1);
+		SpinnerModel DeathMax = new SpinnerNumberModel(25, 1, 100, 1);
 		spinDeathMax = new JSpinner(DeathMax);
 		spinDeathMax.setBounds(330, (height - 125), 40, 20);
-		((DefaultEditor) spinDeathMax.getEditor()).getTextField().setEditable(false);
+		((DefaultEditor) spinDeathMax.getEditor()).getTextField().setEditable(
+				false);
 
 		spinDeathMin.show(false);
 		spinDeathMax.show(false);
-		
+
 		panel.add(spinDeathMin);
 		panel.add(spinDeathMax);
-		
+
 		SpinnerModel runs = new SpinnerNumberModel(1, 1, 1000, 1);
 		spinRuns = new JSpinner(runs);
 		spinRuns.setBounds(345, 5, 40, 20);
-		((DefaultEditor) spinRuns.getEditor()).getTextField().setEditable(false);
-		
+		((DefaultEditor) spinRuns.getEditor()).getTextField()
+				.setEditable(false);
+
 		JLabel lblRuns = new JLabel("Runs:");
 		lblRuns.setBounds(305, 3, 40, 20);
-		
+
 		panel.add(lblRuns);
 		panel.add(spinRuns);
-		
-		
+
 		/*
 		 * Buttons
 		 */
@@ -255,19 +258,19 @@ public class GUI extends JFrame {
 				boolean ok = true;
 				EmergencyRoomModel.dist1Min = (int) spinP1min.getValue();
 				EmergencyRoomModel.dist1Max = (int) spinP1max.getValue();
-				if(EmergencyRoomModel.dist1Min > EmergencyRoomModel.dist1Max){
+				if (EmergencyRoomModel.dist1Min > EmergencyRoomModel.dist1Max) {
 					ok = false;
 					JOptionPane.showMessageDialog(null, "Distr. 1 min>max");
 				}
 				EmergencyRoomModel.dist2Min = (int) spinP2min.getValue();
 				EmergencyRoomModel.dist2Max = (int) spinP2max.getValue();
-				if(EmergencyRoomModel.dist2Min > EmergencyRoomModel.dist2Max){
+				if (EmergencyRoomModel.dist2Min > EmergencyRoomModel.dist2Max) {
 					ok = false;
 					JOptionPane.showMessageDialog(null, "Distr. 2 min>max");
 				}
 				EmergencyRoomModel.dist3Min = (int) spinP3min.getValue();
 				EmergencyRoomModel.dist3Max = (int) spinP3max.getValue();
-				if(EmergencyRoomModel.dist3Min > EmergencyRoomModel.dist3Max){
+				if (EmergencyRoomModel.dist3Min > EmergencyRoomModel.dist3Max) {
 					ok = false;
 					JOptionPane.showMessageDialog(null, "Distr. 3 min>max");
 				}
@@ -275,24 +278,27 @@ public class GUI extends JFrame {
 				EmergencyRoomModel.arrivalTime = (int) spinAvgPatArr.getValue();
 				EmergencyRoomModel.simulationTime = (int) spinSimuTime
 						.getValue();
-				EmergencyRoomModel.prio3kicks1=chkPrio3Kicks1.isSelected();
+				EmergencyRoomModel.prio3kicks1 = chkPrio3Kicks1.isSelected();
 				EmergencyRoomModel.initialPhaseFlag = chkInitialphase
 						.isSelected();
 				EmergencyRoomModel.deathOfPatientsFlag = chkDeathOfPatients
 						.isSelected();
-				
-				if(chkDeathOfPatients.isSelected()){
-					EmergencyRoomModel.deathOfPatientsMin = (int) spinDeathMin.getValue();
-					EmergencyRoomModel.deathOfPatientsMax = (int) spinDeathMax.getValue();
-					if(EmergencyRoomModel.deathOfPatientsMin > EmergencyRoomModel.deathOfPatientsMax){
+
+				if (chkDeathOfPatients.isSelected()) {
+					EmergencyRoomModel.deathOfPatientsMin = (int) spinDeathMin
+							.getValue();
+					EmergencyRoomModel.deathOfPatientsMax = (int) spinDeathMax
+							.getValue();
+					if (EmergencyRoomModel.deathOfPatientsMin > EmergencyRoomModel.deathOfPatientsMax) {
 						ok = false;
-						JOptionPane.showMessageDialog(null, "Death distr. min > max");
+						JOptionPane.showMessageDialog(null,
+								"Death distr. min > max");
 					}
 				}
 				EmergencyRoomModel.underFive = 0;
 				EmergencyRoomModel.deaths = 0;
 				EmergencyRoomModel.runs = (int) spinRuns.getValue();
-				if(ok){
+				if (ok) {
 					System.out.println("Starting Simulation.");
 					EmergencyRoomModel.runSimulation();
 				}
@@ -313,21 +319,21 @@ public class GUI extends JFrame {
 		chkDeathOfPatients.setSelected(false);
 		chkDeathOfPatients.setBounds(127, (height - 125), 125, 20);
 		panel.add(chkDeathOfPatients);
-		
+
 		chkPrio3Kicks1 = new JCheckBox("3 kicks 1");
 		chkPrio3Kicks1.setSelected(false);
 		chkPrio3Kicks1.setBounds(127, (height - 100), 140, 20);
 		panel.add(chkPrio3Kicks1);
 
 		setTitle("Emergency Room Model");
-		setSize(width, height+50);
+		setSize(width, height + 50);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
+
 		chkDeathOfPatients.addChangeListener(new ChangeListener() {
-			
+
 			@Override
-			public void stateChanged(ChangeEvent  arg0) {
+			public void stateChanged(ChangeEvent arg0) {
 				spinDeathMax.show(chkDeathOfPatients.isSelected());
 				spinDeathMin.show(chkDeathOfPatients.isSelected());
 			}

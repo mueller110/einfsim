@@ -3,11 +3,20 @@ import desmoj.core.simulator.Model;
 import desmoj.core.simulator.Queue;
 import desmoj.core.simulator.SimTime;
 
+/**
+ * The treatment termination event represents the end of a pateint's treatment
+ */
 @SuppressWarnings("deprecation")
 public class TreatmentTermination extends Event<PatientEntity> {
 	private EmergencyRoomModel model;
 	static int removed = 0;
 
+	/**
+	 * constructor
+	 * @param owner
+	 * @param name
+	 * @param showInTrace
+	 */
 	public TreatmentTermination(Model owner, String name, boolean showInTrace) {
 		super(owner, name, showInTrace);
 		model = (EmergencyRoomModel) owner;
@@ -73,7 +82,7 @@ public class TreatmentTermination extends Event<PatientEntity> {
 			nextPatient.treatmentTermination = treatmentTerm;
 		} else {
 			DoctorEntity doctor = (DoctorEntity) model.busyDoctorQueue.first();
-			// make doc available
+			// make the doctor available
 			model.busyDoctorQueue.remove(doctor);
 			model.freeDoctorQueue.insert(doctor);
 		}

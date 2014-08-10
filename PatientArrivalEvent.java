@@ -5,6 +5,9 @@ import desmoj.core.simulator.Model;
 import desmoj.core.simulator.Queue;
 import desmoj.core.simulator.SimTime;
 
+/**
+ * The patient arrival event represents the arrival of a patient
+ */
 @SuppressWarnings("deprecation")
 public class PatientArrivalEvent extends Event<PatientEntity> {
 
@@ -27,7 +30,7 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 				model.allPatientsQueue.insert(patient);
 			}
 			queue = model.lowPriorityPatientQueue;
-			
+
 		} else if (cPriority == 2) {
 			queue = model.lastCheckPatientQueue;
 		} else {
@@ -60,7 +63,7 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 			queue.remove(patient);
 			if (patient.getPriority() == 3 && model.deathOfPatientsFlag)
 				patient.deathEvent.cancel();
-			
+
 			patient.treatmentStart = new SimTime(model.currentTime());
 			TreatmentTermination treatmentTerm = new TreatmentTermination(
 					model, "End of Treatment", true);
@@ -79,31 +82,29 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 			patient.end = model.currentTime();
 		} else {
 			if (patient.getPriority() == 3 && EmergencyRoomModel.prio3kicks1) {
-				PatientEntity tmpPatient=null;
-				//lol just use an iterator idiot ^^
-				//PatientEntity firstPatient = model.inTreatmentQueue.first();
-				boolean prio1Found=false;
-				Iterator <PatientEntity> it=model.inTreatmentQueue.iterator();
-				while(!prio1Found && it.hasNext()){
-					tmpPatient=it.next();
-					if (tmpPatient.getPriority()==1){
-						prio1Found=true;
+				PatientEntity tmpPatient = null;
+				// PatientEntity firstPatient = model.inTreatmentQueue.first();
+				boolean prio1Found = false;
+				Iterator<PatientEntity> it = model.inTreatmentQueue.iterator();
+				while (!prio1Found && it.hasNext()) {
+					tmpPatient = it.next();
+					if (tmpPatient.getPriority() == 1) {
+						prio1Found = true;
 					}
 				}
-				
+
 				/*
-				 	model.inTreatmentQueue.remove(firstPatient);
-					model.inTreatmentQueue.insert(firstPatient);
-				  do {
-					tmpPatient = model.inTreatmentQueue.first();
-					model.inTreatmentQueue.remove(tmpPatient);
-					model.inTreatmentQueue.insert(tmpPatient);
-					// System.out.println("Wer ist drin: " +
-					// tmpPatient.getPriority() + " von " +
-					// tmpPatient.getName());
-				} while (firstPatient != tmpPatient
-						&& tmpPatient.getPriority() != 1);*/
-			
+				 * model.inTreatmentQueue.remove(firstPatient);
+				 * model.inTreatmentQueue.insert(firstPatient); do { tmpPatient
+				 * = model.inTreatmentQueue.first();
+				 * model.inTreatmentQueue.remove(tmpPatient);
+				 * model.inTreatmentQueue.insert(tmpPatient); //
+				 * System.out.println("Wer ist drin: " + //
+				 * tmpPatient.getPriority() + " von " + //
+				 * tmpPatient.getName()); } while (firstPatient != tmpPatient &&
+				 * tmpPatient.getPriority() != 1);
+				 */
+
 				if (prio1Found) {
 					// System.out.println("priority: " +
 					// tmpPatient.getPriority());
@@ -122,7 +123,7 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 					model.inTreatmentQueue.remove(tmpPatient);
 					model.inTreatmentQueue.insert(patient);
 					tmpPatient.treatementInterrupted = true;
-					//System.out.println("3 vor 1 ALARM !!!!!!!!!!!!");
+					// System.out.println("3 vor 1 ALARM !!!!!!!!!!!!");
 					PatientArrivalEvent arrival = new PatientArrivalEvent(
 							model, "Reschedule", true);
 					arrival.schedule(tmpPatient, new SimTime(0.0));
@@ -145,12 +146,16 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 		}
 
 	}
-	private void printQueue(Queue<PatientEntity> queue){
-		System.out.println("Printing: "+queue.getName());
-		Iterator <PatientEntity> it=queue.iterator();
-		while(it.hasNext()){
-			System.out.print(it.next().getName()+" ");
+
+	/**
+	 * @param queue will be printed
+	 */
+	private void printQueue(Queue<PatientEntity> queue) {
+		System.out.println("Printing: " + queue.getName());
+		Iterator<PatientEntity> it = queue.iterator();
+		while (it.hasNext()) {
+			System.out.print(it.next().getName() + " ");
 		}
-		System.out.println();		
+		System.out.println();
 	}
 }
