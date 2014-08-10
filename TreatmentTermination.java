@@ -38,20 +38,19 @@ public class TreatmentTermination extends Event<PatientEntity> {
 			queue = model.lowPriorityPatientQueue; // 1
 		}
 
-		// prio 1 & 3 ---> 2
+		// set the priority of patient to last checkup if it is a prio 1 or prio 2 patient
 		if (patient.getPriority() == 1 || patient.getPriority() == 3) {
 			patient.setPriority(2);
 			PatientArrivalEvent arrival = new PatientArrivalEvent(model,
 					"Last check of Patient", true);
 			arrival.schedule(patient, new SimTime(0.0)); // instant arrival
 		} else {		
-				// this was the last waiting time for nextPatient => we can set
+				// this was the last waiting time for nextPatient => we can now set
 				// its departure time
 				patient.departureTime = new SimTime(model.currentTime());
 		} 
-		// remove the patient of the treatment queue
-		EmergencyRoomModel.inTreatmentQueue.remove(patient);
-		
+		// remove the patient from the treatment queue
+		EmergencyRoomModel.inTreatmentQueue.remove(patient);	
 		if (queue != null) {
 			PatientEntity nextPatient = queue.first();
 			queue.remove(nextPatient);
@@ -83,7 +82,7 @@ public class TreatmentTermination extends Event<PatientEntity> {
 			}
 			nextPatient.treatmentTermination = treatmentTerm;
 		} else {
-			// all (patient)queues are empty
+			// all (patient) queues are empty
 			DoctorEntity doctor = (DoctorEntity) model.busyDoctorQueue.first();
 			// make the doctor available
 			model.busyDoctorQueue.remove(doctor);
