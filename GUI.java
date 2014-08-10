@@ -21,12 +21,11 @@ import javax.swing.event.ChangeListener;
 
 /**
  * Interface used for testing, so you don't have to change the code itself
- * @author Home
  *
  */
 public class GUI extends JFrame {
 
-	private static final long serialVersionUID = 1L;
+	
 
 	JMenuBar menubar;
 	JPanel panel;
@@ -38,7 +37,7 @@ public class GUI extends JFrame {
 			spinRuns;
 	JCheckBox chkInitialphase, chkDeathOfPatients, chkPrio3Kicks1;
 
-	@SuppressWarnings("deprecation")
+
 	public GUI() {
 		int width = 400;
 		int height = 400;

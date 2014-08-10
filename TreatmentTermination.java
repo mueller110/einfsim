@@ -42,10 +42,9 @@ public class TreatmentTermination extends Event<PatientEntity> {
 			arrival.schedule(patient, new SimTime(0.0)); // instant arrival
 		} else {		
 				// this was the last waiting time for nextPatient => we can set
-				// its departure timedeat
+				// its departure time
 				patient.departureTime = new SimTime(model.currentTime());
-				
-			
+						
 		}
 
 		EmergencyRoomModel.inTreatmentQueue.remove(patient);

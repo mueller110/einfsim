@@ -162,7 +162,7 @@ Wie in \ref{sec:Aufgabe} beschrieben, war es Teil der Aufgabenstellung die Simul
 Desweiteren haben wir die Auswirkung  der von uns erdachten Erweiterungen betrachtet und analysiert.
 Folgende Ergebnisgr\"{o}{\ss}en waren f\"{u}r uns von besonderem Interesse:
 \begin{itemize}
-	\item maximale und mittlere Anzahl der wartenden akuten 	Notf\"{a}lle und restlichen Patienten 
+
 	\item mittlerer Wartezeit beider Patientenarten\newline
 	Die mittlere Wartezeit der Patienten nimmt mit einer zunehmenden Anzahl an Doktoren ab.
 	Weiters konnten wir durch die Notfall-Priorit\"{a}t die mittlere Wartezeit der Priorit\"{a}t 3 Patienten um 50\% verk\"{u}rzen. Dies f\"{u}hrte zu eine
@@ -176,6 +176,11 @@ Eine Initialisierungsphase sorgt daf\"{u}r, dass die Warteschlangen zu Begin der
 	\item Zeit x, welche 90\% der Patienten in der Notaufnahme verbracht haben
 	Auch hier konnte erwartungsgem\"{a}{\ss} eine Abnahme der Wartezeit mit zunehmender Anzahl an Doktoren beobachtet werde. Bei 4 Doktoren entsprach die Zeit x schon in etwa der durchschnittlichen Behandlungszeit der Patienten. 
 Eine Initialisierungsphase f\"{u}hrte zu einer h\"{o}hren Zeit.
+
+	\item maximale und mittlere Anzahl der wartenden akuten 	Notf\"{a}lle und restlichen Patienten 
+	Wie die mittlere Wartezeit nimmt auch die mittlere Anzahl der wartenden Patienten mit einer Zunahme der Anzahl an Doktoren ab. Selbiges gilt f\"{u}r die maximale Anzahl von Patienten in der Warteschlange. Eine vorgeschaltete Initialisierungsphase erh\"{o}ht sowohl die mittlere als auch maximale Anzahl der Patienten in der Warteschlange.
+Das Konzept der Notfallpriorit\"{a}t f\"{u}hrt erwartungsgem\"{a}ß zu einer Verminderung der mittleren und maximalen Anzahl an wartenden Patienten der Priorit\"{a}t 3 Patienten.
+	
 \end{itemize}
 
 
