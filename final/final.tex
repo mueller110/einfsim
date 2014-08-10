@@ -11,6 +11,7 @@
 \usepackage{amsmath,amsfonts,amssymb,amsthm,latexsym}
 \usepackage{graphics,graphicx,color}
 \usepackage{fancyhdr}
+
 \usepackage[english]{babel}
 \usepackage[latin1]{inputenc}
 \usepackage{mathtools}
@@ -24,9 +25,9 @@
 \pagestyle{fancyplain} \setlength{\headheight}{16pt}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
 \lhead[\fancyplain{}{\thepage}]
-   {\fancyplain{}{\rightmark}}
+  {\fancyplain{}{\rightmark}}
 \rhead[\fancyplain{}{\leftmark}]
-   {\fancyplain{}{\thepage}}
+  {\fancyplain{}{\thepage}}
 \cfoot{}
 \renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
@@ -86,35 +87,38 @@ Academic Supervisor: \\
 %%%
 \section{Einleitung}
 In folgender Ausarbeitung sollen  Modell und Ergebnisse der von uns im Rahmen des Proseminars Einf\"{u}hrung Simulation implementierten Projektes besprochen werden.
-Ziel des Projektes war es eine auf DesmoJ basierende Simulation einer Notaufnahme zu erstellen. Wir haben uns f\"{u}r den Ansatz der Ereignisorientierten Simulation entschieden dh. Zustands\"{a}nderungen erfolgen stets nur zu bestimmten Ereigniszeitpunkten.
+Ziel des Projektes war es eine auf DesmoJ basierende Simulation einer Notaufnahme zu erstellen. Wir haben uns f\"{u}r den Ansatz der ereignisorientierten Simulation entschieden dh. Zustands\"{a}nderungen erfolgen stets nur zu bestimmten Ereigniszeitpunkten.
 
 \section{Aufgabe}\label{sec:Aufgabe}
-Unsere Aufgabe war es eine Notaufnahme eines Krankenhauses zu simulieren. Die Notaufnahme wird von 2 \"{A}rzten betreut. In dieser Notaufnahme erscheint durschnittlich alle 40 Minuten ein Patient. Der angekommende Patient hat eine Priorit\"{a}t, die seine Dringlichkeit beschreibt. Etwa 20\% der ankommenden Patienten haben die Priorit\"{a}t 3 und m\"{u}ssen so schnell wie m\"{o}glich behandelt werden. Sie sind also akute Notf\"{a}lle. Der Rest, also Patienten mit der Priorit\"{a}t 1, kann warten. Nach einer Behandlung eines Patienten, wird dessen Priorit\"{a}t auf 2 gesetzt. Diese Patienten werden noch einmal f\"{u}r eine Nachbehandlung gebraucht, bevor sie die Notaufnahme endg\"{u}ltig verlassen.
-Zu simulieren war ein l\"{a}ngerer Zeitraum, wie etwa 20 Tage. Die Notaufnahme hat dabei immer offen zu sein.
+Unsere Aufgabe war es eine Notaufnahme eines Krankenhauses zu simulieren. Die Notaufnahme wird von 2 \"{A}rzten betreut.Durchschnittlich alle 40 Minuten wird ein Patient eingeliefert. Jedem Patient wird bei seinem Eintreffen eine Priorit\"{a}t zugewiesen.
+Diese Priorit\"{a} beschreibt wie Dringlich seine Behandlung ist.
+Etwa 20\% der ankommenden Patienten haben die Priorit\"{a}t 3 und m\"{u}ssen so schnell wie m\"{o}glich behandelt werden. Sie sind also akute Notf\"{a}lle. Patienten mit der Priorit\"{a}t 1, sind weniger schwere Notf\"{a}lle und k\"{o}nnen daher warten. Nach einer Behandlung eines Patienten der Priorit\"{a}t 1 oder 3, wird dessen Priorit\"{a}t auf 2 gesetzt. Diese Patienten werden einer Nachbehandlung zugef\"{u}hrt, bevor sie die Notaufnahme endg\"{u}ltig verlassen d\"{u}rfen.
+Zu Simulieren war ein l\"{a}ngerer Zeitraum, wie etwa 20 Tage. Die Notaufnahme sollte dabei st\"{a}ndig ge\"{o}ffnet bleiben.
 Ebenso war es unsere Aufgabe Erweiterungen zu \"{u}berlegen und zu implementieren.
 
 \section{Erweiterungen}
-Wie schon in \ref{sec:Aufgabe} angesprochen, sollten wir ebenfalls ein paar Erweiterungen \"{u}berlegen und implementieren. Um ein bisschen Realit\"{a}tsn\"{a}her zu sein, dachten wir uns, dass dringendere Notf\"{a}lle (Patienten mit Priorit\"{a}t 3) nicht so dringende Patienten (Patitienten mit Priorit\"{a}t 1) verdr\"{a}ngen k\"{o}nnen, da diese eventuell schwerwiegende, also lebensbedrohende, Verletzungen haben k\"{o}nnen.
-Desweiteren dachten wir uns, dass akute Notf\"{a}lle auch versterben k\"{o}nnen. Somit sind wir auf den Entschluss gekommen, den Patienten mit der Priorit\"{a}t 3 eine zuf\"{a}llige Restzeit zu geben, in der sie behandelt werden m\"{u}ssen. Werden sie jedoch nicht behandelt, versterben die Patienten und werden dadurch auch aus der Notausnahme gebracht.
+Wie schon in \ref{sec:Aufgabe} angesprochen,war es ebenfalls Teil der Aufgabe das gegebene Modell zu erweitern.
+Mit dem Ziel der Realit\"{a}t gerechter zu werden, implementierten wir unsere Simulation sodass dringendere Notf\"{a}lle (Patienten der Priorit\"{a}t 3) weniger dringliche Notf\"{a}lle (Patienten mit Priorit\"{a}t 1) verdr\"{a}ngen(Behandlung des Priorit\"{a}t 1 Patienten wird zugunsten des Priorit\"{a}t 1 Patienten abgebrochen) k\"{o}nnen. 
+Desweiteren dachten wir uns, dass akute Notf\"{a}lle auch versterben k\"{o}nnen sollten. Jedem Patienten der Priorit\"{a}t 3 wird also bei dessen Ankunft ein bestimmter Zeitpunkt zugewiesen(PatientDeathEvent wird der Ereignisliste hinzugef\"{u}gt), zu welchem der Patient sollte er bis dahin nicht behandelt worden sein verstirbt.
 
 \section{Events und Warteschlangen}
 \subsection{New Patient Event}
-Um einen neuen Patienten zu erzeugen verwenden wir unser New Patient Event. Nun wird eine neue Patient Entit\"{a}t erstellt. Hierbei bekommt der Patient mit einer Warscheinlichkeit von 20% die Priorit\"{a}t 3, sonst bekommt er die Priorit\"{a}t 1. Nun wird ein neues Patient Arrival Event f\"{u}r jenen Patienten erstellt, und ebenso ein New Patient Event erstellt, sodass immer wieder neue Patienten kommen.
+Im Rahmen des NewPatient Events wird ein neuer Patient erstellt und eine Priorit\"{a}t zugewiesen.
+Hierbei bekommt jeder 5-te Patient die Priorit\"{a}t 3,
+Allen anderen wird die Priorit\"{a}t 1 zugewiesen. Um eine stetige Ankunft von Patienten zu gew\"{a}hrleisten, wird dann in weiterer Folge ein neues New Patient Event der Ereignisliste hinzugef\"{u}gt. Der gerade neu erstellte Patient kommt ohne dass Simulationszeit vergeht in der Notaufnahme an. (Patient Arrival Event)
 %\frametitle{NewPatientEvent Modell}
 \begin{center}
-\includegraphics[scale=1]{img/NewPatientEvent}
+%\includegraphics[scale=1]{img/NewPatientEvent}
 \end{center}
 
 
 
 
 \subsection{Patient Arrival Event}
-
-%\frametitle{PatientArrivalEvent Modell}
-PatientArrivalEvent modelliert die Ankunft eines Patienten. 
+Patient Arrival Event modelliert die Ankunft eines Patienten.
 Abh\"{a}ngig von der Priorit\"{a}t des Patienten wird dieser in einer der 3 Warteschlangen gegeben. Wurde der Patient im Sinne unserer Erweiterung von einem Patienten mit Priorit\"{a}t 3 abgel\"{o}\ss t dh. wurde seine Behandlung durch einen Priorit\"{a}t 3 abgebrochen, wird dieser in vorne in die Warteschlange seiner Priorit\"{a}t eingereiht. Handelt es sich bei dem Patienten um einen Patienten der Priorit\"{a}t 3 wird f\"{u}r diesen weiter die Zeitpunkt seines Todes bestimmt. (PatientDeathEvent)
-Abh\"{a}ngig davon ob ein Doktor frei ist dh. gerade keinen Patienten behandelt oder nicht wird der Patient einem Doktor zugewiesen oder aber er verbleibt in der Warteschlange. 
-Handelt es sich beim Patienten um einen Notfall hat dieser auch wenn kein Doktor frei sein sollte durch Abl\"{o}sung eines sich in Behandlung befindlichen Priorit\"{a}t 1 Patienten die M\"{o}glichkeit sofort behandelt zu werden. 
+Abh\"{a}ngig davon ob ein Doktor frei ist (dh. gerade keinen Patienten behandelt) oder nicht wird der Patient einem Doktor zugewiesen oder aber er verbleibt in der Warteschlange.
+Handelt es sich beim Patienten um einen Notfall hat dieser auch wenn kein Doktor frei sein sollte durch Abl\"{o}sung eines sich in Behandlung befindlichen Priorit\"{a}t 1 Patienten die M\"{o}glichkeit sofort behandelt zu werden.
 
 
 \begin{center}
@@ -138,15 +142,32 @@ Hat dieser neue Patient eine Priorit\"{a}t von 3, so wird sein Patient Death Eve
 Die Doktoren in unserer Notaufnahme werden mittels zwei Warteschlangen verwaltet. Diese Graphik beschreibt den Statuswechsel der Doktoren.
 %\frametitle{Busy/Free Doctor}
 \begin{center}
-    \includegraphics[scale=1]{img/freeDoctor}
+  % \includegraphics[scale=1]{img/freeDoctor}
 \end{center}
 
 
+\newpage
 
 \section{Ergebnisse}
-Im folgenden sollen die Ergebnisse, welche das Resultat von jeweils hundert Simulationsl\"{a}ufen sind, einer n\"{a}heren Betrachtung unterzogen werden.
+Im Folgenden sollen die Ergebnisse, welche das Resultat von jeweils hundert Simulationsl\"{a}ufen sind, einer n\"{a}heren Betrachtung unterzogen werden.
 Wie in \ref{sec:Aufgabe} beschrieben, war es Teil der Aufgabenstellung die Simulation mit und ohne Initialisierungsphase durchzuf\"{u}hren.
 Desweiteren haben wir die Auswirkung  der von uns erdachten Erweiterungen betrachtet und analysiert.
+Folgende Ergebni{\ss}gr\"{o}{\ss}en waren f\"{u}r uns von besonderem Interesse:
+\begin{itemize}
+	\item maximale und mittlere Anzahl der wartenden akuten 	Notf\"{a}lle und restlichen Patienten 
+	\item mittlerer Wartezeit beider Patientenarten\newline
+	Die mittlere Wartezeit der Patienten nimmt mit einer zunehmenden Anzahl an Doktoren ab.
+	Weiters konnten wir durch die Notfall-Priorit\"{a}t die Wartezeit der Priorit\"{a}t 3 Patienten um 60 % verk\"{u}rzen. Die Wartezeit der anderen Patienten wird jedoch gleichzeitig 
+	\item Anteil der Patienten die nicht warten/maximal 5 Minuten warten m\"{u}ssen.\newline
+	Die Anzahl der Patienten, welche maximal 5 Minuten warten mussten nahm erwartungsgem\"{a}{\ss} mit der Anzahl der Doktoren zu und erreichte bei 5 Doktoren ihr Maximum. Eine vorgeschaltete Initialisierungsphase f\"{u}hrt zu einer Verminderung des Anteils solcher Patienten.
+Eine Initialisierungsphase sorgt daf\"{u}r, dass die Warteschlangen zu Begin der eigentlichen Simulation nicht leer sind bzw.
+ die Behandlungsr\"{a}ume der Doktoren besetzt sind. Daraus resultiert nat\"{u}rlich ein gr\"{o}{\ss}erer Anteil an Patienten mit einer Wartezeit von \"{u}ber 5 Minuten. 
+	Der Anteil der Patienten, welche gar nicht warten mussten verhielt sich bez\"{u}glich der Anzahl der Doktoren und Initialisierungsphase gleicherma{\ss}en.
+
+	\item Zeit x, welche 90\% der Patienten in der Notaufnahme verbracht haben
+	Auch hier konnte erwartungsgem\"{a}{\ss} eine Abnahme der Wartezeit mit zunehmender Anzahl an Doktoren beobachtet werde. Bei 4 Doktoren entsprach die Zeit x schon in etwa der durchschnittlichen Behandlungszeit der Patienten. 
+Eine Initialisierungsphase f\"{u}hrte zu einer h\"{o}hren Zeit.
+\end{itemize}
 
 
 
@@ -157,6 +178,9 @@ Desweiteren haben wir die Auswirkung  der von uns erdachten Erweiterungen betrac
 % end of document
 %
 \end{document}
+
+
+
 
 
 
