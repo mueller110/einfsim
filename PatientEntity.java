@@ -12,16 +12,27 @@ public class PatientEntity extends Entity {
 	private int priority;
 	// its arrival time
 	public SimTime arrivalTime;
+	// start time
 	public SimTime start;
+	// its departure time
 	public SimTime departureTime;
+	// total wating time of the patient
 	public SimTime waitingTime;
+	// departure time
 	public SimTime end;
+	// if the treatement was interrupted
 	public boolean treatementInterrupted;
+	// if interrupted, rest of the treatment time
 	public SimTime rest;
+	// treatment start time
 	public SimTime treatmentStart;
+	// the treatment duration
 	public SimTime treatmentDuration;
+	// no waiting time
 	boolean isZero = true;
+	// its treatment termination event
 	TreatmentTermination treatmentTermination;
+	// its death event
 	PatientDeathEvent deathEvent;
 
 	/**

@@ -20,7 +20,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- * Interface used for testing, so you don't have to change the code itself
+ * Interface used for testing makint it easier to change parameters
  * @author Home
  *
  */
