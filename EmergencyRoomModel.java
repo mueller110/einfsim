@@ -16,7 +16,7 @@ import desmoj.core.simulator.Model;
 import desmoj.core.simulator.Queue;
 import desmoj.core.simulator.SimTime;
 
-@SuppressWarnings("deprecation")
+
 public class EmergencyRoomModel extends Model {
 	public static int runs = 1;
 	public static int totalZeros = 0;

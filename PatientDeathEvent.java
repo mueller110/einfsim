@@ -12,8 +12,7 @@ public class PatientDeathEvent extends Event<PatientEntity>{
 	}
 
 	@Override
-	public void eventRoutine(PatientEntity patient) {
-		
+	public void eventRoutine(PatientEntity patient) {		
 		model.deaths++;
 		model.highPriorityPatientQueue.remove(patient);
 	}

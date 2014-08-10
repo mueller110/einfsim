@@ -52,12 +52,7 @@ public class PatientArrivalEvent extends Event<PatientEntity> {
 		} else {
 			queue.insert(patient);
 		}
-//		System.out.println("Printing da queues");
-//		printQueue(model.lowPriorityPatientQueue);
-//		printQueue(model.lastCheckPatientQueue);
-//		printQueue(model.highPriorityPatientQueue);
-//		printQueue(model.inTreatmentQueue);
-		// there is a free doctor?! -> no waiting
+
 		if (!model.freeDoctorQueue.isEmpty()) {
 			DoctorEntity doctor = (DoctorEntity) model.freeDoctorQueue.first();
 			model.freeDoctorQueue.remove(doctor);
