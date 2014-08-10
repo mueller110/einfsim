@@ -182,7 +182,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="2.1785437"
      inkscape:cx="184.04707"
-     inkscape:cy="145.44161"
+     inkscape:cy="163.8025"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:window-width="1920"
@@ -383,7 +383,7 @@
          y="908.82483"
          id="tspan8288">(set <tspan
    style="fill:#0000ff"
-   id="tspan8292">x</tspan>.prio = 2)</tspan><tspan
+   id="tspan3165">patient.</tspan>prio = 2)</tspan><tspan
          sodipodi:role="line"
          x="19.927467"
          y="920.21667"
@@ -624,7 +624,7 @@
        sodipodi:cy="248.03148"
        sodipodi:rx="7.0866141"
        sodipodi:ry="7.0866141"
-       d="m 403.93702,248.03148 a 7.0866141,7.0866141 0 1 1 -14.17323,0 7.0866141,7.0866141 0 1 1 14.17323,0 z"
+       d="m 403.93702,248.03148 c 0,3.91383 -3.17279,7.08661 -7.08662,7.08661 -3.91383,0 -7.08661,-3.17278 -7.08661,-7.08661 0,-3.91383 3.17278,-7.08662 7.08661,-7.08662 3.91383,0 7.08662,3.17279 7.08662,7.08662 z"
        transform="matrix(0.43841168,0,0,0.43841168,76.098497,857.93165)" />
     <path
        sodipodi:type="arc"
@@ -634,7 +634,7 @@
        sodipodi:cy="265.74802"
        sodipodi:rx="24.80315"
        sodipodi:ry="24.80315"
-       d="m 233.85826,265.74802 a 24.80315,24.80315 0 1 1 -49.6063,0 24.80315,24.80315 0 1 1 49.6063,0 z"
+       d="m 233.85826,265.74802 c 0,13.6984 -11.10474,24.80315 -24.80315,24.80315 -13.6984,0 -24.80315,-11.10475 -24.80315,-24.80315 0,-13.69841 11.10475,-24.80315 24.80315,-24.80315 13.69841,0 24.80315,11.10474 24.80315,24.80315 z"
        transform="matrix(0.3034395,0,0,0.3034395,187.24052,885.60966)" />
     <rect
        style="fill:#f9f9f9;fill-opacity:1;stroke:#000000;stroke-width:1.41484594;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -688,7 +688,9 @@
            style="font-size:9px" /></flowRegion><flowPara
          id="flowPara5922">create new <flowSpan
    style="font-size:9px;fill:#ff0000"
-   id="flowSpan5924">TreatmentTermination</flowSpan> with time t+d</flowPara></flowRoot>    <path
+   id="flowSpan5924">TreatmentTermination</flowSpan> with <flowSpan
+   style="fill:#0000ff"
+   id="flowSpan3169">nextPatient </flowSpan>time t+d</flowPara></flowRoot>    <path
        sodipodi:type="arc"
        style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.99921262;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="path6276"
@@ -696,7 +698,7 @@
        sodipodi:cy="248.03148"
        sodipodi:rx="7.0866141"
        sodipodi:ry="7.0866141"
-       d="m 403.93702,248.03148 a 7.0866141,7.0866141 0 1 1 -14.17323,0 7.0866141,7.0866141 0 1 1 14.17323,0 z"
+       d="m 403.93702,248.03148 c 0,3.91383 -3.17279,7.08661 -7.08662,7.08661 -3.91383,0 -7.08661,-3.17278 -7.08661,-7.08661 0,-3.91383 3.17278,-7.08662 7.08661,-7.08662 3.91383,0 7.08662,3.17279 7.08662,7.08662 z"
        transform="matrix(0.43841168,0,0,0.43841168,252.69988,771.32648)" />
     <path
        sodipodi:type="arc"
@@ -706,7 +708,7 @@
        sodipodi:cy="265.74802"
        sodipodi:rx="24.80315"
        sodipodi:ry="24.80315"
-       d="m 233.85826,265.74802 a 24.80315,24.80315 0 1 1 -49.6063,0 24.80315,24.80315 0 1 1 49.6063,0 z"
+       d="m 233.85826,265.74802 c 0,13.6984 -11.10474,24.80315 -24.80315,24.80315 -13.6984,0 -24.80315,-11.10475 -24.80315,-24.80315 0,-13.69841 11.10475,-24.80315 24.80315,-24.80315 13.69841,0 24.80315,11.10474 24.80315,24.80315 z"
        transform="matrix(0.3034395,0,0,0.3034395,363.66861,799.17777)" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.91063154;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend-6)"
@@ -816,26 +818,26 @@
        id="path15222"
        inkscape:connector-curvature="0" />
     <rect
-       style="fill:#f9f9f9;fill-opacity:1;stroke:#000000;stroke-width:1.30816698;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#f9f9f9;fill-opacity:1;stroke:#000000;stroke-width:1.60309601;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2995-4-8-0-3-6-9-7"
-       width="70.324516"
-       height="19.740782"
-       x="371.99045"
-       y="749.69208" />
+       width="107.21039"
+       height="19.445852"
+       x="344.13754"
+       y="749.83954" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot13271"
        style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="matrix(0.56521809,0,0,0.56521809,211.14554,580.93584)"><flowRegion
+       transform="matrix(0.56521809,0,0,0.56521809,181.76812,580.47682)"><flowRegion
          id="flowRegion13273"><rect
            id="rect13275"
-           width="121.64088"
-           height="17.442835"
+           width="243.45816"
+           height="17.442841"
            x="291.02011"
            y="308.48492" /></flowRegion><flowPara
          id="flowPara13277"><flowSpan
    style="fill:#0000ff"
-   id="flowSpan14035">x</flowSpan>.interrupted=false</flowPara></flowRoot>    <path
+   id="flowSpan3167">nextPatient</flowSpan>.interrupted=false</flowPara></flowRoot>    <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-64-9)"
        d="m 373.6441,21.137017 49.11538,0 0,30.295467"
        id="path15506"
