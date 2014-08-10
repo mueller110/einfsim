@@ -142,20 +142,19 @@ public class EmergencyRoomModel extends Model {
 
 		patientArrivalTime.setNonNegative(true);
 
-		// es muss gelten: bedienZeitPrio1<bedienZeitPrio3 und
+		// es muss gelten: bedienZeitPrio1 < bedienZeitPrio3 und
 		// bedienZeitPrio2_1< bedienZeitPrio2_3
 		treatmentTime[0] = new RealDistUniform(this,
 				"treatment time interval (Priority 1)", dist1Min, dist1Max,
 				true, true); // bedienZeitPrio
-		// 1
+	
 		treatmentTime[1] = new RealDistUniform(this,
-				"treatment time interval (Priority 2_1)", dist2Min, dist2Max,
+				"treatment time interval (Priority 2)", dist2Min, dist2Max,
 				true, true); // bedienZeitPrio
-		// 2_1
+		
 		treatmentTime[2] = new RealDistUniform(this,
 				"treatment time inverval (Priority 3)", dist3Min, dist3Max,
 				true, true); // bedienZeitPrio
-		// 3
 
 		if (deathOfPatientsFlag) {
 			deathTime = new RealDistUniform(this,
@@ -189,7 +188,7 @@ public class EmergencyRoomModel extends Model {
 	/**
 	 * runs the simulation
 	 */
-	@SuppressWarnings("deprecation")
+	
 	public static void runSimulation() {
 		int totalUnderFive = 0;
 		int overallDeaths = 0;
@@ -248,6 +247,8 @@ public class EmergencyRoomModel extends Model {
 			emergencyExperiment.start();
 			emergencyExperiment.report();
 			emergencyExperiment.finish();
+			
+			// create and output statistics of simulation
 			String fileContent = "";
 			try {
 				FileInputStream fstream = new FileInputStream(
@@ -260,8 +261,6 @@ public class EmergencyRoomModel extends Model {
 				while ((strLine = br.readLine()) != null)
 					fileContent += strLine;
 				in.close();
-				// System.out.println(fileContent.substring(0,
-				// fileContent.length() - 14));
 			} catch (Exception e) {
 				System.err.println("Error: " + e.getMessage());
 			}
@@ -293,9 +292,6 @@ public class EmergencyRoomModel extends Model {
 					+ ((lowPriorityPatientQueue.averageWaitTime()
 							.getTimeAsDouble() + lastCheckPatientQueue
 							.averageWaitTime().getTimeAsDouble()) / 2) + "<br>";
-			// fileContent += "Zeros: "+
-			// (highPriorityPatientQueue.zeroWaits()+lastCheckPatientQueue.zeroWaits()
-			// + lowPriorityPatientQueue.zeroWaits()) + "<br>";
 
 			int totalPatientCount = 0;
 			SimTime[] simTimeArr = new SimTime[allPatientsQueue.size()];
@@ -351,7 +347,6 @@ public class EmergencyRoomModel extends Model {
 					quantile = 0.5 * SimTime.add(simTimeArr[n],
 							simTimeArr[n + 1]).getTimeValue();
 				}
-				// fileContent += "90%-Quantile: " + quantile + "<br>";
 				quantileCount++;
 			}
 

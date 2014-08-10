@@ -21,7 +21,6 @@ import javax.swing.event.ChangeListener;
 
 /**
  * Interface used for testing, so you don't have to change the code itself
- *
  */
 public class GUI extends JFrame {
 
@@ -36,7 +35,6 @@ public class GUI extends JFrame {
 			spinNrDr, spinAvgPatArr, spinSimuTime, spinDeathMin, spinDeathMax,
 			spinRuns;
 	JCheckBox chkInitialphase, chkDeathOfPatients, chkPrio3Kicks1;
-
 
 	public GUI() {
 		int width = 400;

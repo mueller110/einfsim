@@ -7,6 +7,12 @@ import desmoj.core.simulator.Model;
 public class ResetEvent extends Event<QueueEntity> {
 	private EmergencyRoomModel model;
 
+	/**
+	 * constructor
+	 * @param owner
+	 * @param name
+	 * @param showInTrace
+	 */
 	public ResetEvent(Model owner, String name, boolean showInTrace) {
 		super(owner, name, showInTrace);
 		model = (EmergencyRoomModel) owner;
@@ -15,6 +21,5 @@ public class ResetEvent extends Event<QueueEntity> {
 	@Override
 	public void eventRoutine(QueueEntity queueEntity) {
 		queueEntity.queue.reset();
-		// System.out.println("Doing the fancy stuff");
 	}
 }

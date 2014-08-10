@@ -6,9 +6,10 @@ import desmoj.core.simulator.SimTime;
 /**
  * The new patient event creates a new patient
  */
-@SuppressWarnings("deprecation")
+
 public class NewPatientEvent extends ExternalEvent {
 
+	// the model
 	private EmergencyRoomModel model;
 	// rand is used to get the priority of the patient
 	private static Random rand = new Random();
@@ -30,6 +31,8 @@ public class NewPatientEvent extends ExternalEvent {
 	@Override
 	public void eventRoutine() {
 		// get the priority of the patient
+		// priority 3: 20%
+		// priority 1: 80%
 		int prio;	
 		if (rand.nextDouble() <= 0.2) {
 			prio = 3;
